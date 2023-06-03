@@ -1,0 +1,45 @@
+/**/
+:root {
+    --correct-answer-color: #0b8d28;
+    --incorrect-answer-color: #bb0d1e;
+
+    --main-color: white;
+    --headline-font-color: black;
+}
+
+/* -- Farbe und Schriftart -- */
+body {
+    background-color: var(--main-color);
+    font-family: "Arial";
+}
+
+.headline1 {color: var(--headline-font-color)}
+.headline2 {color: var(--headline-font-color)}
+
+a {color: black; text-decoration: none}
+a:hover {color: gray}
+
+/* -- Rahmen und Abstände -- */
+header, article, nav, aside, footer {
+    margin: 0.5em;
+    padding: 0.75em;
+    border: 1px solid #000000;
+    /*border-radius: 0.5em;*/
+}
+/* -- Listentyp -- */
+ul {list-style-type: square}
+
+/* -- Buttons -- */
+button {
+    width: 50px;
+    height: 25px;
+}
+
+
+/* -- Flex-Items mit flex-grow, flex-shrink, flex-basis*/
+main {display: flex}
+nav {background-color: orange; order: 1; flex: 1 1 1em}
+article {background-color: #cccccc; order: 2; flex: 3 3 3%}
+aside {background-color: orange; order: 3; flex: 1 1 1em}
+
+footer {background: Wheat;}
