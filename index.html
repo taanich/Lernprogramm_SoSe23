@@ -12,10 +12,11 @@
   <link rel="stylesheet" href="stylesheet.css" type="text/css"/>
   <script src="scripts/sw.js" type="text/javascript" defer></script>
   <script src="mvp/mvp.js" type="text/javascript" defer></script>
+  <!script src="scripts/script.js" type="text/javascript" defer><!/script>
 
   <!link rel="stylesheet" href="scripts/katex/katex.css" type="text/css"/>
-  <!script src="scripts/katex/katex.min.js" type="text/javascript" defer></script>
-  <!script src="scripts/katex/contrib/auto-render.min.js" type="text/javascript" defer></script>
+  <!script src="scripts/katex/katex.min.js" type="text/javascript" defer><!/script>
+  <!script src="scripts/katex/contrib/auto-render.min.js" type="text/javascript" defer><!/script>
   <!noscript>
 
   <!/noscript>
@@ -28,57 +29,52 @@
   </header>
 
   <main>
+    <! --- Navigation --- !>
     <nav>
       <h2 class="headline1">Navigation</h2>
-      <! --- TODO --- !>
+      <ul>
+        <li><a href="index.html">Startseite</a></li>
+        <li><a href="mathematik.html">Mathematik</a></li>
+        <li><a href="internettechnologie.html">Internet Technologie</a></li>
+        <li><a href="allgemeineswissen.html">Allgemeines Wissen</a></li>
+      </ul>
     </nav>
 
+    <! --- Startseite --- !>
     <article>
-      <h2 class="headline1">Startseite</h2>
+      <h2 class="headline1">Willkommen im Lernprogramm!</h2>
       <p></p>
-      <p id="textbox">Hier könnte ein kurzer Einführungstext zu dem Aufgabenbereich stehen...</p>
-      <hr />
-
-      <form>
-        <fieldset id="aufgabenauswahl">
-          <input type="radio" id="auf1" name="aufgabe" value="1" checked="checked"/> <label for="auf1">Aufgabe 1</label>
-          <input type="radio" id="auf2" name="aufgabe" value="2"> <label for="auf2">Aufgabe 2</label>
-          <input type="radio" id="auf3" name="aufgabe" value="3"> <label for="auf3">Aufgabe 3</label>
-          <input type="radio" id="auf4" name="aufgabe" value="4"> <label for="auf4">Aufgabe 4</label>
-          <input type="radio" id="auf5" name="aufgabe" value="5"> <label for="auf5">Aufgabe 5</label>
-          <input type="radio" id="auf6" name="aufgabe" value="6"> <label for="auf6">Aufgabe 6</label>
-          <input type="radio" id="auf7" name="aufgabe" value="7"> <label for="auf7">Aufgabe 7</label>
-          <input type="radio" id="auf8" name="aufgabe" value="8"> <label for="auf8">Aufgabe 8</label>
-          <input type="radio" id="auf9" name="aufgabe" value="9"> <label for="auf9">Aufgabe 9</label>
-          <input type="radio" id="auf10" name="aufgabe" value="10"> <label for="auf10">Aufgabe 10</label>
-        </fieldset>
-      </form>
+      <p id="textbox">Dieses interaktive Lernprogramm bietet dir die Möglichkeit, deine Kenntnisse und Fähigkeiten in einem bestimmten Bereich zu erweitern.
+        Egal, ob du mathematische Aufgaben lösen, deine Programmierkenntnisse verbessern oder dich über bestimmte Themen informieren möchtest,
+        hier findest du die richtigen Lerninhalte.</p>
       <hr />
       <p></p>
 
-      <! --- Anzeige der Aufgabe --- !>
-      <div id="task">Hier steht die Aufgabenstellung</div>
-      <p></p>
-
-      <p>Wähle die passende Antwort!</p>
-      <p></p>
-
-      <div id="answer">
-        <button id="A">A</button>
-        <button id="B">B</button>
-        <button id="C">C</button>
-        <button id="D">D</button>
+      <! --- Anzeige der Aufgabenbereiche --- !>
+      <div id="aufgabenbereich">
+        <div id="bereich">
+          <a href="mathematik.html">
+            <button id="mathe">Mathematik</button>
+          </a>
+          <a href="internettechnologie.html">
+            <button id="it">Internet Technologie</button>
+          </a>
+          <a href="allgemeineswissen.html">
+            <button id="aw">Allgemeines Wissen</button>
+          </a>
+        </div>
       </div>
       <p></p>
-
-      <button id="start">Start</button>
-
+      <hr />
     </article>
 
+    <! --- Anzeige des aktuellen Lernstands --- !>
     <aside>
       <h2 class="headline1">Mein Lernstand</h2>
-      <p>"Angemeldet als ..." einfügen</p>
-      <p>Lernstand hier einfügen</p>
+      <p>Mein aktueller Lernfortschritt</p>
+      <p>...</p>
+      <p>Letzter Lernstand</p>
+      <p>...</p>
     </aside>
   </main>
 

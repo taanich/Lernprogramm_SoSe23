@@ -1,4 +1,3 @@
-/**/
 :root {
     --correct-answer-color: #0b8d28;
     --incorrect-answer-color: #bb0d1e;
@@ -29,11 +28,83 @@ header, article, nav, aside, footer {
 /* -- Listentyp -- */
 ul {list-style-type: square}
 
-/* -- Buttons -- */
+/* -- Allgemeiner Button-Stil -- */
 button {
-    width: 50px;
-    height: 25px;
+    min-width: 100px;
+    min-height: 40px;
+    font-size: 16px;
+    margin: 10px;
+    padding: 8px 16px; /* Innenabstand innerhalb des Buttons (oben/unten, links/rechts) */
+    white-space: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    border: none;
+    border-radius: 5px;
+    background-color: #eaeaea;
+    color: #333333;
+    transition: background-color 0.3s ease;
 }
+
+button:hover {
+    background-color: #706d6d;
+    color: #eaeaea;
+}
+
+button:focus {
+    outline: none;
+   /* box-shadow: 0 0 10px #d98243; */
+}
+
+/* -- Buttons im Startbereich -- */
+#bereich {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+#bereich a {
+    margin: 0.5em;
+}
+
+#bereich button {
+    padding: 25px 50px;
+    text-align: center;
+    font-size: 20px;
+}
+
+/* -- Buttons für die Antworten -- */
+#answers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-wrap: wrap;
+}
+
+#answers button {
+    margin: 10px;
+    padding: 8px 16px; /* Innenabstand innerhalb des Buttons (oben/unten, links/rechts) */
+}
+
+/* -- Statistik -- */
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: #4CAF50;
+    transition: width 0.5s ease-in-out;
+}
+
 
 
 /* -- Flex-Items mit flex-grow, flex-shrink, flex-basis*/

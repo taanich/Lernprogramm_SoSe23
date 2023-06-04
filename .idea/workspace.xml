@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/images/01_HTWD_logo_RGB_wordmark_color.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/03_HTWD_logo_RGB_horizontal_color.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvp/mvp.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/sw.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
+    <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="initial Project">
+      <change afterPath="$PROJECT_DIR$/allgemeineswissen.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aufgaben.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internettechnologie.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mathematik.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvp/mvp2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/service-worker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvp/mvp.js" beforeDir="false" afterPath="$PROJECT_DIR$/mvp/mvp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +28,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="tsconfig.json" />
+        <option value="HTML File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -53,27 +59,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/tandi/Documents/00_Studium/00_HTW/04. Semester/02. Internet-Technologie I/00. APL/Lernprogramm_v1",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tandi/Documents/00_Studium/00_HTW/04. Semester/02. Internet-Technologie I/00. APL/Lernprogramm_SoSe23&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23" />
+      <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23\mvp" />
       <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23\images" />
       <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23\mvp-demo" />
-      <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -90,11 +100,24 @@
       <workItem from="1685457132080" duration="112000" />
       <workItem from="1685457265144" duration="2033000" />
       <workItem from="1685797671318" duration="1055000" />
-      <workItem from="1685804081018" duration="1513000" />
+      <workItem from="1685804081018" duration="9881000" />
+      <workItem from="1685862739801" duration="48914000" />
     </task>
+    <task id="LOCAL-00001" summary="initial Project">
+      <created>1685805672388</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1685805672388</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial Project" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial Project" />
   </component>
 </project>

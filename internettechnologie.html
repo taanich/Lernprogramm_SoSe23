@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <title>Lernprogramm</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" sizes="512x512" href="images/01_HTWD_logo_RGB_wordmark_color.png"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="ROBOTS" content="INDEX, FOLLOW"/>
+
+  <link rel="stylesheet" href="stylesheet.css" type="text/css"/>
+  <script src="scripts/sw.js" type="text/javascript" defer></script>
+  <script src="mvp/mvp.js" type="text/javascript" defer></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <!link rel="stylesheet" href="scripts/katex/katex.css" type="text/css"/>
+  <!script src="scripts/katex/katex.min.js" type="text/javascript" defer><!/script>
+  <!script src="scripts/katex/contrib/auto-render.min.js" type="text/javascript" defer><!/script>
+  <!noscript>
+
+  <!/noscript>
+</head>
+
+<body>
+<header style="display: flex; align-items: center;">
+  <h1 style="margin-right: auto;">Lernprogramm</h1>
+  <img src="../Lernprogramm_SoSe23/images/03_HTWD_logo_RGB_horizontal_color.png" alt="HTWD_Logo" style="width: 300px; height: auto; margin-left: 1em;">
+</header>
+
+<main>
+  <! --- Navigation --- !>
+  <nav>
+    <h2 class="headline1">Navigation</h2>
+    <ul>
+      <li><a href="index.html">Startseite</a></li>
+      <li><a href="mathematik.html">Mathematik</a></li>
+      <li><a href="internettechnologie.html">Internet Technologie</a></li>
+      <li><a href="allgemeineswissen.html">Allgemeines Wissen</a></li>
+    </ul>
+  </nav>
+
+  <! --- Aufgabenbereich - Internet Technologie --- !>
+  <article>
+    <h2 class="headline1">Internet Technologie</h2>
+    <p></p>
+    <p id="textbox">Hier kannst Du Dein Wissen zum Modul Internet Technologie testen und bereits erlernte Konzepte vertiefen. Übe Deine Kenntnisse in HTTP, DNS(SEC), E-Mail und in anderen Bereichen, um sie weiter zu festigen. <p>
+    <p>Beginne, in dem Du auf den Start Button drückst!</p>
+    <hr />
+    <p></p>
+
+    <! --- Anzeige der Aufgabe --- !>
+    <div id="task"> >> Hier erscheint die Aufgabenstellung << </div>
+    <p></p>
+    <hr />
+
+    <! --- Auswahl der Antworten (Buttons) --- !>
+    <p>Wähle die passende Antwort!</p>
+    <p></p>
+
+    <div id="answers">
+      <button id="A">A</button>
+      <button id="B">B</button>
+      <button id="C">C</button>
+      <button id="D">D</button>
+    </div>
+    <p></p>
+
+    <! --- Start-Button - Holen der neuen Aufgabe --- !>
+    <button id="internet-start">Start</button>
+  </article>
+
+  <! --- Anzeige des aktuellen Lernstands --- !>
+  <aside>
+    <h2 class="headline1">Mein Lernstand</h2>
+    <p>Mein aktueller Lernfortschritt</p>
+    <p>...</p>
+    <p>Letzter Lernstand</p>
+    <p>...</p>
+  </aside>
+</main>
+
+<footer style="display: flex; align-items: center">
+  <h3 style="margin-right: auto">SoSe 2023 - Beleg</h3>
+  <h3 style="margin-right: auto">Internet Technologie I - Prof. Dr.-Ing. Jörg Vogt</h3>
+  <h3>Tanja Dietrich - s83797</h3>
+</footer>
+</body>
+</html>
