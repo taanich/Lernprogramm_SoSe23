@@ -11,16 +11,11 @@
 
   <link rel="stylesheet" href="stylesheet.css" type="text/css"/>
   <script src="scripts/sw.js" type="text/javascript" defer></script>
+  <script src="scripts/script.js" type="text/javascript" defer></script>
   <script src="mvp/mvp.js" type="text/javascript" defer></script>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
   <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
-  <!link rel="stylesheet" href="scripts/katex/katex.css" type="text/css"/>
-  <!script src="scripts/katex/katex.min.js" type="text/javascript" defer><!/script>
-  <!script src="scripts/katex/contrib/auto-render.min.js" type="text/javascript" defer><!/script>
-  <!noscript>
-
-  <!/noscript>
 </head>
 
 <body>
@@ -45,8 +40,7 @@
   <article>
     <h2 class="headline1">Internet Technologie</h2>
     <p></p>
-    <p id="textbox">Hier kannst Du Dein Wissen zum Modul Internet Technologie testen und bereits erlernte Konzepte vertiefen. Übe Deine Kenntnisse in HTTP, DNS(SEC), E-Mail und in anderen Bereichen, um sie weiter zu festigen. <p>
-    <p>Beginne, in dem Du auf den Start Button drückst!</p>
+    <p id="textbox">[TODO]</p>
     <hr />
     <p></p>
 
@@ -68,7 +62,19 @@
     <p></p>
 
     <! --- Start-Button - Holen der neuen Aufgabe --- !>
-    <button id="internet-start">Start</button>
+    <div style="display: flex; justify-content: flex-end; align-items: center;">
+      <button id="internet-start">Start</button>
+      <button id="weiter-button">Weiter</button>
+    </div>
+    <p></p>
+    <hr />
+
+    <! --- Aktueller Lernstand --- !>
+    <div class="progress-bar">
+      <div class="progress" id="progress-bar" style="width: 0%;"></div>
+    </div>
+
+
   </article>
 
   <! --- Anzeige des aktuellen Lernstands --- !>
