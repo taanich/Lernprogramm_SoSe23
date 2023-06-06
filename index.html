@@ -11,77 +11,94 @@
 
   <link rel="stylesheet" href="stylesheet.css" type="text/css"/>
   <script src="scripts/sw.js" type="text/javascript" defer></script>
+  <script src="scripts/script.js" type="text/javascript" defer></script>
   <script src="mvp/mvp.js" type="text/javascript" defer></script>
-  <!script src="scripts/script.js" type="text/javascript" defer><!/script>
 
-  <!link rel="stylesheet" href="scripts/katex/katex.css" type="text/css"/>
-  <!script src="scripts/katex/katex.min.js" type="text/javascript" defer><!/script>
-  <!script src="scripts/katex/contrib/auto-render.min.js" type="text/javascript" defer><!/script>
-  <!noscript>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0"></script>
 
-  <!/noscript>
 </head>
 
 <body>
-  <header style="display: flex; align-items: center;">
-    <h1 style="margin-right: auto;">Lernprogramm</h1>
-    <img src="../Lernprogramm_SoSe23/images/03_HTWD_logo_RGB_horizontal_color.png" alt="HTWD_Logo" style="width: 300px; height: auto; margin-left: 1em;">
-  </header>
+<! --- Header mit Logo --- !>
+<header style="display: flex; align-items: center;">
+  <h1 style="margin-right: auto;">Lernprogramm</h1>
+  <div style="max-width: 300px; overflow: hidden;">
+    <img src="../Lernprogramm_SoSe23/images/03_HTWD_logo_RGB_horizontal_color.png" alt="HTWD_Logo" style="max-width: 100%; height: auto;">
+  </div>
+</header>
 
-  <main>
-    <! --- Navigation --- !>
-    <nav>
-      <h2 class="headline1">Navigation</h2>
-      <ul>
-        <li><a href="index.html">Startseite</a></li>
-        <li><a href="mathematik.html">Mathematik</a></li>
-        <li><a href="internettechnologie.html">Internet Technologie</a></li>
-        <li><a href="allgemeineswissen.html">Allgemeines Wissen</a></li>
-      </ul>
-    </nav>
+<main>
+  <! --- Navigation --- !>
+  <nav class="nav-container">
+    <h2 class="headline1">Navigation</h2>
+    <div class="nav-item"><a class="nav-link" href="index.html">Startseite</a></div>
+    <div class="nav-item"><a class="nav-link" href="mathematik.html">Mathematik</a></div>
+    <div class="nav-item"><a class="nav-link" href="internettechnologie.html">Internet Technologie</a></div>
+    <div class="nav-item"><a class="nav-link" href="allgemeinwissen.html">Allgemein Wissen</a></div>
+  </nav>
 
-    <! --- Startseite --- !>
-    <article>
-      <h2 class="headline1">Willkommen im Lernprogramm!</h2>
-      <p></p>
-      <p id="textbox">Dieses interaktive Lernprogramm bietet dir die Möglichkeit, deine Kenntnisse und Fähigkeiten in einem bestimmten Bereich zu erweitern.
-        Egal, ob du mathematische Aufgaben lösen, deine Programmierkenntnisse verbessern oder dich über bestimmte Themen informieren möchtest,
-        hier findest du die richtigen Lerninhalte.</p>
-      <hr />
-      <p></p>
 
-      <! --- Anzeige der Aufgabenbereiche --- !>
-      <div id="aufgabenbereich">
-        <div id="bereich">
-          <a href="mathematik.html">
-            <button id="mathe">Mathematik</button>
-          </a>
-          <a href="internettechnologie.html">
-            <button id="it">Internet Technologie</button>
-          </a>
-          <a href="allgemeineswissen.html">
-            <button id="aw">Allgemeines Wissen</button>
-          </a>
-        </div>
+  <! --- Startseite --- !>
+  <article>
+    <h2 class="headline1">Willkommen im Lernprogramm!</h2>
+    <p></p>
+    <hr />
+
+    <! --- Anzeige der Aufgabenbereiche --- !>
+    <div id="aufgabenbereich">
+      <div id="bereich" class="button-container">
+        <a href="mathematik.html">
+          <button id="mathe">Mathematik</button>
+        </a>
+        <a href="internettechnologie.html">
+          <button id="it">Internet Technologie</button>
+        </a>
+        <a href="allgemeinwissen.html">
+          <button id="aw">Allgemein Wissen</button>
+        </a>
       </div>
-      <p></p>
-      <hr />
-    </article>
+    </div>
+    <p></p>
+    <hr />
+  </article>
 
-    <! --- Anzeige des aktuellen Lernstands --- !>
-    <aside>
-      <h2 class="headline1">Mein Lernstand</h2>
-      <p>Mein aktueller Lernfortschritt</p>
-      <p>...</p>
-      <p>Letzter Lernstand</p>
-      <p>...</p>
-    </aside>
-  </main>
+  <! --- Anzeige des aktuellen Lernstands --- !>
+  <aside>
+    <h2 class="headline1">Mein Lernstand</h2>
+    <ul class="progress-list">
+      <li>
+        <span class="subject">Mathematik</span>
+        <span class="status">98%</span>
+        </div>
+      </li>
+      <li>
+        <span class="subject">Internet Technologie</span>
+        <span class="status">85%</span>
+      </li>
+      <li>
+        <span class="subject">Allgemein Wissen</span>
+        <span class="status">72%</span>
+      </li>
+    </ul>
+  </aside>
+</main>
 
-  <footer style="display: flex; align-items: center">
-    <h3 style="margin-right: auto">SoSe 2023 - Beleg</h3>
-    <h3 style="margin-right: auto">Internet Technologie I - Prof. Dr.-Ing. Jörg Vogt</h3>
-    <h3>Tanja Dietrich - s83797</h3>
-  </footer>
+<footer style="display: flex; align-items: center">
+  <p id="footerText1" style="margin-right: auto">SoSe 2023 - Beleg</p>
+  <p id="footerText2" style="margin-right: auto">Internet Technologie I - Prof. Dr.-Ing. Jörg Vogt</p>
+  <p id="footerText3">Tanja Dietrich - s83797</p>
+</footer>
 </body>
 </html>
+
+
+<script>
+  // Service Worker registrieren für PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('scripts/sw.js')
+            .then(reg => console.log(reg))
+            .catch(err => console.log(err));
+  }
+</script>

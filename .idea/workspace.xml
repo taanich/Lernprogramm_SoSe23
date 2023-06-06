@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="wip">
+      <change afterPath="$PROJECT_DIR$/backup.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvp/mvp3-backup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allgemeineswissen.html" beforeDir="false" afterPath="$PROJECT_DIR$/allgemeineswissen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allgemeineswissen.html" beforeDir="false" afterPath="$PROJECT_DIR$/allgemeinwissen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internettechnologie.html" beforeDir="false" afterPath="$PROJECT_DIR$/internettechnologie.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mathematik.html" beforeDir="false" afterPath="$PROJECT_DIR$/mathematik.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mvp/mvp.js" beforeDir="false" afterPath="$PROJECT_DIR$/mvp/mvp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mvp/mvp2.js" beforeDir="false" afterPath="$PROJECT_DIR$/mvp/mvp2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/sw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +30,8 @@
       <list>
         <option value="CSS File" />
         <option value="tsconfig.json" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -97,7 +102,9 @@
       <workItem from="1685797671318" duration="1055000" />
       <workItem from="1685804081018" duration="9881000" />
       <workItem from="1685862739801" duration="48993000" />
-      <workItem from="1685972739761" duration="15764000" />
+      <workItem from="1685972739761" duration="15826000" />
+      <workItem from="1686035157242" duration="15848000" />
+      <workItem from="1686064868454" duration="22457000" />
     </task>
     <task id="LOCAL-00001" summary="initial Project">
       <created>1685805672388</created>
@@ -113,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685914836478</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="wip">
+      <created>1686001567822</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1686001567822</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

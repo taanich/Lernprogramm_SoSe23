@@ -11,11 +11,15 @@
 
   <link rel="stylesheet" href="stylesheet.css" type="text/css"/>
   <script src="scripts/sw.js" type="text/javascript" defer></script>
-  <script src="scripts/script.js" type="text/javascript" defer></script>
   <script src="mvp/mvp.js" type="text/javascript" defer></script>
+  <!script src="scripts/script.js" type="text/javascript" defer><!/script>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <!link rel="stylesheet" href="scripts/katex/katex.css" type="text/css"/>
+  <!script src="scripts/katex/katex.min.js" type="text/javascript" defer><!/script>
+  <!script src="scripts/katex/contrib/auto-render.min.js" type="text/javascript" defer><!/script>
+  <!noscript>
+
+  <!/noscript>
 </head>
 
 <body>
@@ -32,49 +36,36 @@
       <li><a href="index.html">Startseite</a></li>
       <li><a href="mathematik.html">Mathematik</a></li>
       <li><a href="internettechnologie.html">Internet Technologie</a></li>
-      <li><a href="allgemeineswissen.html">Allgemeines Wissen</a></li>
+      <li><a href="allgemeinwissen.html">Allgemeines Wissen</a></li>
     </ul>
   </nav>
 
-  <! --- Aufgabenbereich - Allgemeines Wissen --- !>
+  <! --- Startseite --- !>
   <article>
-    <h2 class="headline1">Allgemeines Wissen</h2>
+    <h2 class="headline1">Willkommen im Lernprogramm!</h2>
     <p></p>
-    <p id="textbox">[TODO]</p>
+    <p id="textbox">Dieses interaktive Lernprogramm bietet dir die Möglichkeit, deine Kenntnisse und Fähigkeiten in einem bestimmten Bereich zu erweitern.
+      Egal, ob du mathematische Aufgaben lösen, deine Programmierkenntnisse verbessern oder dich über bestimmte Themen informieren möchtest,
+      hier findest du die richtigen Lerninhalte.</p>
     <hr />
     <p></p>
 
-    <! --- Anzeige der Aufgabe --- !>
-    <div id="task"> >> Hier erscheint die Aufgabenstellung << </div>
-    <p></p>
-    <hr />
-
-    <! --- Auswahl der Antworten (Buttons) --- !>
-    <p>Wähle die passende Antwort!</p>
-    <p></p>
-
-    <div id="answers">
-      <button id="A">A</button>
-      <button id="B">B</button>
-      <button id="C">C</button>
-      <button id="D">D</button>
-    </div>
-    <p></p>
-
-    <! --- Start-Button - Holen der neuen Aufgabe --- !>
-    <div style="display: flex; justify-content: flex-end; align-items: center;">
-      <button id="allg-start">Start</button>
-      <button id="weiter-button">Weiter</button>
+    <! --- Anzeige der Aufgabenbereiche --- !>
+    <div id="aufgabenbereich">
+      <div id="bereich">
+        <a href="mathematik.html">
+          <button id="mathe">Mathematik</button>
+        </a>
+        <a href="internettechnologie.html">
+          <button id="it">Internet Technologie</button>
+        </a>
+        <a href="allgemeinwissen.html">
+          <button id="aw">Allgemeines Wissen</button>
+        </a>
+      </div>
     </div>
     <p></p>
     <hr />
-
-    <! --- Aktueller Lernstand --- !>
-    <div class="progress-bar">
-      <div class="progress" id="progress-bar" style="width: 0%;"></div>
-    </div>
-
-
   </article>
 
   <! --- Anzeige des aktuellen Lernstands --- !>
@@ -94,4 +85,3 @@
 </footer>
 </body>
 </html>
-
