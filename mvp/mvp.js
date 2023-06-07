@@ -1,27 +1,19 @@
 "use strict";
 
-document.addEventListener('DOMContentLoaded', function () {
-    let m = new Model();
-    let p = new Presenter();
-    let v = new View(p);
+document.addEventListener('DOMContentLoaded', () => {
+    const m = new Model();
+    const p = new Presenter();
+    const v = new View(p);
     p.setModelAndView(m, v);
 
-    // Erfolgsquoten beim Laden der Seite aus dem Local Storage abrufen und anzeigen
-    const mathErfolgsquote = localStorage.getItem('mathErfolgsquote');
-    const internetErfolgsquote = localStorage.getItem('internetErfolgsquote');
-    const allgemeinErfolgsquote = localStorage.getItem('allgemeinErfolgsquote');
+    const categories = ['math', 'internet', 'allgemein', 'spanisch'];
 
-    if (mathErfolgsquote) {
-        document.querySelector('.progress-list li:nth-child(1) .status').textContent = `${mathErfolgsquote}%`;
-    }
-
-    if (internetErfolgsquote) {
-        document.querySelector('.progress-list li:nth-child(2) .status').textContent = `${internetErfolgsquote}%`;
-    }
-
-    if (allgemeinErfolgsquote) {
-        document.querySelector('.progress-list li:nth-child(3) .status').textContent = `${allgemeinErfolgsquote}%`;
-    }
+    categories.forEach((category, index) => {
+        const erfolgsquote = localStorage.getItem(`${category}Erfolgsquote`);
+        if (erfolgsquote) {
+            document.querySelector(`.progress-list li:nth-child(${index + 1}) .quote`).textContent = `${erfolgsquote}%`;
+        }
+    });
 });
 
 
@@ -140,7 +132,8 @@ class View {
         const categoryMap = {
             "math-start": "teil-mathe",
             "internet-start": "teil-internettechnologien",
-            "allgemein-start": "teil-allgemein"
+            "allgemein-start": "teil-allgemein",
+            "spanisch-start": "teil-spanisch",
         };
 
         const addStartEventHandler = (buttonId, category) => {
@@ -204,7 +197,7 @@ class View {
     }
 
     clearAnswerButtons() {
-        const buttonsElement = document.getElementById("answers");
+        const buttonsElement = document.getElementById("answers-buttons");
         buttonsElement.innerHTML = "";
     }
 
@@ -221,7 +214,7 @@ class View {
     }
 
     renderAnswerButtons(frag, category) {
-        const buttonsElement = document.getElementById("answers");
+        const buttonsElement = document.getElementById("answers-buttons");
         buttonsElement.innerHTML = "";
 
         const answersWithIndices = frag.l.map((answer, index) => ({ answer, index }));
@@ -240,7 +233,7 @@ class View {
     }
 
     addButtonHandlers() {
-        const answerButtons = document.querySelectorAll("#answers button");
+        const answerButtons = document.querySelectorAll("#answers-buttons button");
         answerButtons.forEach(button => {
             button.addEventListener("click", () => {
                 const value = button.value;
@@ -293,18 +286,23 @@ class View {
         const erfolgsquote = Math.round((correctCount / totalQuestions) * 100);
 
         if (category === 'teil-mathe') {
-            document.querySelector('.progress-list li:nth-child(1) .status').textContent = `${erfolgsquote}%`;
+            document.querySelector('.progress-list li:nth-child(1) .quote').textContent = `${erfolgsquote}%`;
             localStorage.setItem('mathErfolgsquote', erfolgsquote);
         }
 
         if (category === 'teil-internettechnologien') {
-            document.querySelector('.progress-list li:nth-child(2) .status').textContent = `${erfolgsquote}%`;
+            document.querySelector('.progress-list li:nth-child(2) .quote').textContent = `${erfolgsquote}%`;
             localStorage.setItem('internetErfolgsquote', erfolgsquote);
         }
 
         if (category === 'teil-allgemein') {
-            document.querySelector('.progress-list li:nth-child(3) .status').textContent = `${erfolgsquote}%`;
+            document.querySelector('.progress-list li:nth-child(3) .quote').textContent = `${erfolgsquote}%`;
             localStorage.setItem('allgemeinErfolgsquote', erfolgsquote);
+        }
+
+        if (category === 'teil-spanisch') {
+            document.querySelector('.progress-list li:nth-child(4) .quote').textContent = `${erfolgsquote}%`;
+            localStorage.setItem('spanischErfolgsquote', erfolgsquote);
         }
     }
 
@@ -315,8 +313,8 @@ class View {
         correctCountElement.textContent = correctCount;
         incorrectCountElement.textContent = incorrectCount;
 
-        const progressBarGreen = document.querySelector('.progress-bar-green');
-        const progressBarRed = document.querySelector('.progress-bar-red');
+        const progressBarGreen = document.querySelector('.progress-bar-right');
+        const progressBarRed = document.querySelector('.progress-bar-wrong');
 
         const greenWidth = (correctCount / totalQuestions) * 100;
         const redWidth = 100 - greenWidth;
@@ -367,14 +365,14 @@ class View {
     }
 
     disableAnswerButtons() {
-        const answerButtons = document.querySelectorAll("#answers button");
+        const answerButtons = document.querySelectorAll("#answers-buttons button");
         answerButtons.forEach(button => {
             button.style.display = "none";
         });
     }
 
     enableAnswerButtons() {
-        const answerButtons = document.querySelectorAll("#answers button");
+        const answerButtons = document.querySelectorAll("#answers-buttons button");
         answerButtons.forEach(button => {
             button.style.display = "block";
         });

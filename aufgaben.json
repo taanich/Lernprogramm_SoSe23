@@ -51,6 +51,23 @@
         {"a":"Welches chemische Element ist das leichteste?", "l":["Wasserstoff","Sauerstoff","Kohlenstoff","Stickstoff"]}
 
     ],
+    "teil-spanisch": [
+        {"a": "Was bedeutet \"Haus\" auf Spanisch?", "l": ["Casa", "Coche", "Perro", "Gato"]},
+        {"a": "Wie sagt man \"Danke\" auf Spanisch?", "l": ["Gracias", "Amigo", "Hola", "Adiós"]},
+        {"a": "Wie übersetzt man \"Apfel\" ins Spanische?", "l": ["Manzana", "Mesa", "Playa", "Sol"]},
+        {"a": "Was bedeutet \"Schule\" auf Spanisch?", "l": ["Escuela", "Lápiz", "Flor", "Coche"]},
+        {"a": "Wie sagt man \"Katze\" auf Spanisch?", "l": ["Gato", "Casa", "Perro", "Árbol"]},
+        {"a": "Was bedeutet \"Wasser\" auf Spanisch?", "l": ["Agua", "Sol", "Flor", "Playa"]},
+        {"a": "Wie übersetzt man \"Tisch\" ins Spanische?", "l": ["Mesa", "Perro", "Taza", "Coche"]},
+        {"a": "Was bedeutet \"Buch\" auf Spanisch?", "l": ["Libro", "Casa", "Sol", "Manzana"]},
+        {"a": "Wie sagt man \"Mutter\" auf Spanisch?", "l": ["Madre", "Amigo", "Padre", "Hola"]},
+        {"a": "Was bedeutet \"Hund\" auf Spanisch?", "l": ["Perro", "Gato", "Coche", "Árbol"]},
+        {"a": "Wie übersetzt man \"Stuhl\" ins Spanische?", "l": ["Silla", "Lápiz", "Flor", "Casa"]},
+        {"a": "Was bedeutet \"Stift\" auf Spanisch?", "l": ["Lápiz", "Sol", "Coche", "Taza"]},
+        {"a": "Wie sagt man \"Bruder\" auf Spanisch?", "l": ["Hermano", "Amigo", "Hola", "Padre"]},
+        {"a": "Was bedeutet \"Blume\" auf Spanisch?", "l": ["Flor", "Árbol", "Perro", "Casa"]},
+        {"a": "Wie übersetzt man \"Glas\" ins Spanische?", "l": ["Vaso", "Taza", "Sol", "Playa"]}
+    ],
     "teil-noten": [
         {"a":"C4", "l":["C","D","E","H"]},
         {"a":"(C4 E4 G4)", "l": ["C", "H", "F", "D"]}

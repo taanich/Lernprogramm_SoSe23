@@ -3,16 +3,13 @@
     --orange-color: #ec6608;
     --white-color: #eaeaea;
     --grey-color: #333333;
-
-    --correct-answer-color: #0b8d28;
-    --incorrect-answer-color: #bb0d1e;
 }
 
 /* -- Farbe und Schriftart -- */
 body {
-    background-color: var(--main-color); font-family: "Arial"; }
-
-a {color: black; text-decoration: none}
+    background-color: var(--main-color) ;
+    font-family: "Arial";
+}
 
 /* -- Rahmen und Abstände -- */
 header, article, nav, aside, footer {
@@ -21,70 +18,21 @@ header, article, nav, aside, footer {
     border-radius: 0.5em;
 }
 
-/* -- Allgemeiner Button-Stil -- */
-button {
-    min-width: 100px;
-    min-height: 40px;
-    font-size: 16px;
-    margin: 10px;
-    padding: 8px 16px; /* Innenabstand innerhalb des Buttons (oben/unten, links/rechts) */
-    white-space: normal;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--white-color);
-    color: #333333;
-    transition: background-color 0.3s ease;
+/* -- Links -- */
+a {color: black; text-decoration: none}
+
+/* -- Paragraphen -- */
+p {
+    padding: 1px 1px;
 }
 
-button:hover {
-    background-color: var(--orange-color);
-    color: var(--white-color);
+/* Überschriften Navigation, Aufgabenbereich, Erfolgsquote */
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
-button:focus {
-    outline: none;
-}
-
-
-/* -- Buttons im Startbereich -- */
-#bereich {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-
-#bereich a {
-    flex: 0 0 auto;
-    margin: 0.5em;
-}
-
-#bereich button {
-    padding: 10px 16px;
-    font-size: 16px;
-    white-space: normal;
-}
-
-
-/* -- Buttons für die Antworten -- */
-#answers {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-wrap: wrap;
-}
-
-#answers button {
-    margin: 10px;
-    padding: 8px 16px; /* Innenabstand innerhalb des Buttons (oben/unten, links/rechts) */
-}
-
+/* -- Footer -- */
 footer {
     background-color: #ee9e6e;
     font-weight: bold;
@@ -95,21 +43,8 @@ footer {
     text-overflow: fade;
 }
 
-
-
-
-/* -- Statistik -- */
-
-
-
-
-/* -- Flex-Items mit flex-grow, flex-shrink, flex-basis*/
-/*
-main {display: flex}
-nav {background-color: orange; order: 1; flex: 1 1 1em}
-article {background-color: #cccccc; order: 2; flex: 3 3 3%}
-aside {background-color: orange; order: 3; flex: 1 1 1em}
-*/
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Responsive Design -- */
 
 main {
     display: flex;
@@ -117,9 +52,26 @@ main {
 }
 
 nav {
-    background-color: var(--orange-color);
+    background-color: #5b5a5a;
+    padding: 10px;
     order: 1;
     flex: 1 1 1em;
+}
+
+.nav-item {
+    margin: 10px 0;
+}
+
+.nav-link {
+    display: block;
+    text-decoration: none;
+    color: var(--white-color);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--orange-color);
 }
 
 article {
@@ -129,9 +81,14 @@ article {
     overflow: auto; /* Fügt bei Bedarf einen Scrollbalken hinzu */
 }
 
+#task {
+    word-wrap: break-word;
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
 
 aside {
-    background-color: var(--orange-color);
+    background-color: #e8e8e8;
     order: 3;
     flex: 1 1 1em;
 }
@@ -143,77 +100,16 @@ aside {
     }
 }
 
-.progress-bar {
-    display: flex;
-    align-items: stretch;
-    height: 20px; /* Höhe des Progressbalkens anpassen */
-    background-color: #ccc; /* Hintergrundfarbe des Progressbalkens */
-    margin-top: 10px; /* Abstand zum vorherigen Element anpassen */
-    position: relative;
-}
-
-.progress-bar-green {
-    height: 100%;
-    background-color: green;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 50%; /* Anfangsgröße des grünen Balkens (50% für den Beispielzweck) */
-}
-
-.progress-bar-red {
-    height: 100%;
-    background-color: red;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 50%; /* Anfangsgröße des roten Balkens (50% für den Beispielzweck) */
-}
-
-.progress-stats {
-    display: flex;
-    justify-content: space-between;
-}
-
-.task-label {
-    text-align: center;
-}
-
-.nav-container {
-    background-color: #5b5a5a;
-    padding: 10px;
-}
-
-.nav-item {
-    margin: 10px 0;
-}
-
-.nav-link {
-    display: block;
-    text-decoration: none;
-    color: #ffffff;
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- aside - Erfolgsquote -- */
+.category {
     font-weight: bold;
-    transition: color 0.3s;
 }
 
-.nav-link:hover {
-    color: var(--orange-color);
+.quote {
+    font-size: 12px;
+    color: #565353;
 }
-
-
-
-
-
-aside {
-    background-color: #e8e8e8;
-    padding: 10px;
-}
-
-h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
 .progress-list {
     list-style-type: none;
     padding: 0;
@@ -226,36 +122,104 @@ h2 {
     margin-bottom: 5px;
 }
 
-.subject {
+.category {
     font-weight: bold;
 }
 
-.status {
+.quote {
     font-size: 12px;
     color: #565353;
 }
 
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Allgemeiner Button-Stil -- */
+button {
+    margin: 10px;
+    font-size: 16px;
+    padding: 8px 16px;
+    display: flex;
+    border: none;
+    border-radius: 5px;
+    flex-grow: 1;
+    color: var(--grey-color);
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: var(--orange-color);
+    color: var(--white-color);
+}
+
+/* -- Buttons im Startbereich -- */
+#startcategory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#startcategory a {
+    margin: 0.5em;
+}
+
+#startcategory button {
+    padding: 20px 28px;
+    font-size: 16px;
+}
+
+/* -- Aufgaben-Start-Button -- */
+.start-button button {
+    white-space: normal;
+    justify-content: center;
+}
+
+/* -- Buttons für die Antworten -- */
+#answers-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- x von x Aufgaben -- */
+.task-label {
+    text-align: center;
+}
+
+/* -- Fortschrittsbalken Richtig/Falsch beantwortet-- */
 .progress-bar {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     height: 10px;
-    background-color: #f5f5f5;
+    margin-top: 10px; /* Abstand zum vorherigen Element anpassen */
+    position: relative;
     border-radius: 5px;
     overflow: hidden;
 }
 
-.progress-bar-inner {
+.progress-bar-right {
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-    transition: width 0.3s ease;
+    background-color: var(--orange-color);
+    left: 0;
+    top: 0;
+    width: 50%;
 }
 
-.progress-bar-green {
-    background-color: #ec6608;
+.progress-bar-wrong {
+    height: 100%;
+    background-color: var(--white-color);
+    right: 0;
+    top: 0;
+    width: 50%;
 }
 
-.progress-bar-red {
-    background-color: #e8e8e8;
+.progress-stats {
+    display: flex;
+    justify-content: space-between;
 }
+
+
+
+
+
 
 

@@ -1,5 +1,3 @@
-// service-worker.js
-
 // Name des Cache-Speichers
 const CACHE_NAME = 'my-cache';
 
@@ -7,9 +5,13 @@ const CACHE_NAME = 'my-cache';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/images/logo.png'
+    '/mathematik.html',
+    '/internettechnologie.html',
+    '/allgemeinwissen.html',
+    '/stylesheet.css',
+    '/mvp/mvp.js',
+    '/images/01_HTWD_logo_RGB_wordmark_color.png',
+    '/images/03_HTWD_logo_RBG_horizontal_color.png',
 ];
 
 // Installationsereignis: Ressourcen im Cache speichern

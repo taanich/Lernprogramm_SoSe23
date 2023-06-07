@@ -10,13 +10,8 @@
   <meta name="ROBOTS" content="INDEX, FOLLOW"/>
 
   <link rel="stylesheet" href="stylesheet.css" type="text/css"/>
-  <script src="scripts/sw.js" type="text/javascript" defer></script>
-  <script src="scripts/script.js" type="text/javascript" defer></script>
+  <script src="scripts/service-worker.js" type="text/javascript" defer></script>
   <script src="mvp/mvp.js" type="text/javascript" defer></script>
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0"></script>
 
 </head>
 
@@ -37,6 +32,7 @@
     <div class="nav-item"><a class="nav-link" href="mathematik.html">Mathematik</a></div>
     <div class="nav-item"><a class="nav-link" href="internettechnologie.html">Internet Technologie</a></div>
     <div class="nav-item"><a class="nav-link" href="allgemeinwissen.html">Allgemeinwissen</a></div>
+    <div class="nav-item"><a class="nav-link" href="spanisch.html">Spanisch</a></div>
   </nav>
 
 
@@ -47,8 +43,8 @@
     <hr />
 
     <! --- Anzeige der Aufgabenbereiche --- !>
-    <div id="aufgabenbereich">
-      <div id="bereich" class="button-container">
+    <div id="category-container">
+      <div id="startcategory" class="button-container">
         <a href="mathematik.html">
           <button id="mathe">Mathematik</button>
         </a>
@@ -56,11 +52,13 @@
           <button id="it">Internet Technologie</button>
         </a>
         <a href="allgemeinwissen.html">
-          <button id="aw">Allgemein Wissen</button>
+          <button id="aw">Allgemeinwissen</button>
+        </a>
+        <a href="spanisch.html">
+          <button id="sp">Spanisch</button>
         </a>
       </div>
     </div>
-    <p></p>
     <hr />
   </article>
 
@@ -69,16 +67,20 @@
     <h2>Meine Erfolgsquote</h2>
     <ul class="progress-list">
       <li>
-        <span class="subject">Mathematik</span>
-        <span class="status">0%</span>
+        <span class="category">Mathematik</span>
+        <span class="quote">0%</span>
       </li>
       <li>
-        <span class="subject">Internet Technologie</span>
-        <span class="status">0%</span>
+        <span class="category">Internet Technologie</span>
+        <span class="quote">0%</span>
       </li>
       <li>
-        <span class="subject">Allgemeinwissen</span>
-        <span class="status">0%</span>
+        <span class="category">Allgemeinwissen</span>
+        <span class="quote">0%</span>
+      </li>
+      <li>
+        <span class="category">Spanisch</span>
+        <span class="quote">0%</span>
       </li>
     </ul>
   </aside>
@@ -96,7 +98,7 @@
 <script>
   // Service Worker registrieren für PWA
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('scripts/sw.js')
+    navigator.serviceWorker.register('scripts/service-worker.js')
             .then(reg => console.log(reg))
             .catch(err => console.log(err));
   }
