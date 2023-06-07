@@ -1,33 +1,25 @@
 :root {
+    --main-color: white;
+    --orange-color: #ec6608;
+    --white-color: #eaeaea;
+    --grey-color: #333333;
+
     --correct-answer-color: #0b8d28;
     --incorrect-answer-color: #bb0d1e;
-
-    --main-color: white;
-    --headline-font-color: black;
-    --orange-color: #ec6608;
 }
 
 /* -- Farbe und Schriftart -- */
 body {
-    background-color: var(--main-color);
-    font-family: "Arial";
-}
-
-.headline1 {color: var(--headline-font-color)}
-.headline2 {color: var(--headline-font-color)}
+    background-color: var(--main-color); font-family: "Arial"; }
 
 a {color: black; text-decoration: none}
-a:hover {color: gray}
 
 /* -- Rahmen und Abstände -- */
 header, article, nav, aside, footer {
     margin: 0.5em;
     padding: 0.75em;
-    /*border: 1px solid #000000;*/
     border-radius: 0.5em;
 }
-/* -- Listentyp -- */
-ul {list-style-type: square}
 
 /* -- Allgemeiner Button-Stil -- */
 button {
@@ -43,20 +35,20 @@ button {
     flex-grow: 1;
     border: none;
     border-radius: 5px;
-    background-color: #eaeaea;
+    background-color: var(--white-color);
     color: #333333;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: var(--orange-color);
-    color: #eaeaea;
+    color: var(--white-color);
 }
 
 button:focus {
     outline: none;
-   /* box-shadow: 0 0 10px #d98243; */
 }
+
 
 /* -- Buttons im Startbereich -- */
 #bereich {
@@ -265,3 +257,5 @@ h2 {
 .progress-bar-red {
     background-color: #e8e8e8;
 }
+
+

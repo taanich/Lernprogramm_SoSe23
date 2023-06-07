@@ -14,83 +14,97 @@
   <script src="scripts/script.js" type="text/javascript" defer></script>
   <script src="mvp/mvp.js" type="text/javascript" defer></script>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0"></script>
+
 </head>
 
 <body>
 <header style="display: flex; align-items: center;">
   <h1 style="margin-right: auto;">Lernprogramm</h1>
-  <img src="../Lernprogramm_SoSe23/images/03_HTWD_logo_RGB_horizontal_color.png" alt="HTWD_Logo" style="width: 300px; height: auto; margin-left: 1em;">
+  <div style="max-width: 300px; overflow: hidden;">
+    <img src="../Lernprogramm_SoSe23/images/03_HTWD_logo_RGB_horizontal_color.png" alt="HTWD_Logo" style="max-width: 100%; height: auto;">
+  </div>
 </header>
 
 <main>
   <! --- Navigation --- !>
-  <nav>
-    <h2 class="headline1">Navigation</h2>
-    <ul>
-      <li><a href="index.html">Startseite</a></li>
-      <li><a href="mathematik.html">Mathematik</a></li>
-      <li><a href="internettechnologie.html">Internet Technologie</a></li>
-      <li><a href="allgemeinwissen.html">Allgemeines Wissen</a></li>
-    </ul>
+  <nav class="nav-container">
+    <h2>Navigation</h2>
+    <div class="nav-item"><a class="nav-link" href="index.html">Startseite</a></div>
+    <div class="nav-item"><a class="nav-link" href="mathematik.html">Mathematik</a></div>
+    <div class="nav-item"><a class="nav-link" href="internettechnologie.html">Internet Technologie</a></div>
+    <div class="nav-item"><a class="nav-link" href="allgemeinwissen.html">Allgemeinwissen</a></div>
   </nav>
 
-  <! --- Aufgabenbereich - Allgemeines Wissen --- !>
+  <! --- Aufgabenbereich - Allgemeinwissen --- !>
   <article>
-    <h2 class="headline1">Allgemeines Wissen</h2>
-    <p></p>
-    <p id="textbox">[TODO]</p>
+    <h2>Allgemeinwissen</h2>
     <hr />
     <p></p>
 
     <! --- Anzeige der Aufgabe --- !>
-    <div id="task"> >> Hier erscheint die Aufgabenstellung << </div>
+    <div id="task">Beginne, in dem Du auf den Start Button drückst!</div>
     <p></p>
     <hr />
 
     <! --- Auswahl der Antworten (Buttons) --- !>
-    <p>Wähle die passende Antwort!</p>
     <p></p>
-
     <div id="answers">
-      <button id="A">A</button>
-      <button id="B">B</button>
-      <button id="C">C</button>
-      <button id="D">D</button>
+      <button id="A"></button>
+      <button id="B"></button>
+      <button id="C"></button>
+      <button id="D"></button>
     </div>
     <p></p>
 
+    <! --- Statistische Darstellung --- !>
+    <div id="statisticsContainer"></div>
+
     <! --- Start-Button - Holen der neuen Aufgabe --- !>
     <div style="display: flex; justify-content: flex-end; align-items: center;">
-      <button id="allg-start">Start</button>
-      <button id="weiter-button">Weiter</button>
+      <button id="allgemein-start">Start</button>
     </div>
     <p></p>
     <hr />
 
-    <! --- Aktueller Lernstand --- !>
-    <div class="progress-bar">
-      <div class="progress" id="progress-bar" style="width: 0%;"></div>
+    <! --- Fortschritt-Anzeige --- !>
+    <div id="progress">
+      <p class="task-label"><span id="currentTask">0 von 0 Aufgaben</span></p>
+      <div class="progress-bar">
+        <div class="progress-bar-green"></div>
+        <div class="progress-bar-red"></div>
+      </div>
+      <div class="progress-stats">
+        <p>Richtig beantwortet: <span id="correctCount">0</span></p>
+        <p>Falsch beantwortet: <span id="incorrectCount">0</span></p>
+      </div>
     </div>
-
-
   </article>
 
   <! --- Anzeige des aktuellen Lernstands --- !>
   <aside>
-    <h2 class="headline1">Mein Lernstand</h2>
-    <p>Mein aktueller Lernfortschritt</p>
-    <p>...</p>
-    <p>Letzter Lernstand</p>
-    <p>...</p>
+    <h2>Meine Erfolgsquote</h2>
+    <ul class="progress-list">
+      <li>
+        <span class="subject">Mathematik</span>
+        <span class="status">0%</span>
+      </li>
+      <li>
+        <span class="subject">Internet Technologie</span>
+        <span class="status">0%</span>
+      </li>
+      <li>
+        <span class="subject">Allgemeinwissen</span>
+        <span class="status">0%</span>
+      </li>
+    </ul>
   </aside>
 </main>
 
 <footer style="display: flex; align-items: center">
-  <h3 style="margin-right: auto">SoSe 2023 - Beleg</h3>
-  <h3 style="margin-right: auto">Internet Technologie I - Prof. Dr.-Ing. Jörg Vogt</h3>
-  <h3>Tanja Dietrich - s83797</h3>
+  <p id="footerText1" style="margin-right: auto">SoSe 2023 - Beleg</p>
+  <p id="footerText2" style="margin-right: auto">Internet Technologie I - Prof. Dr.-Ing. Jörg Vogt</p>
+  <p id="footerText3">Tanja Dietrich - s83797</p>
 </footer>
 </body>
 </html>

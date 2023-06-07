@@ -5,7 +5,25 @@ document.addEventListener('DOMContentLoaded', function () {
     let p = new Presenter();
     let v = new View(p);
     p.setModelAndView(m, v);
+
+    // Erfolgsquoten beim Laden der Seite aus dem Local Storage abrufen und anzeigen
+    const mathErfolgsquote = localStorage.getItem('mathErfolgsquote');
+    const internetErfolgsquote = localStorage.getItem('internetErfolgsquote');
+    const allgemeinErfolgsquote = localStorage.getItem('allgemeinErfolgsquote');
+
+    if (mathErfolgsquote) {
+        document.querySelector('.progress-list li:nth-child(1) .status').textContent = `${mathErfolgsquote}%`;
+    }
+
+    if (internetErfolgsquote) {
+        document.querySelector('.progress-list li:nth-child(2) .status').textContent = `${internetErfolgsquote}%`;
+    }
+
+    if (allgemeinErfolgsquote) {
+        document.querySelector('.progress-list li:nth-child(3) .status').textContent = `${allgemeinErfolgsquote}%`;
+    }
 });
+
 
 // Model -------------------------------------------------------------------------------------------------------------
 class Model {
@@ -77,7 +95,6 @@ class Model {
 // Presenter ---------------------------------------------------------------------------------------------------------
 class Presenter {
     constructor() {
-        this.anr = 0;
         this.m = null;
         this.v = null;
         this.correctCount = 0; // Variable für die richtigen Antworten
@@ -123,7 +140,7 @@ class View {
         const categoryMap = {
             "math-start": "teil-mathe",
             "internet-start": "teil-internettechnologien",
-            "allg-start": "teil-allgemein"
+            "allgemein-start": "teil-allgemein"
         };
 
         const addStartEventHandler = (buttonId, category) => {
@@ -165,12 +182,6 @@ class View {
         const taskElement = document.getElementById("task");
         taskElement.innerHTML = ""; // Löschen des vorherigen Inhalts
 
-        if (!frag) {
-            this.renderNoTasksMessage(taskElement);
-            this.clearAnswerButtons();
-            return;
-        }
-
         this.renderTask(frag, category, taskElement);
         this.renderAnswerButtons(frag, category);
 
@@ -199,8 +210,9 @@ class View {
 
     renderTask(frag, category, taskElement) {
         const taskParagraph = document.createElement("p");
-        const taskText = (category === "teil-mathe") ? "Aufgabe: " : "Aufgabe: ";
+        const taskText = (category === "teil-mathe") ? "" : "";
         taskParagraph.innerHTML = taskText + this.getTaskContent(frag, category);
+        taskParagraph.style.textAlign = "center";
         taskElement.appendChild(taskParagraph);
     }
 
@@ -276,6 +288,24 @@ class View {
         statisticsContainer.prepend(canvas);
 
         this.renderStatistics(correctCount, incorrectCount);
+
+        // Erfolgsquote berechnen und im Local Storage speichern
+        const erfolgsquote = Math.round((correctCount / totalQuestions) * 100);
+
+        if (category === 'teil-mathe') {
+            document.querySelector('.progress-list li:nth-child(1) .status').textContent = `${erfolgsquote}%`;
+            localStorage.setItem('mathErfolgsquote', erfolgsquote);
+        }
+
+        if (category === 'teil-internettechnologien') {
+            document.querySelector('.progress-list li:nth-child(2) .status').textContent = `${erfolgsquote}%`;
+            localStorage.setItem('internetErfolgsquote', erfolgsquote);
+        }
+
+        if (category === 'teil-allgemein') {
+            document.querySelector('.progress-list li:nth-child(3) .status').textContent = `${erfolgsquote}%`;
+            localStorage.setItem('allgemeinErfolgsquote', erfolgsquote);
+        }
     }
 
     updateProgress(correctCount, incorrectCount, totalQuestions) {

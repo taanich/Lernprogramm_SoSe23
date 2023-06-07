@@ -72,16 +72,11 @@ class Model {
         console.log("Aktuelle Aufgabe:", this.currentTask);
     }
 
-    checkAnswer() {
-        // TODO
-    }
 }
 
 // Presenter ---------------------------------------------------------------------------------------------------------
-// Presenter ---------------------------------------------------------------------------------------------------------
 class Presenter {
     constructor() {
-        this.anr = 0;
         this.m = null;
         this.v = null;
         this.correctCount = 0; // Variable für die richtigen Antworten
@@ -97,6 +92,7 @@ class Presenter {
         let frag = await this.m.getTask(category);
         console.log("Erhaltene Aufgabe:", frag);
         this.v.renderText(frag, category, this.m.totalQuestions, this.correctCount, this.incorrectCount); // Über gebe die Anzahl der Fragen für View
+        this.v.enableAnswerButtons(); // Aktiviere die Answer-Buttons
     }
 
     resetTasks() {
@@ -119,13 +115,14 @@ class View {
     constructor(p) {
         this.p = p;  // Presenter
         this.setHandler();
+        this.disableAnswerButtons(); // Deaktiviere die Answer-Buttons beim Initialisieren der View
     }
 
     setHandler() {
         const categoryMap = {
             "math-start": "teil-mathe",
             "internet-start": "teil-internettechnologien",
-            "allg-start": "teil-allgemein"
+            "allgemein-start": "teil-allgemein"
         };
 
         const addStartEventHandler = (buttonId, category) => {
@@ -145,6 +142,7 @@ class View {
 
     resetTasksAndStart(category) {
         this.p.resetTasks();
+        this.clearStatistics(); // Neue Methode hinzufügen, um die Statistik zu leeren
         this.start(category);
     }
 
@@ -166,12 +164,6 @@ class View {
         const taskElement = document.getElementById("task");
         taskElement.innerHTML = ""; // Löschen des vorherigen Inhalts
 
-        if (!frag) {
-            this.renderNoTasksMessage(taskElement);
-            this.clearAnswerButtons();
-            return;
-        }
-
         this.renderTask(frag, category, taskElement);
         this.renderAnswerButtons(frag, category);
 
@@ -180,6 +172,12 @@ class View {
         // In der View-Klasse
         this.updateProgress(correctCount, incorrectCount, totalQuestions);
         this.renderCurrentTask(totalQuestions, this.p.m.selectedTasks.size);
+
+        const answeredQuestions = correctCount + incorrectCount;
+        if (answeredQuestions === totalQuestions) {
+            this.renderEndMessage(category, totalQuestions, correctCount, incorrectCount);
+            this.clearAnswerButtons();
+        }
     }
 
     renderCurrentTask(totalQuestions, currentTaskIndex) {
@@ -194,8 +192,9 @@ class View {
 
     renderTask(frag, category, taskElement) {
         const taskParagraph = document.createElement("p");
-        const taskText = (category === "teil-mathe") ? "Ausgabe: " : "Aufgabe: ";
+        const taskText = (category === "teil-mathe") ? "" : "";
         taskParagraph.innerHTML = taskText + this.getTaskContent(frag, category);
+        taskParagraph.style.textAlign = "center";
         taskElement.appendChild(taskParagraph);
     }
 
@@ -229,10 +228,10 @@ class View {
                 const value = button.value;
                 if (value === "correct") {
                     this.p.increaseCorrectCount();
-                    console.log("Richtige Antwort! Anzahl der richtigen Antworten:", this.p.correctCount);
+                    console.log("Anzahl der richtigen Antworten:", this.p.correctCount);
                 } else {
                     this.p.increaseIncorrectCount();
-                    console.log("Falsche Antwort! Anzahl der falschen Antworten:", this.p.incorrectCount);
+                    console.log("Anzahl der falschen Antworten:", this.p.incorrectCount);
                 }
 
                 const totalQuestions = this.p.m.totalQuestions;
@@ -254,7 +253,7 @@ class View {
         button.style.width = width + "px";
     }
 
-    renderEndMessage(category, totalQuestions, correctCount) {
+    renderEndMessage(category, totalQuestions, correctCount, incorrectCount) {
         const taskElement = document.getElementById("task");
         taskElement.innerHTML = ""; // Löschen des vorherigen Inhalts
 
@@ -264,15 +263,85 @@ class View {
         resultParagraph.style.textAlign = "center";
 
         taskElement.appendChild(resultParagraph);
+
+        const statisticsContainer = document.getElementById("statisticsContainer");
+        const canvas = document.createElement("canvas");
+        canvas.id = "statisticsChart";
+        statisticsContainer.prepend(canvas);
+
+        this.renderStatistics(correctCount, incorrectCount);
     }
 
     updateProgress(correctCount, incorrectCount, totalQuestions) {
         const correctCountElement = document.getElementById("correctCount");
         const incorrectCountElement = document.getElementById("incorrectCount");
-        //const totalQuestionsElement = document.getElementById("totalQuestions");
 
         correctCountElement.textContent = correctCount;
         incorrectCountElement.textContent = incorrectCount;
-        //totalQuestionsElement.textContent = totalQuestions;
+
+        const progressBarGreen = document.querySelector('.progress-bar-green');
+        const progressBarRed = document.querySelector('.progress-bar-red');
+
+        const greenWidth = (correctCount / totalQuestions) * 100;
+        const redWidth = 100 - greenWidth;
+
+        progressBarGreen.style.width = greenWidth + '%';
+        progressBarRed.style.width = redWidth + '%';
     }
+
+    renderStatistics(correctCount, incorrectCount) {
+        const canvas = document.getElementById("statisticsChart");
+        const ctx = canvas.getContext("2d");
+
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ["Richtig", "Falsch"],
+                datasets: [
+                    {
+                        label: "Fragen",
+                        data: [correctCount, incorrectCount],
+                        backgroundColor: ["green", "darkred"],
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            precision: 0
+                        },
+                        max: this.p.m.totalQuestions // Skala an die Gesamtzahl der Fragen anpassen
+                    }
+                }
+            }
+        });
+    }
+
+
+    clearStatistics() {
+        const taskElement = document.getElementById("task");
+        taskElement.innerHTML = ""; // Löschen des vorherigen Inhalts
+
+        const statisticsContainer = document.getElementById("statisticsContainer");
+        statisticsContainer.innerHTML = ""; // Löschen der Statistik-Anzeige
+    }
+
+    disableAnswerButtons() {
+        const answerButtons = document.querySelectorAll("#answers button");
+        answerButtons.forEach(button => {
+            button.style.display = "none";
+        });
+    }
+
+    enableAnswerButtons() {
+        const answerButtons = document.querySelectorAll("#answers button");
+        answerButtons.forEach(button => {
+            button.style.display = "block";
+        });
+    }
+
 }

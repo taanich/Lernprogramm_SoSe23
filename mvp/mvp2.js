@@ -262,7 +262,7 @@ class View {
         taskElement.innerHTML = ""; // Löschen des vorherigen Inhalts
 
         const resultParagraph = document.createElement("p");
-        resultParagraph.textContent = `Du hast ${correctCount} von ${totalQuestions} Fragen gelöst!`;
+        resultParagraph.textContent = `Du hast ${correctCount} von ${totalQuestions} Fragen richtig gelöst!`;
 
         resultParagraph.style.textAlign = "center";
 
