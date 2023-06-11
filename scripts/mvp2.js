@@ -4,6 +4,7 @@
 const mathRadioButton = document.getElementById('mathe');
 const internetRadioButton = document.getElementById('internet');
 const allgemeinRadioButton = document.getElementById('allgemein');
+const ajaxRadioButton = document.getElementById('ajax');
 
 // Überschrift
 const header = document.getElementById('headline');
@@ -17,8 +18,10 @@ const allButtons = document.querySelectorAll('#options > *');
 let questionsMath;
 let questionsInternet;
 let questionsAllgemein;
+let questionsAjax;
 
 // ------------------------------------------------------------------------------------------------------------------
+
 
 document.addEventListener('DOMContentLoaded', function (){
     let model = new Model();
@@ -42,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function (){
             console.log("Allgemeinwissen");
             console.log(questionsAllgemein);
 
+            questionsAjax = getQuiz();      // Ajax Funktion
+
             // Radio-Buttons initialisieren
             mathRadioButton.addEventListener('click', function() {
                 header.textContent = 'Mathematik';
@@ -58,6 +63,12 @@ document.addEventListener('DOMContentLoaded', function (){
             allgemeinRadioButton.addEventListener('click', function() {
                 header.textContent = 'Allgemeinwissen';
                 model.init(questionsAllgemein, 0, 0, 0);
+                presenter.start();
+            });
+
+            allgemeinRadioButton.addEventListener('click', function() {
+                header.textContent = 'Ajax Aufgaben';
+                model.init(questionsAjax, 0, 0, 0);
                 presenter.start();
             });
         })
@@ -133,9 +144,11 @@ class Presenter {
         //Begin application
         options.style.display = 'flex';
         line.style.display = 'flex';
+
         console.log("Applikation beginnt...");
         this.displayQuestion(this.model.index); // Beginne bei Index o des Fragenkatalogs
         document.getElementById('result').innerHTML=""; // Anzeige der richtigen Antwort leeren
+        this.updateProgressBar(); // Aktualisiere die Fortschrittsleiste
     }
 
     displayQuestion(){
@@ -146,8 +159,10 @@ class Presenter {
             this.view.setButtons(this.model.getOptions());
         } else {
             question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.getLength() + " Aufgaben richtig gelöst!";
+            options.style.display = 'none';
             return;
         }
+        this.updateProgressBar(); // Aktualisiere die Fortschrittsleiste
     }
 
     evaluate(answer){
@@ -166,6 +181,13 @@ class Presenter {
 
         this.model.incrementIndex();
         this.displayQuestion();
+    }
+
+    updateProgressBar() {
+        const progressBar = document.getElementById('progress-bar');
+        progressBar.style.display = 'flex';
+        const progressPercentage = ((this.model.getIndex() + 1) / this.model.getLength()) * 100;
+        progressBar.style.width = progressPercentage + '%';
     }
 }
 
@@ -217,5 +239,36 @@ class View {
 
     checkAnswer(event) {
         this.presenter.evaluate(event.target);
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+
+function getQuiz() {
+    let xhr = getXhr();
+    sendXhr(xhr);
+
+    function xhrHandler() {
+        console.log("Status: " +xhr.readyState);
+        if (xhr.readyState !== 4 ){
+            return;
+        }
+        console.log("Status "+ xhr.readyState + " " + xhr.status);
+        if (xhr.status === 200) {
+            console.log("Success");
+        }
+    }
+
+    function getXhr() {
+        if(window.XMLHttpRequest) {
+            return new XMLHttpRequest();
+        } else return false;
+    }
+    function sendXhr() {
+        xhr.onreadystatechange = xhrHandler;
+        xhr.open("GET", "https://irene.informatik.htw-dresden.de:8888/api/quizzes/" + 2, true)
+        xhr.setRequestHeader('Authorization', 'Basic ' + btoa('test@gmail.com:secret'));
+        xhr.send(null);
+        console.log("gesendet!");
     }
 }

@@ -1,22 +1,27 @@
-// AJAX-Anfrage senden
-$.ajax({
-    url: 'dein_server_endpoint',
-    method: 'GET',
-    dataType: 'json',
-    success: function(response) {
-        // Antwort erfolgreich empfangen
-        if (response.id >= 2 && response.id <= 33) {
-            // Überprüfen, ob die Antwort korrekt ist
-            var userAnswer = prompt(response.text);
-            if (userAnswer === response.options[0]) {
-                alert('Richtig!');
-            } else {
-                alert('Falsch!');
-            }
+function getQuiz() {
+    let xhr = getXhr();
+    sendXhr(xhr);
+
+    function xhrHandler() {
+        console.log("Status: " +xhr.readyState);
+        if (xhr.readyState !== 4 ){
+            return;
         }
-    },
-    error: function(xhr, status, error) {
-        // Fehler beim Empfangen der Antwort
-        console.error('Fehler beim Laden der Aufgabe:', error);
+        console.log("Status "+ xhr.readyState + " " + xhr.status);
+        if (xhr.status === 200) {
+            console.log("Success");
+        }
     }
-});
+
+    function getXhr() {
+        if(window.XMLHttpRequest) {
+            return new XMLHttpRequest();
+        } else return false;
+    }
+    function sendXhr() {
+        xhr.onreadystatechange = xhrHandler;
+        xhr.open("GET", "https://irene.informatik.htw-dresden.de:8888")
+        xhr.send(null);
+        console.log("gesendet!");
+    }
+}

@@ -202,3 +202,19 @@ button:hover {
     text-align: center;
     margin: 15px;
 }
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Progressbar -- */
+#progress-container {
+    display: flex;
+    justify-content: stretch;
+    margin-top: 20px; /* Optional: Füge einen oberen Abstand hinzu */
+}
+
+#progress-bar {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--orange-color);
+    transition: width 0.3s ease-in-out; /* Hinzugefügt: Übergangseffekt für die Breitenänderung */
+}

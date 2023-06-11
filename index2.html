@@ -46,6 +46,11 @@
         <input type="radio" id="allgemein" name="radioGroup" value="allgemein">
         <label for="allgemein">Allgemeinwissen</label>
       </div>
+
+      <div class="radio">
+        <input type="radio" id="ajax" name="radioGroup" value="ajax">
+        <label for="ajax">Ajax Aufgaben</label>
+      </div>
     </form>
   </nav>
 
@@ -64,12 +69,15 @@
         <button id="c"></button>
         <button id="d"></button>
       </div>
-      <div id="result"></div>
     </div>
     <script src="scripts/mvp2.js"></script>
 
     <hr id="line" style="display: none"/>
     <! --- Progressbalken einfügen!!! --- !>
+    <div id="progress-container">
+      <div id="progress-bar" style="display: none"></div>
+    </div>
+
   </article>
 
   <! --- Anzeige des aktuellen Lernstands --- !>
