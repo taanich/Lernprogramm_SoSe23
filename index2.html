@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="ROBOTS" content="INDEX, FOLLOW"/>
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <title>Lernprogramm</title>
+  <link rel="icon" sizes="512x512" href="images/01_HTWD_logo_RGB_wordmark_color.png"/>
+
+  <link rel="stylesheet" href="stylesheet2.css" type="text/css"/>
+  <script src="scripts/service-worker.js" type="text/javascript" defer></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.css" integrity="sha384-knaESGLxlQRSHWSJ+ZbTX6/L1bJZWBsBYGb2O+g64XHFuO7CbIj9Pkf1aaVXzIZJ" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.js" integrity="sha384-7u+OeKP8De/qfWU/3s5KUDC2wvwPe+d5GwojxjiwFJJpHAp38wQFtz3tr2QNGidv" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<! --- Header mit Logo - [TODO - Einstellungen auslagern!!!] --- !>
+<header style="display: flex; align-items: center;">
+  <h1 style="margin-right: auto;">Lernprogramm</h1>
+  <div style="max-width: 300px; overflow: hidden;">
+    <img src="../Lernprogramm_SoSe23/images/03_HTWD_logo_RGB_horizontal_color.png" alt="HTWD_Logo" style="max-width: 100%; height: auto;">
+  </div>
+</header>
+
+<main>
+  <! --- Navigation --- !>
+  <nav class="lernbereiche">
+    <h2>Lernbereiche</h2>
+    <form>
+      <div class="radio">
+        <input type="radio" id="mathe" name="radioGroup" value="mathe">
+        <label for="mathe">Mathematik</label>
+      </div>
+
+      <div class="radio">
+        <input type="radio" id="internet" name="radioGroup" value="internet">
+        <label for="internet">Internet Technologie</label>
+      </div>
+
+      <div class="radio">
+        <input type="radio" id="allgemein" name="radioGroup" value="allgemein">
+        <label for="allgemein">Allgemeinwissen</label>
+      </div>
+    </form>
+  </nav>
+
+  <! --- Hauptseite --- !>
+  <article id="hauptseite">
+        <p id="headline">Willkommen im Lernprogramm!</p>
+    <hr />
+
+    <div id="task-container">
+      <div id="question">Klicke im Lernbereich auf das Fach, welches Du lernen möchtest!</div>
+      <hr />
+
+      <div id="options" style="display: none">
+        <button id="a"></button>
+        <button id="b"></button>
+        <button id="c"></button>
+        <button id="d"></button>
+      </div>
+      <div id="result"></div>
+    </div>
+    <script src="scripts/mvp2.js"></script>
+
+    <hr id="line" style="display: none"/>
+    <! --- Progressbalken einfügen!!! --- !>
+  </article>
+
+  <! --- Anzeige des aktuellen Lernstands --- !>
+  <aside>
+    <h2>Meine Erfolgsquote</h2>
+    <div class="erfolgsquote-container">
+      <div class="erfolgsquote-item">
+        <span class="lernbereich">Mathematik</span>
+        <span class="erfolgsquote">0%</span>
+      </div>
+      <div class="erfolgsquote-item">
+        <span class="lernbereich">Internet Technologie</span>
+        <span class="erfolgsquote">0%</span>
+      </div>
+      <div class="erfolgsquote-item">
+        <span class="lernbereich">Allgemeinwissen</span>
+        <span class="erfolgsquote">0%</span>
+      </div>
+      <div class="erfolgsquote-item">
+        <span class="lernbereich">Spanisch</span>
+        <span class="erfolgsquote">0%</span>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<footer style="display: flex; align-items: center">
+  <p id="footerText1" style="margin-right: auto">SoSe 2023 - Beleg</p>
+  <p id="footerText2" style="margin-right: auto">Internet Technologie I - Prof. Dr.-Ing. Jörg Vogt</p>
+  <p id="footerText3">Tanja Dietrich - s83797</p>
+</footer>
+</body>
+</html>
+
+
+<script>
+  // Service Worker registrieren für PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('scripts/service-worker.js')
+            .then(reg => console.log(reg))
+            .catch(err => console.log(err));
+  }
+</script>

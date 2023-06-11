@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     categories.forEach((category, index) => {
         const erfolgsquote = localStorage.getItem(`${category}Erfolgsquote`);
         if (erfolgsquote) {
-            document.querySelector(`.progress-list li:nth-child(${index + 1}) .quote`).textContent = `${erfolgsquote}%`;
+            document.querySelector(`.erfolgsquote-liste li:nth-child(${index + 1}) .erfolgsquote`).textContent = `${erfolgsquote}%`;
         }
     });
 });
@@ -286,22 +286,22 @@ class View {
         const erfolgsquote = Math.round((correctCount / totalQuestions) * 100);
 
         if (category === 'teil-mathe') {
-            document.querySelector('.progress-list li:nth-child(1) .quote').textContent = `${erfolgsquote}%`;
+            document.querySelector('.erfolgsquote-liste li:nth-child(1) .erfolgsquote').textContent = `${erfolgsquote}%`;
             localStorage.setItem('mathErfolgsquote', erfolgsquote);
         }
 
         if (category === 'teil-internettechnologien') {
-            document.querySelector('.progress-list li:nth-child(2) .quote').textContent = `${erfolgsquote}%`;
+            document.querySelector('.erfolgsquote-liste li:nth-child(2) .erfolgsquote').textContent = `${erfolgsquote}%`;
             localStorage.setItem('internetErfolgsquote', erfolgsquote);
         }
 
         if (category === 'teil-allgemein') {
-            document.querySelector('.progress-list li:nth-child(3) .quote').textContent = `${erfolgsquote}%`;
+            document.querySelector('.erfolgsquote-liste li:nth-child(3) .erfolgsquote').textContent = `${erfolgsquote}%`;
             localStorage.setItem('allgemeinErfolgsquote', erfolgsquote);
         }
 
         if (category === 'teil-spanisch') {
-            document.querySelector('.progress-list li:nth-child(4) .quote').textContent = `${erfolgsquote}%`;
+            document.querySelector('.erfolgsquote-liste li:nth-child(4) .erfolgsquote').textContent = `${erfolgsquote}%`;
             localStorage.setItem('spanischErfolgsquote', erfolgsquote);
         }
     }

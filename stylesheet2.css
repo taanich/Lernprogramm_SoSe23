@@ -1,0 +1,204 @@
+:root {
+    --main-color: white;
+    --orange-color: #ec6608;
+    --white-color: #eaeaea;
+    --grey-color: #333333;
+}
+
+/* -- Farbe und Schriftart -- */
+body {
+    background-color: var(--main-color) ;
+    font-family: "Arial";
+}
+
+/* -- Rahmen und Abstände -- */
+header, article, nav, aside, footer {
+    margin: 0.5em;
+    padding: 0.75em;
+    border-radius: 0.5em;
+}
+
+/* -- Links -- */
+a {color: black; text-decoration: none}
+
+/* Überschriften Navigation, Aufgabenbereich, Erfolgsquote */
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* -- Footer -- */
+footer {
+    background-color: #ee9e6e;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    white-space: break-spaces;
+    overflow: hidden;
+    text-overflow: fade;
+}
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Responsive Design -- */
+
+main {
+    display: flex;
+    flex-direction: row; /* Ändere die Richtung auf vertikal */
+}
+
+nav {
+    background-color: #5b5a5a;
+    padding: 10px;
+    order: 1;
+    flex: 1 1 1em;
+}
+
+article {
+    background-color: #cccccc;
+    order: 2;
+    flex: 3 3 3%;
+    overflow: auto; /* Fügt bei Bedarf einen Scrollbalken hinzu */
+}
+
+#task {
+    word-wrap: break-word;
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+aside {
+    background-color: #e8e8e8;
+    order: 3;
+    flex: 1 1 1em;
+}
+
+/* Media Query für kleinere Bildschirme */
+@media (max-width: 1080px) {
+    main {
+        flex-direction: column;
+    }
+}
+
+
+
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Neue Einstellungen -- *
+
+/* --- Radiobuttons in Navigation --- */
+/* Container für Radiobutton und Label */
+.radio {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+/* Styling für den Radiobutton */
+.radio input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    outline: none;
+    margin-right: 5px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Styling für das Label */
+.radio label {
+    font-size: 14px;
+    color: var(--white-color);
+}
+
+/* Styling für den ausgewählten Radiobutton */
+.radio input[type="radio"]:checked {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+}
+
+/* Styling für das Label des ausgewählten Radiobuttons */
+.radio input[type="radio"]:checked + label {
+    font-weight: bold;
+}
+
+/* Styling beim Überfahren mit dem Mauszeiger */
+.radio input[type="radio"]:hover {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+    cursor: pointer;
+}
+
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Allgemeiner Button-Stil -- */
+/* Styling für den Button-Container */
+#options {
+    display: flex;
+    justify-content: center; /* Buttons haben den Startpunkt als Ausrichtung */
+    flex-wrap: wrap; /* Buttons werden bei Platzmangel umgebrochen */
+    margin: 15px;
+}
+
+/* Styling für die Buttons */
+button {
+    padding: 20px 40px; /* Innenabstand des Buttons (vertikal und horizontal) */
+    border: none;
+    border-radius: 5px;
+    background-color: #e8e8e8;
+    color: #000000;
+    font-size: 16px;
+    margin-bottom: 10px; /* Abstand zwischen den Buttons (vertikal) */
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+/* Styling für den ausgewählten Button */
+button.selected {
+    background-color: #0b8d28;
+}
+
+/* Styling beim Überfahren mit dem Mauszeiger */
+button:hover {
+    background-color: #ff5722;
+    cursor: pointer;
+}
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* --- Anzeige der Erfolgsquote --- */
+.erfolgsquote-container {
+    display: flex; /* Elemente in einer Flexbox anordnen */
+    flex-wrap: wrap; /* Bei Platzmangel umbrechen */
+    justify-content: flex-start; /* Elemente am Anfang der Hauptachse ausrichten */
+}
+
+.erfolgsquote-item {
+    padding: 10px; /* Innenabstand des Elements */
+    border-radius: 5px; /* Runde Ecken */
+    color: var(--grey-color); /* Farbe des Textes */
+}
+
+.lernbereich {
+    font-weight: bold; /* Fettschrift für die Kategorie */
+    font-size: 15px; /* Schriftgröße für die Kategorie */
+}
+
+.erfolgsquote {
+    font-size: 15px; /* Schriftgröße für die Zitate */
+}
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Überschrift: Mathematik, Internet Technologie, Allgemeinwissen -- */
+#headline {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Anzeige der Aufgaben -- */
+#question {
+    text-align: center;
+    margin: 15px;
+}
