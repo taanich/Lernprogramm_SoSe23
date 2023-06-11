@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function (){
                 presenter.start();
             });
 
-            allgemeinRadioButton.addEventListener('click', function() {
+            ajaxRadioButton.addEventListener('click', function() {
                 header.textContent = 'Ajax Aufgaben';
                 model.init(questionsAjax, 0, 0, 0);
                 presenter.start();
