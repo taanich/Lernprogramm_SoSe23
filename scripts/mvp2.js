@@ -75,6 +75,15 @@ class Model {
         this.index = index;                 // Beginn bei Index 0
         this.correctAnswers = correct;      // Anzahl richtige Antworten
         this.incorrectAnswers = incorrect;  // Anzahl falsche Antworten
+        this.shuffleQuestions();
+    }
+
+    // Fisher-Yates-Shuffle-Algorithmus
+    shuffleQuestions() {
+        for (let i = this.questions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]];
+        }
     }
 
     getTask() {
@@ -91,10 +100,6 @@ class Model {
         return this.questions[this.index].l;
     }
 
-    getAnswer() {
-        return this.questions[this.index].correctAnswer;
-    }
-
     incrementCorrect() {
         this.correctAnswers +=1;
     }
@@ -107,27 +112,14 @@ class Model {
         return this.questions.length;
     }
 
-
-    getTaskAll(i) {
-        if (this.questions === questionsMath)
-            return katex.renderToString(this.questions[i].a);
-        else
-            return this.questions[i].a;
-    }
-
-    getAnswerAll(i) {
-        let corr = this.questions[i].correctAnswer;
-        return this.questions[i].l[corr];
-    }
-
     incrementIndex() {
         this.index +=1;
     }
 
     getIndex() {
-        //console.log("Aufgabe: " + this.index);
         return this.index;
     }
+
 }
 
 // Presenter --------------------------------------------------------------------------------------------------------------------
@@ -148,35 +140,32 @@ class Presenter {
 
     displayQuestion(){
         let question = document.getElementById('question');
-        question.innerHTML= this.model.getTask();
-        this.view.setButtons(this.model.getOptions());
+
+        if(this.model.index < this.model.getLength()) {
+            question.innerHTML= this.model.getTask();
+            this.view.setButtons(this.model.getOptions());
+        } else {
+            question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.getLength() + " Aufgaben richtig gelöst!";
+            return;
+        }
     }
 
     evaluate(answer){
-        if(this.model.getIndex() < this.model.getLength()) {                    // Prüfen, ob aktueller Index kleiner als Gesamtlänge ist (Idee: statt Index den Counter prüfen)
-            if (answer === this.model.getAnswer(this.model.getIndex())) {
-                this.model.incrementCorrect();
-                console.log("Antwort " + answer + ' ist richtig!');
-                console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
-                console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
-            } else {
-                this.model.incrementIncorrect();
-                console.log("Antwort " + answer + ' ist falsch! ');
-                console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
-                console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
-            }
-
-           // this.setCorrectAnswers();
-
-            if (this.model.getIndex() === this.model.getLength()) {     // Zum Schluss alle Aufgaben anzeigem
-                for(let i = 0; i < this.model.getLength(); i++)
-                    this.view.displayTaskAnswer(this.model.getTaskAll(i), this.model.getAnswerAll(i));
-                return;
-            }
-            this.model.incrementIndex();
-
-            this.displayQuestion();
+        // console.log("answer: " + answer.value)
+        if (answer.value === "1") {
+            this.model.incrementCorrect();
+            console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist richtig!');
+            console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
+            console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
+        } else {
+            this.model.incrementIncorrect();
+            console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist falsch! ');
+            console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
+            console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
         }
+
+        this.model.incrementIndex();
+        this.displayQuestion();
     }
 }
 
@@ -207,29 +196,26 @@ class View {
     }
 
     setButtons(i) {
-        //const randomIndex = Math.floor(Math.random() * allButtons.length);
+        const correctAnswer = i[0];
+        const randomIndex = Math.floor(Math.random() * allButtons.length);
 
-        allButtons[0].textContent = i[0];
-        allButtons[1].textContent = i[1];
-        allButtons[2].textContent = i[2];
-        allButtons[3].textContent = i[3];
+        allButtons[0].textContent = i[randomIndex];
+        allButtons[1].textContent = i[(randomIndex + 1) % allButtons.length];
+        allButtons[2].textContent = i[(randomIndex + 2) % allButtons.length];
+        allButtons[3].textContent = i[(randomIndex + 3) % allButtons.length];
+
+        for (let j = 0; j < 4; j++) {
+            if (allButtons[j].textContent === correctAnswer) {
+                allButtons[j].value = 1;
+                console.log("Button: " + allButtons[j].id + " ist die richtige Antwort mit " + correctAnswer);
+                console.log(allButtons[j].value);
+            }  else {
+                allButtons[j].value = 0;
+            }
+        }
     }
 
     checkAnswer(event) {
-        this.presenter.evaluate(String(event.target.attributes.getNamedItem('id').value));          // Ereignisobjekt "event" enthält Informationen über das ausgelöste Ereignis und das Zielobjekt, auf das geklickt wurde
-    }                                                                                                           // "event.target" gibt das Element zurück, auf das geklickt wurde, also den Antwortbutton
-                                                                                                                // "attributes.getNamedItem('id')" wird das Attribut "id" des Antwort-Buttons abgerufen
-                                                                                                                // "value" gibt den Wert des "id"-Attributs des Antwort-Buttons zurück (A, B, C, D) - Wert wird dann in String() umgewandelt → als Argument für "evaluate(answer)"
-    displayTaskAnswer(q, a) {
-        let result = document.getElementById('result');
-        let question = document.createElement("div");
-        let answer = document.createElement("div");
-
-        question.style.marginTop = "5px";
-        question.innerHTML ="Frage: " + q;
-        answer.innerHTML ="Richtige Antwort: " + a;
-
-        result.appendChild(question);
-        result.appendChild(answer);
+        this.presenter.evaluate(event.target);
     }
 }
