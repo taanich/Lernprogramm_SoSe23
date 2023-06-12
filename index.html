@@ -13,9 +13,8 @@
   <link rel="stylesheet" href="stylesheet2.css" type="text/css"/>
   <script src="scripts/service-worker.js" type="text/javascript" defer></script>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.css" integrity="sha384-knaESGLxlQRSHWSJ+ZbTX6/L1bJZWBsBYGb2O+g64XHFuO7CbIj9Pkf1aaVXzIZJ" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.js" integrity="sha384-7u+OeKP8De/qfWU/3s5KUDC2wvwPe+d5GwojxjiwFJJpHAp38wQFtz3tr2QNGidv" crossorigin="anonymous"></script>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
 </head>
 
 <body>
@@ -70,14 +69,19 @@
         <button id="d"></button>
       </div>
     </div>
-    <script src="scripts/mvp2.js"></script>
+    <script src="scripts/mvp.js"></script>
 
     <hr id="line" style="display: none"/>
-    <! --- Progressbalken einfügen!!! --- !>
+
+    <div id="aufgaben-fortschritt"></div>
     <div id="progress-container">
       <div id="progress-bar" style="display: none"></div>
     </div>
 
+    <div id="ergebnis-anzeige">
+      <span id="richtige-antworten"></span>
+      <span id="falsche-antworten"></span>
+    </div>
   </article>
 
   <! --- Anzeige des aktuellen Lernstands --- !>

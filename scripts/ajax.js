@@ -19,8 +19,10 @@ function getQuiz() {
         } else return false;
     }
     function sendXhr() {
+        const i = Math.floor(Math.random() * (20 - 3 +1)) + 3;
         xhr.onreadystatechange = xhrHandler;
-        xhr.open("GET", "https://irene.informatik.htw-dresden.de:8888")
+        xhr.open("GET", "https://irene.informatik.htw-dresden.de:8888/api/quizzes/" + i, true)
+        xhr.setRequestHeader('Authorization', 'Basic ' + btoa('test@gmail.com:secret'));
         xhr.send(null);
         console.log("gesendet!");
     }

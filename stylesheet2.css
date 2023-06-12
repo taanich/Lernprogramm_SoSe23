@@ -175,7 +175,7 @@ button:hover {
 }
 
 .erfolgsquote-item {
-    padding: 10px; /* Innenabstand des Elements */
+    padding: 5px; /* Innenabstand des Elements */
     border-radius: 5px; /* Runde Ecken */
     color: var(--grey-color); /* Farbe des Textes */
 }
@@ -217,4 +217,27 @@ button:hover {
     border-radius: 5px;
     background-color: var(--orange-color);
     transition: width 0.3s ease-in-out; /* Hinzugefügt: Übergangseffekt für die Breitenänderung */
+}
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Anzeige: X von X Aufgaben -- */
+#aufgaben-fortschritt {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Anzeige: Richtige Antworten/ Falsche Antworten -- */
+#ergebnis-anzeige {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-top: 15px;
+}
+
+#ergebnis-anzeige span {
+    font-size: 16px;
+    color: #333;
 }
