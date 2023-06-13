@@ -109,6 +109,15 @@ document.addEventListener('DOMContentLoaded', function (){
         model.init(questionsAjax, 0, 0, 0);
         presenter.start();
     });
+
+    // Erfolgsquoten aus dem localStorage holen
+    const lernbereiche = ['math', 'internet', 'allgemein', 'gemischt'];
+    lernbereiche.forEach((lernbereich, index) => {
+        const quote = localStorage.getItem(`${lernbereich}-quote`);
+        if (quote) {
+            document.getElementById(`${lernbereich}-quote`).innerHTML = `${quote}%`;
+        }
+    })
 });
 
 // Model --------------------------------------------------------------------------------------------------------------------
@@ -244,12 +253,14 @@ class Presenter {
 
         question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.getLength() + " Aufgaben richtig gelöst!";
         options.style.display = 'none';
+        line.style.display = 'none';
     }
 
     updateErfolgsquote(id, erfolgsquote) {
         const erfolgsquoteElement = document.getElementById(id);
         if (erfolgsquoteElement) {
             erfolgsquoteElement.innerHTML = erfolgsquote + "%";
+            localStorage.setItem(id, erfolgsquote); // Erfolgsquote in localStorage speichern
         }
     }
 }
