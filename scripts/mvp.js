@@ -151,24 +151,6 @@ class Model {
     getOptions() {
         console.log("Hole Lösungen: " + this.questions[this.index].options + "...");
         return this.questions[this.index].options;
-
-        /*
-        const opt = this.questions[this.index].options;
-        console.log("Hole Optionen: " + this.questions[this.index].options + "...")
-        let options = [];
-
-        if (this.questions === questionsMath) {
-            for (let key of Object.keys(opt)) {
-                const element = opt[key];
-                const renderedElement = katex.renderToString(element);
-                options.push(renderedElement);
-                console.log(options);
-            }
-            return options;
-        } else {
-            return opt;
-        }
-        */
     }
 
     incrementCorrect() {
@@ -235,7 +217,6 @@ class Presenter {
 
     async evaluate(answer){
         // console.log("answer: " + answer.value)
-
         if (this.model.questions === questionsAjax) {
             let questionId = this.model.questions[this.model.index].id;
             console.log("questionID: " + questionId);
@@ -334,30 +315,36 @@ class View {
     }
 
     setHandler() {
-        // use capture false -> use bubbling
-        // bind this -> this is refering to object rather than event
-        // allButtons[0].addEventListener('click', this.nextQuestion.bind(this), false);
         allButtons[0].addEventListener('click', this.checkAnswer.bind(this), false);
-
-        // allButtons[1].addEventListener('click', this.nextQuestion.bind(this), false);
         allButtons[1].addEventListener('click', this.checkAnswer.bind(this), false);
-
-        // allButtons[2].addEventListener('click', this.nextQuestion.bind(this), false);
         allButtons[2].addEventListener('click', this.checkAnswer.bind(this), false);
-
-        // allButtons[3].addEventListener('click', this.nextQuestion.bind(this), false);
         allButtons[3].addEventListener('click', this.checkAnswer.bind(this), false);
-
     }
 
     setButtons(opt) {
         //const correctAnswer = opt[0];
         const randomIndex = Math.floor(Math.random() * allButtons.length);
 
+        // gerenderte Version
+        if (this.presenter.model.questions === questionsMath) {
+            allButtons[randomIndex].innerHTML = katex.renderToString(opt[0], {throwOnError: false});
+            allButtons[(randomIndex + 1) % allButtons.length].innerHTML = katex.renderToString(opt[1], {throwOnError: false});
+            allButtons[(randomIndex + 2) % allButtons.length].innerHTML = katex.renderToString(opt[2], {throwOnError: false});
+            allButtons[(randomIndex + 3) % allButtons.length].innerHTML = katex.renderToString(opt[3], {throwOnError: false});
+        } else {
+            allButtons[randomIndex].innerHTML = opt[0];
+            allButtons[(randomIndex + 1) % allButtons.length].innerHTML = opt[1];
+            allButtons[(randomIndex + 2) % allButtons.length].innerHTML = opt[2];
+            allButtons[(randomIndex + 3) % allButtons.length].innerHTML = opt[3];
+        }
+
+        // nicht gerenderte Version
+        /*
         allButtons[randomIndex].innerHTML = opt[0];
         allButtons[(randomIndex + 1) % allButtons.length].innerHTML = opt[1];
         allButtons[(randomIndex + 2) % allButtons.length].innerHTML = opt[2];
         allButtons[(randomIndex + 3) % allButtons.length].innerHTML = opt[3];
+         */
 
         if (this.presenter.model.getquestionsAjax()) {
             console.log("Ajax Aufgabe!");
@@ -377,9 +364,35 @@ class View {
         }
     }
 
+    // mit Fehlermeldung
+    /*
     checkAnswer(event) {
         this.presenter.evaluate(event.target);
     }
+    */
+
+    // mit Ausgabe an Console
+    checkAnswer(event) {
+        const target = event.target;
+        if (target.tagName === 'BUTTON') {
+            // Das Event-Target ist ein Button
+            const buttonId = target.getAttribute('id');
+            // Hier kannst du die ID des Buttons verwenden
+            console.log('Button ID:', buttonId);
+            this.presenter.evaluate(event.target);
+        } else {
+            // Das Event-Target ist nicht der erwartete Button
+            console.log('Ungültiges Event-Target:', target);
+        }
+        /*
+        const answer = event.target;
+        if (answer.attributes && answer.attributes.getNamedItem("id") !== null)
+            this.presenter.evaluate(event.target);
+        else
+            console.log(answer.attributes.getNamedItem('id'));
+        */
+    }
+
 }
 
 // ------------------------------------------------------------------------------------------------------------------
