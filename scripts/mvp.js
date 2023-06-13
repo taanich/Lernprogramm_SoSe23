@@ -173,6 +173,14 @@ class Model {
         return this.index;
     }
 
+    getquestionsAjax() {
+        if (this.questions === questionsAjax) {
+            return true;
+        }  else {
+            return false;
+        }
+    }
+
 }
 
 // Presenter --------------------------------------------------------------------------------------------------------------------
@@ -207,25 +215,52 @@ class Presenter {
         this.updateProgressBar(); // Aktualisiere die Fortschrittsleiste
     }
 
-    evaluate(answer){
+    async evaluate(answer){
         // console.log("answer: " + answer.value)
-        const antwortAnzeige = document.getElementById('antwort-anzeige');
-        if (answer.value === "1") {
-            this.model.incrementCorrect();
-            //console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist richtig!');
-            antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist richtig!";
-            console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
-            console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
-        } else {
-            this.model.incrementIncorrect();
-            //console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist falsch! ');
-            antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist falsch!";
-            console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
-            console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
-        }
 
+        if (this.model.questions === questionsAjax) {
+            let questionId = this.model.questions[this.model.index].id;
+            console.log("questionID: " + questionId);
+            console.log("answerIndex: " + answer.value);
+
+            try {
+                const correctAnswer = await getAnswerFromServer(questionId, answer.value);
+                console.log("Die korrekte Antwort vom Server lautet: " + correctAnswer);
+                if (correctAnswer === true) {
+                    this.correctAnswer(answer);
+                } else {
+                    this.incorrectAnswer(answer);
+                }
+            } catch (error) {
+                console.error("Fehler beim Abrufen der Antwort vom Server:", error);
+            }
+        } else {
+            if (answer.value === "1") {
+                this.correctAnswer(answer);
+            } else {
+                this.incorrectAnswer(answer);
+            }
+        }
         this.model.incrementIndex();
         this.displayQuestion();
+    }
+
+    correctAnswer(answer) {
+        const antwortAnzeige = document.getElementById('antwort-anzeige');
+        this.model.incrementCorrect();
+        console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist richtig!');
+        antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist richtig!";
+        console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
+        console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
+    }
+
+    incorrectAnswer(answer){
+        const antwortAnzeige = document.getElementById('antwort-anzeige');
+        this.model.incrementIncorrect();
+        console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist falsch! ');
+        antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist falsch!";
+        console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
+        console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
     }
 
     updateProgressBar() {
@@ -277,7 +312,7 @@ class View {
     constructor(presenter) {
         this.presenter = presenter;
         this.setHandler();
-        this.setButtons(0);
+        //this.setButtons(0);
     }
 
     setHandler() {
@@ -297,23 +332,30 @@ class View {
 
     }
 
-    setButtons(i) {
-        const correctAnswer = i[0];
+    setButtons(opt) {
+        //const correctAnswer = opt[0];
         const randomIndex = Math.floor(Math.random() * allButtons.length);
 
-        allButtons[0].textContent = i[randomIndex];
-        allButtons[1].textContent = i[(randomIndex + 1) % allButtons.length];
-        allButtons[2].textContent = i[(randomIndex + 2) % allButtons.length];
-        allButtons[3].textContent = i[(randomIndex + 3) % allButtons.length];
+        allButtons[randomIndex].innerHTML = opt[0];
+        allButtons[(randomIndex + 1) % allButtons.length].innerHTML = opt[1];
+        allButtons[(randomIndex + 2) % allButtons.length].innerHTML = opt[2];
+        allButtons[(randomIndex + 3) % allButtons.length].innerHTML = opt[3];
 
-        for (let j = 0; j < 4; j++) {
-            if (allButtons[j].textContent === correctAnswer) {
-                allButtons[j].value = 1;
-                console.log("Button: " + allButtons[j].id + " ist die richtige Antwort mit " + correctAnswer);
-                console.log(allButtons[j].value);
-            }  else {
-                allButtons[j].value = 0;
-            }
+        if (this.presenter.model.getquestionsAjax()) {
+            console.log("Ajax Aufgabe!");
+            allButtons[randomIndex].value = 0;
+            allButtons[(randomIndex + 1) % allButtons.length].value = 1;
+            allButtons[(randomIndex + 2) % allButtons.length].value = 2;
+            allButtons[(randomIndex + 3) % allButtons.length].value = 3;
+        } else {
+            console.log("Keine Ajax Aufgabe!");
+            allButtons[randomIndex].value = 1;
+            allButtons[(randomIndex + 1) % allButtons.length].value = 0;
+            allButtons[(randomIndex + 2) % allButtons.length].value = 0;
+            allButtons[(randomIndex + 3) % allButtons.length].value = 0;
+
+            console.log("Button: " + allButtons[randomIndex].id + " hat die richtige Antwort");
+            console.log(allButtons[randomIndex].value);
         }
     }
 
@@ -384,45 +426,53 @@ function getQuizFromServer() {
 
 // ------------------------------------------------------------------------------------------------------------------
 // POST QUIZ --------------------------------------------------------------------------------------------------------
-function getAnswerFromServer(id, answer, callback){
-    let correctAnswer;
+function getAnswerFromServer(id, answer) {
+    return new Promise((resolve, reject) => {
+        let xhr = getXhr();
+        sendXhr(xhr);
 
-    let xhr = getXhr();
-    sendXhr(xhr);
+        function xhrHandler() {
+            console.log("Status: " + xhr.readyState);
+            if (xhr.readyState !== 4) {
+                return;
+            }
 
-    function xhrHandler() {
-        console.log("Status: " + xhr.readyState);
-        if (xhr.readyState !== 4) {
-            return;
+            console.log("Status " + xhr.readyState + " " + xhr.status);
+            if (xhr.status === 200) {
+                const jsonObject = JSON.parse(xhr.responseText);
+                console.log("JSON-Object");
+                console.log(jsonObject);
+                const correctAnswer = jsonObject.success;
+                resolve(correctAnswer); // Auflösen der Promise mit dem Wert
+            } else {
+                reject(new Error("Fehler beim Abrufen der Antwort vom Server")); // Ablehnen der Promise mit einem Fehler
+            }
         }
 
-        console.log("Status "+ xhr.readyState + " " + xhr.status);
-        if (xhr.status === 200) {
-            const jsonObject = JSON.parse(xhr.responseText);
-            console.log("JSON-Object");
-            console.log(jsonObject);
-            correctAnswer = jsonObject.success;
-            callback(correctAnswer);
+        function getXhr() {
+            if (window.XMLHttpRequest) {
+                return new XMLHttpRequest();
+            } else {
+                reject(new Error("XMLHttpRequest wird nicht unterstützt"));
+            }
         }
-    }
 
-    function getXhr() {
-        if(window.XMLHttpRequest) {
-            return new XMLHttpRequest();
-        } else return false;
-    }
-
-    function sendXhr(xhr) {
-        xhr.onreadystatechange = xhrHandler;
-        xhr.open('POST', 'https://irene.informatik.htw-dresden.de:8888/api/quizzes/' + id + '/solve', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader(
-            'Authorization',
-            'Basic ' + btoa('test@gmail.com:secret')
-        );
-        xhr.send(JSON.stringify([answer])); // Antwort 0 bis 3
-        console.log("Request send");
-    }
-
+        function sendXhr(xhr) {
+            xhr.onreadystatechange = xhrHandler;
+            xhr.open( "POST", "https://irene.informatik.htw-dresden.de:8888/api/quizzes/" + id + "/solve", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " + btoa("test@gmail.com:secret")
+            );
+            xhr.send(JSON.stringify([answer]));
+            console.log("Request send");
+        }
+    });
+}
+/*
+function handleAnswerFromServer(correctAnswer){
+    console.log("Die korrekte Antwort vom Server lautet: " + correctAnswer);
     return correctAnswer;
 }
+*/
