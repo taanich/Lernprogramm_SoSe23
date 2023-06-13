@@ -139,12 +139,17 @@ aside {
     display: flex;
     justify-content: center; /* Buttons haben den Startpunkt als Ausrichtung */
     flex-wrap: wrap; /* Buttons werden bei Platzmangel umgebrochen */
-    margin: 15px;
+}
+
+.option-button {
+    flex: 1 0 50%;
+    margin: 5px;
 }
 
 /* Styling für die Buttons */
 button {
-    padding: 20px 40px; /* Innenabstand des Buttons (vertikal und horizontal) */
+    flex-grow: 1;
+    padding: 15px; /* Innenabstand des Buttons (vertikal und horizontal) */
     border: none;
     border-radius: 5px;
     background-color: #e8e8e8;
@@ -156,9 +161,11 @@ button {
 }
 
 /* Styling für den ausgewählten Button */
+/*
 button.selected {
     background-color: #0b8d28;
 }
+*/
 
 /* Styling beim Überfahren mit dem Mauszeiger */
 button:hover {
@@ -199,8 +206,9 @@ button:hover {
 /* -------------------------------------------------------------------------------------------------------- */
 /* -- Anzeige der Aufgaben -- */
 #question {
-    text-align: center;
     margin: 15px;
+    text-align: center;
+    white-space: pre-wrap;
 }
 
 /* -------------------------------------------------------------------------------------------------------- */

@@ -8,28 +8,27 @@ const ajaxRadioButton = document.getElementById('ajax');
 
 // Überschrift
 const header = document.getElementById('headline');
+
 // Alle Antwort-Buttons
 const allButtons = document.querySelectorAll('#options > *');
 
-// Erfolgsquoten
-//const matheErfolgsquote = document.getElementById('mat');
-//const internetErfolgsquote = document.getElementById('int');
-//const allgemeinErfolgsquote = document.getElementById('all');
+// Erfolgsquote
+let erfolgsQuote;
 
 // ------------------------------------------------------------------------------------------------------------------
 
 // Aufgabenbereiche festlegen
 const questionsMath = [
-    {"text":"\\text{Was ist das Ergebnis von:}\\ x^2+x^2\\ =\\ ?", "options":["2x^2","x^4","x^8","2x^4"]},
+    {"text":"\\text{Was ist das Ergebnis von:} x^2+x^2= ?", "options":["2x^2","x^4","x^8","2x^4"]},
     {"text":"\\text{Was ist das Ergebnis von:}\\ x^2*x^2\\ =\\ ?", "options":["x^4","x^2","2x^2","4x"]},
     {"text":"\\text{Was ist die Lösung dieser Gleichung:}\\ 2x^2-5x+2 = 0 \\text{?}", "options":["x = 1", "x = -\\frac{1}{2}", "x = 2", "x = \\frac{1}{4}"]},
     {"text":"\\text{Was ist die Ableitung von:}\\ f(x)=sin(x)+cos(x) \\text{?}", "options":["f'(x)=cos(x)-sin(x)","f'(x)=sin(x)+ cos(x)"," f'(x)=sin(x)-cos(x)","f'(x)=-sin(x)-cos(x)"]},
     {"text":"\\text{Was ist der Grenzwert von:}\\ lim_{x \\to 0} \\frac{sin(x)}{x} \\text{?}", "options":["1","0","\\frac{1}{2}","-\\frac{1}{2}"]},
     {"text":"\\text{Welche ist die Determinante von:}\\ \\begin{bmatrix}2&-1&3&4\\end{bmatrix} \\text{?}", "options":["11","9","7","5"]},
-    {"text":"\\text{Welches ist die Ableitung dieser Funktion:}\\ f(x)=e^x\\cdot\\cos(x) \\text{?}", "options":["f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\cos(x)+e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)"]},
+    {"text":"\\text{Welches ist die Ableitung dieser Funktion:} f(x)=e^x\\cdot\\cos(x) \\text{?}", "options":["f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\cos(x)+e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)"]},
     {"text":"\\text{Was ist die Summe dieser Reihe:}\\  \\sum_{n=1}^{\\infty}\\frac{1}{2^n} \\text{?}", "options":["1","2","\\frac{1}{2}","\\frac{2}{3}"]},
     {"text":"\\text{Was ist die Lösungsmenge dieser Gleichung:}\\ \\sqrt{x+3}-2=0 \\text{?}", "options":["x=1","x=2","x=4","x=7"]},
-    {"text":"\\text{Welches ist die Koordinate des Tiefpunktes dieser Funktion:}\\ f(x)=e^x-3x^2 \\text{?}", "options":["(0,1)","(1,-1)","(0,-3)","(1,-3)"]},
+    {"text":"\\text{Welches ist die Koordinate des Tiefpunktes dieser Funktion:} f(x)=e^x-3x^2 text{?}", "options":["(0,1)","(1,-1)","(0,-3)","(1,-3)"]},
     {"text":"\\text{Bestimme die Lösungsmenge dieser Gleichung:}\\ \\log_2(x)=3", "options":["\\{8\\}","\\{ \\frac{1}{8}\\}","\\{ \\frac{1}{2}\\}","\\{2^3\\}"]},
     {"text":"\\text{Welches Volumen hat eine Kugel mit einem Radius von 10cm?}", "options":["1000\\pi cm^3","300\\pi cm^3","400\\pi cm^3","100\\pi cm^3"]},
     {"text":"\\text{Was ist der Umfang eines gleichseitigen Dreiecks mit einer Seitenlänge von 12cm?}", "options":["12\\pi cm","4\\pi cm","6\\pi cm","36\\pi cm"]},
@@ -181,7 +180,7 @@ class Presenter {
 
         console.log("Applikation beginnt...");
         this.displayQuestion(this.model.index); // Beginne bei Index o des Fragenkatalogs
-        this.updateProgress(); // Aktualisiere die Fortschrittsleiste
+        this.updateProgressBar(); // Aktualisiere die Fortschrittsleiste
     }
 
     displayQuestion(){
@@ -191,12 +190,9 @@ class Presenter {
             question.innerHTML= this.model.getTask();
             this.view.setButtons(this.model.getOptions());
         } else {
-            this.updateProgress();
-            question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.getLength() + " Aufgaben richtig gelöst!";
-            options.style.display = 'none';
-            return;
+          this.displayFinalResult();
         }
-        this.updateProgress(); // Aktualisiere die Fortschrittsleiste
+        this.updateProgressBar(); // Aktualisiere die Fortschrittsleiste
     }
 
     evaluate(answer){
@@ -217,7 +213,7 @@ class Presenter {
         this.displayQuestion();
     }
 
-    updateProgress() {
+    updateProgressBar() {
         const progressTask = document.getElementById('aufgaben-fortschritt');
         progressTask.innerHTML = this.model.index + " von " + this.model.getLength() + " Aufgaben";
 
@@ -230,6 +226,31 @@ class Presenter {
         const falscheAntwortenAnzeige = document.getElementById('falsche-antworten');
         richtigeAntwortenAnzeige.innerHTML = "Richtige Antworten: " + this.model.correctAnswers;
         falscheAntwortenAnzeige.innerHTML = "Falsche Antworten: " + this.model.incorrectAnswers;
+    }
+
+    displayFinalResult() {
+        const question = document.getElementById('question');
+        const erfolgsquote = Math.round((this.model.correctAnswers / this.model.getLength()) * 100);
+
+        if (this.model.questions === questionsMath) {
+            this.updateErfolgsquote('math-quote', erfolgsquote);
+        } else if (this.model.questions === questionsInternet) {
+            this.updateErfolgsquote('internet-quote', erfolgsquote);
+        } else if (this.model.questions === questionsAllgemein) {
+            this.updateErfolgsquote('allgemein-quote', erfolgsquote);
+        } else if (this.model.questions === questionsAjax) {
+            this.updateErfolgsquote('gemischt-quote', erfolgsquote);
+        }
+
+        question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.getLength() + " Aufgaben richtig gelöst!";
+        options.style.display = 'none';
+    }
+
+    updateErfolgsquote(id, erfolgsquote) {
+        const erfolgsquoteElement = document.getElementById(id);
+        if (erfolgsquoteElement) {
+            erfolgsquoteElement.innerHTML = erfolgsquote + "%";
+        }
     }
 }
 
