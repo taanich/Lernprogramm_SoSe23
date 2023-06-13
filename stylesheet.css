@@ -21,11 +21,6 @@ header, article, nav, aside, footer {
 /* -- Links -- */
 a {color: black; text-decoration: none}
 
-/* -- Paragraphen -- */
-p {
-    padding: 1px 1px;
-}
-
 /* Überschriften Navigation, Aufgabenbereich, Erfolgsquote */
 h2 {
     font-size: 20px;
@@ -58,22 +53,6 @@ nav {
     flex: 1 1 1em;
 }
 
-.nav-item {
-    margin: 10px 0;
-}
-
-.nav-link {
-    display: block;
-    text-decoration: none;
-    color: var(--white-color);
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.nav-link:hover {
-    color: var(--orange-color);
-}
-
 article {
     background-color: #cccccc;
     order: 2;
@@ -100,126 +79,187 @@ aside {
     }
 }
 
+
+
+
 /* -------------------------------------------------------------------------------------------------------- */
-/* -- aside - Erfolgsquote -- */
-.category {
-    font-weight: bold;
-}
+/* -- Neue Einstellungen -- *
 
-.quote {
-    font-size: 12px;
-    color: #565353;
-}
-.progress-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.progress-list li {
+/* --- Radiobuttons in Navigation --- */
+/* Container für Radiobutton und Label */
+.radio {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 5px;
-}
-
-.category {
-    font-weight: bold;
-}
-
-.quote {
-    font-size: 12px;
-    color: #565353;
-}
-
-/* -------------------------------------------------------------------------------------------------------- */
-/* -- Allgemeiner Button-Stil -- */
-button {
     margin: 10px;
-    font-size: 16px;
-    padding: 8px 16px;
-    display: flex;
-    border: none;
-    border-radius: 5px;
-    flex-grow: 1;
-    color: var(--grey-color);
-    transition: 0.3s;
 }
 
-button:hover {
-    background-color: var(--orange-color);
+/* Styling für den Radiobutton */
+.radio input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    outline: none;
+    margin-right: 5px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Styling für das Label */
+.radio label {
+    font-size: 14px;
     color: var(--white-color);
 }
 
-/* -- Buttons im Startbereich -- */
-#startcategory {
+/* Styling für den ausgewählten Radiobutton */
+.radio input[type="radio"]:checked {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+}
+
+/* Styling für das Label des ausgewählten Radiobuttons */
+.radio input[type="radio"]:checked + label {
+    font-weight: bold;
+}
+
+/* Styling beim Überfahren mit dem Mauszeiger */
+.radio input[type="radio"]:hover {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+    cursor: pointer;
+}
+
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Allgemeiner Button-Stil -- */
+/* Styling für den Button-Container */
+#options {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center; /* Buttons haben den Startpunkt als Ausrichtung */
+    flex-wrap: wrap; /* Buttons werden bei Platzmangel umgebrochen */
 }
 
-#startcategory a {
-    margin: 0.5em;
+.option-button {
+    flex: 1 0 50%;
+    margin: 5px;
 }
 
-#startcategory button {
-    padding: 20px 28px;
+/* Styling für die Buttons */
+button {
+    flex-grow: 1;
+    padding: 15px; /* Innenabstand des Buttons (vertikal und horizontal) */
+    border: none;
+    border-radius: 5px;
+    background-color: #e8e8e8;
+    color: #000000;
     font-size: 16px;
+    margin-bottom: 10px; /* Abstand zwischen den Buttons (vertikal) */
+    margin-right: 10px;
+    transition: background-color 0.3s;
 }
 
-/* -- Aufgaben-Start-Button -- */
-.start-button button {
-    white-space: normal;
-    justify-content: center;
+/**/
+.katex {
+    /*display: flex;*/
+    /*justify-content: center;*/
+    pointer-events: none;
 }
 
-/* -- Buttons für die Antworten -- */
-#answers-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+.katex-display {
+    pointer-events: none;
+    /*flex-wrap: wrap;*/
+}
+/* Styling für den ausgewählten Button */
+/*
+button.selected {
+    background-color: #0b8d28;
+}
+*/
+
+/* Styling beim Überfahren mit dem Mauszeiger */
+button:hover {
+    background-color: #ff5722;
+    cursor: pointer;
 }
 
 /* -------------------------------------------------------------------------------------------------------- */
-/* -- x von x Aufgaben -- */
-.task-label {
-    text-align: center;
+/* --- Anzeige der Erfolgsquote --- */
+.erfolgsquote-container {
+    display: flex; /* Elemente in einer Flexbox anordnen */
+    flex-direction: column;
+    /*flex-wrap: wrap; /* Bei Platzmangel umbrechen */
+    /*justify-content: flex-start; /* Elemente am Anfang der Hauptachse ausrichten */
 }
 
-/* -- Fortschrittsbalken Richtig/Falsch beantwortet-- */
-.progress-bar {
-    display: flex;
-    align-items: stretch;
-    height: 10px;
-    margin-top: 10px; /* Abstand zum vorherigen Element anpassen */
-    position: relative;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.progress-bar-right {
-    height: 100%;
-    background-color: var(--orange-color);
-    left: 0;
-    top: 0;
-    width: 50%;
-}
-
-.progress-bar-wrong {
-    height: 100%;
-    background-color: var(--white-color);
-    right: 0;
-    top: 0;
-    width: 50%;
-}
-
-.progress-stats {
+.erfolgsquote-item {
     display: flex;
     justify-content: space-between;
+    padding: 5px; /* Innenabstand des Elements */
+    border-radius: 5px; /* Runde Ecken */
+    color: var(--grey-color); /* Farbe des Textes */
 }
 
+.lernbereich {
+    font-weight: bold; /* Fettschrift für die Kategorie */
+    font-size: 15px; /* Schriftgröße für die Kategorie */
+}
 
+.erfolgsquote {
+    font-size: 15px; /* Schriftgröße für die Zitate */
+}
 
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Überschrift: Mathematik, Internet Technologie, Allgemeinwissen -- */
+#headline {
+    font-size: 20px;
+    font-weight: bold;
+}
 
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Anzeige der Aufgaben -- */
+#question {
+    margin: 15px;
+    text-align: center;
+    white-space: pre-wrap;
+}
 
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Progressbar -- */
+#progress-container {
+    display: flex;
+    justify-content: stretch;
+    margin-top: 20px; /* Optional: Füge einen oberen Abstand hinzu */
+}
 
+#progress-bar {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--orange-color);
+    transition: width 0.3s ease-in-out; /* Hinzugefügt: Übergangseffekt für die Breitenänderung */
+}
 
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Anzeige: X von X Aufgaben -- */
+#aufgaben-fortschritt {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Anzeige: Richtige Antworten/ Falsche Antworten -- */
+#ergebnis-anzeige {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-top: 15px;
+}
+
+#ergebnis-anzeige span {
+    font-size: 16px;
+    color: #333;
+}

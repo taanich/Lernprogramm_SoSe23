@@ -5,11 +5,8 @@ const CACHE_NAME = 'my-cache';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/mathematik.html',
-    '/internettechnologie.html',
-    '/allgemeinwissen.html',
     '/stylesheet.css',
-    '/mvp/mvp.js',
+    '/scripts/mvp.js',
     '/images/01_HTWD_logo_RGB_wordmark_color.png',
     '/images/03_HTWD_logo_RBG_horizontal_color.png',
 ];
@@ -39,6 +36,7 @@ self.addEventListener('fetch', function(event) {
     );
 });
 
+/*
 // Löschereignis: Alte Cache-Speicher bereinigen
 self.addEventListener('activate', function(event) {
     event.waitUntil(
@@ -54,3 +52,4 @@ self.addEventListener('activate', function(event) {
             })
     );
 });
+*/

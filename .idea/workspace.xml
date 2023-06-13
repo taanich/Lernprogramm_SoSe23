@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="wip">
-      <change afterPath="$PROJECT_DIR$/scripts/ajax.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spanisch.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allgemeinwissen.html" beforeDir="false" afterPath="$PROJECT_DIR$/allgemeinwissen.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aufgaben.json" beforeDir="false" afterPath="$PROJECT_DIR$/aufgaben.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backup.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internettechnologie.html" beforeDir="false" afterPath="$PROJECT_DIR$/internettechnologie.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mathematik.html" beforeDir="false" afterPath="$PROJECT_DIR$/mathematik.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvp/mvp.js" beforeDir="false" afterPath="$PROJECT_DIR$/mvp/mvp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvp/mvp2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvp/mvp3-backup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/sw.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
-    </list>
+    <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="wip" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +24,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -64,27 +52,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/tandi/Documents/00_Studium/00_HTW/04. Semester/02. Internet-Technologie I/00. APL/ajax(1).js",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tandi/Documents/00_Studium/00_HTW/04. Semester/02. Internet-Technologie I/00. APL/Lernprogramm_SoSe23&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23\scripts" />
       <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23" />
       <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23\mvp" />
       <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23\images" />
@@ -112,7 +101,14 @@
       <workItem from="1686064868454" duration="22752000" />
       <workItem from="1686113903838" duration="237000" />
       <workItem from="1686133110050" duration="21416000" />
-      <workItem from="1686159761865" duration="12859000" />
+      <workItem from="1686159761865" duration="13079000" />
+      <workItem from="1686214537605" duration="769000" />
+      <workItem from="1686218588673" duration="180000" />
+      <workItem from="1686255999883" duration="729000" />
+      <workItem from="1686486887179" duration="681000" />
+      <workItem from="1686489160827" duration="31670000" />
+      <workItem from="1686590708985" duration="21278000" />
+      <workItem from="1686630598966" duration="4015000" />
     </task>
     <task id="LOCAL-00001" summary="initial Project">
       <created>1685805672388</created>
@@ -149,11 +145,113 @@
       <option name="project" value="LOCAL" />
       <updated>1686153209265</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="wip">
+      <created>1686173840358</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1686173840358</updated>
+    </task>
+    <task id="LOCAL-00007" summary="wip">
+      <created>1686510362151</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1686510362151</updated>
+    </task>
+    <task id="LOCAL-00008" summary="wip">
+      <created>1686515113224</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1686515113224</updated>
+    </task>
+    <task id="LOCAL-00009" summary="wip">
+      <created>1686520284092</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1686520284092</updated>
+    </task>
+    <task id="LOCAL-00010" summary="wip">
+      <created>1686521570717</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1686521570717</updated>
+    </task>
+    <task id="LOCAL-00011" summary="wip">
+      <created>1686610678349</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1686610678349</updated>
+    </task>
+    <task id="LOCAL-00012" summary="wip">
+      <created>1686671442525</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1686671442525</updated>
+    </task>
+    <task id="LOCAL-00013" summary="wip">
+      <created>1686671670766</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1686671670766</updated>
+    </task>
+    <task id="LOCAL-00014" summary="wip">
+      <created>1686677828249</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1686677828249</updated>
+    </task>
+    <task id="LOCAL-00015" summary="wip">
+      <created>1686678297674</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1686678297674</updated>
+    </task>
+    <task id="LOCAL-00016" summary="wip">
+      <created>1686679281902</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1686679281902</updated>
+    </task>
+    <task id="LOCAL-00017" summary="wip">
+      <created>1686690191276</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1686690191276</updated>
+    </task>
+    <task id="LOCAL-00018" summary="wip">
+      <created>1686692480461</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1686692480461</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial Project" />
