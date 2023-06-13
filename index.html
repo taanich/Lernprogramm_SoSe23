@@ -11,10 +11,11 @@
   <link rel="icon" sizes="512x512" href="images/01_HTWD_logo_RGB_wordmark_color.png"/>
 
   <link rel="stylesheet" href="stylesheet.css" type="text/css"/>
-  <script src="scripts/service-worker.js" type="text/javascript" defer></script>
+  <script src="scripts/mvp.js" type="text/javascript" defer></script>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+
 </head>
 
 <body>
@@ -69,7 +70,6 @@
         <button id="d" class="option-button"></button>
       </div>
     </div>
-    <script src="scripts/mvp.js"></script>
 
     <hr id="line" style="display: none"/>
 
@@ -80,6 +80,7 @@
 
     <div id="ergebnis-anzeige">
       <span id="richtige-antworten"></span>
+      <span id="antwort-anzeige"></span>
       <span id="falsche-antworten"></span>
     </div>
   </article>
@@ -111,11 +112,10 @@
 <footer style="display: flex; align-items: center">
   <p id="footerText1" style="margin-right: auto">SoSe 2023 - Beleg</p>
   <p id="footerText2" style="margin-right: auto">Internet Technologie I - Prof. Dr.-Ing. Jörg Vogt</p>
-  <p id="footerText3">Tanja Dietrich - s83797</p>
+  <p id="footerText3">Tanja Dietrich</p>
 </footer>
 </body>
 </html>
-
 
 <script>
   // Service Worker registrieren für PWA

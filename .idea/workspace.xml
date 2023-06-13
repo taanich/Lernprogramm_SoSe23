@@ -6,11 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="wip">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aufgaben.json" beforeDir="false" afterPath="$PROJECT_DIR$/aufgaben.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/ajax.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/mvp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mvp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stylesheet2.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +33,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="version2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -115,7 +115,7 @@
       <workItem from="1686486887179" duration="681000" />
       <workItem from="1686489160827" duration="31670000" />
       <workItem from="1686590708985" duration="21278000" />
-      <workItem from="1686630598966" duration="4015000" />
+      <workItem from="1686630598966" duration="29791000" />
     </task>
     <task id="LOCAL-00001" summary="initial Project">
       <created>1685805672388</created>
@@ -194,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686610678349</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="wip">
+      <created>1686634750673</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1686634750673</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

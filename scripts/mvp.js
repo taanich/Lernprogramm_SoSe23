@@ -12,23 +12,20 @@ const header = document.getElementById('headline');
 // Alle Antwort-Buttons
 const allButtons = document.querySelectorAll('#options > *');
 
-// Erfolgsquote
-let erfolgsQuote;
-
 // ------------------------------------------------------------------------------------------------------------------
 
 // Aufgabenbereiche festlegen
 const questionsMath = [
-    {"text":"\\text{Was ist das Ergebnis von:} x^2+x^2= ?", "options":["2x^2","x^4","x^8","2x^4"]},
+    {"text":"\\text{Was ist das Ergebnis von:}\\ x^2+x^2\\ =\\ ?", "options":["2x^2","x^4","x^8","2x^4"]},
     {"text":"\\text{Was ist das Ergebnis von:}\\ x^2*x^2\\ =\\ ?", "options":["x^4","x^2","2x^2","4x"]},
     {"text":"\\text{Was ist die Lösung dieser Gleichung:}\\ 2x^2-5x+2 = 0 \\text{?}", "options":["x = 1", "x = -\\frac{1}{2}", "x = 2", "x = \\frac{1}{4}"]},
     {"text":"\\text{Was ist die Ableitung von:}\\ f(x)=sin(x)+cos(x) \\text{?}", "options":["f'(x)=cos(x)-sin(x)","f'(x)=sin(x)+ cos(x)"," f'(x)=sin(x)-cos(x)","f'(x)=-sin(x)-cos(x)"]},
     {"text":"\\text{Was ist der Grenzwert von:}\\ lim_{x \\to 0} \\frac{sin(x)}{x} \\text{?}", "options":["1","0","\\frac{1}{2}","-\\frac{1}{2}"]},
     {"text":"\\text{Welche ist die Determinante von:}\\ \\begin{bmatrix}2&-1&3&4\\end{bmatrix} \\text{?}", "options":["11","9","7","5"]},
-    {"text":"\\text{Welches ist die Ableitung dieser Funktion:} f(x)=e^x\\cdot\\cos(x) \\text{?}", "options":["f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\cos(x)+e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)"]},
+    {"text":"\\text{Welches ist die Ableitung dieser Funktion:}\\ f(x)=e^x\\cdot\\cos(x) \\text{?}", "options":["f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\cos(x)+e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)"]},
     {"text":"\\text{Was ist die Summe dieser Reihe:}\\  \\sum_{n=1}^{\\infty}\\frac{1}{2^n} \\text{?}", "options":["1","2","\\frac{1}{2}","\\frac{2}{3}"]},
     {"text":"\\text{Was ist die Lösungsmenge dieser Gleichung:}\\ \\sqrt{x+3}-2=0 \\text{?}", "options":["x=1","x=2","x=4","x=7"]},
-    {"text":"\\text{Welches ist die Koordinate des Tiefpunktes dieser Funktion:} f(x)=e^x-3x^2 text{?}", "options":["(0,1)","(1,-1)","(0,-3)","(1,-3)"]},
+    {"text":"\\text{Welches ist die Koordinate des Tiefpunktes dieser Funktion:}\\ f(x)=e^x-3x^2 \\text{?}", "options":["(0,1)","(1,-1)","(0,-3)","(1,-3)"]},
     {"text":"\\text{Bestimme die Lösungsmenge dieser Gleichung:}\\ \\log_2(x)=3", "options":["\\{8\\}","\\{ \\frac{1}{8}\\}","\\{ \\frac{1}{2}\\}","\\{2^3\\}"]},
     {"text":"\\text{Welches Volumen hat eine Kugel mit einem Radius von 10cm?}", "options":["1000\\pi cm^3","300\\pi cm^3","400\\pi cm^3","100\\pi cm^3"]},
     {"text":"\\text{Was ist der Umfang eines gleichseitigen Dreiecks mit einer Seitenlänge von 12cm?}", "options":["12\\pi cm","4\\pi cm","6\\pi cm","36\\pi cm"]},
@@ -83,7 +80,9 @@ document.addEventListener('DOMContentLoaded', function (){
     let view = new View(presenter);
     presenter.setModelAndView(model, view);
 
+    // Aufgaben vom Sever holen
     getQuizFromServer();
+    //getAnswerFromServer(2, '112', );
 
     // Radio-Buttons initialisieren
     mathRadioButton.addEventListener('click', function() {
@@ -105,10 +104,19 @@ document.addEventListener('DOMContentLoaded', function (){
     });
 
     ajaxRadioButton.addEventListener('click', function() {
-        header.textContent = 'Ajax Aufgaben';
+        header.textContent = 'Gemischte Aufgaben';
         model.init(questionsAjax, 0, 0, 0);
         presenter.start();
     });
+
+    // Erfolgsquoten aus dem localStorage holen
+    const lernbereiche = ['math', 'internet', 'allgemein', 'gemischt'];
+    lernbereiche.forEach((lernbereich, index) => {
+        const quote = localStorage.getItem(`${lernbereich}-quote`);
+        if (quote) {
+            document.getElementById(`${lernbereich}-quote`).innerHTML = `${quote}%`;
+        }
+    })
 });
 
 // Model --------------------------------------------------------------------------------------------------------------------
@@ -140,8 +148,20 @@ class Model {
     }
 
     getOptions() {
-        console.log("Hole Lösungen: " + this.questions[this.index].options + "...");
-        return this.questions[this.index].options;
+        const opt = this.questions[this.index].options;
+        console.log("Hole Optionen: " + opt + "...")
+        let options = [];
+
+        if (this.questions === questionsMath) {
+            for (let key of Object.keys(opt)) {
+                const element = opt[key];
+                const renderedElement = katex.renderToString(element);
+                options.push(renderedElement);
+            }
+            return options;
+        } else {
+            return opt;
+        }
     }
 
     incrementCorrect() {
@@ -178,33 +198,50 @@ class Presenter {
         options.style.display = 'flex';
         line.style.display = 'flex';
 
-        console.log("Applikation beginnt...");
+        console.log("Runde beginnt...");
         this.displayQuestion(this.model.index); // Beginne bei Index o des Fragenkatalogs
-        this.updateProgressBar(); // Aktualisiere die Fortschrittsleiste
+        this.updateProgress(); // Aktualisiere die Fortschrittsleiste
+
+        const antwortAnzeige = document.getElementById('antwort-anzeige');
+        antwortAnzeige.innerHTML = "";
     }
 
     displayQuestion(){
         let question = document.getElementById('question');
-
         if(this.model.index < this.model.getLength()) {
             question.innerHTML= this.model.getTask();
             this.view.setButtons(this.model.getOptions());
         } else {
           this.displayFinalResult();
         }
-        this.updateProgressBar(); // Aktualisiere die Fortschrittsleiste
+        this.updateProgress(); // Aktualisiere die Fortschrittsleiste
     }
 
     evaluate(answer){
-        // console.log("answer: " + answer.value)
-        if (answer.value === "1") {
+        let getAnswer;
+
+        if (this.model.questions === questionsAjax) {
+            let questionId = this.model.questions[this.model.index].id;
+            console.log("Question Id: " + questionId);
+            let chosenAnswer = 2;
+            //let chosenAnswer = answer.textContent.toString();
+            console.log("Ausgewähle Antwort: " + chosenAnswer);
+            getAnswer = getAnswerFromServer(questionId, chosenAnswer, handleAnswerFromServer);
+            console.log("getAnswer: " + getAnswer.value);
+        }
+
+        //console.log("answer: " + answer.value)
+        const antwortAnzeige = document.getElementById('antwort-anzeige');
+        if ((answer.value === "1") || (getAnswer === "true")) {
             this.model.incrementCorrect();
-            console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist richtig!');
+            console.log("Antwort " + answer.attributes.getNamedItem('id').value + " ist richtig!");
+            antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist richtig!";
             console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
             console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
         } else {
             this.model.incrementIncorrect();
-            console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist falsch! ');
+            console.log("Antwort " + answer.attributes.getNamedItem('id').value + " ist falsch!");
+            antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist falsch!";
             console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
             console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
         }
@@ -213,7 +250,7 @@ class Presenter {
         this.displayQuestion();
     }
 
-    updateProgressBar() {
+    updateProgress() {
         const progressTask = document.getElementById('aufgaben-fortschritt');
         progressTask.innerHTML = this.model.index + " von " + this.model.getLength() + " Aufgaben";
 
@@ -244,12 +281,14 @@ class Presenter {
 
         question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.getLength() + " Aufgaben richtig gelöst!";
         options.style.display = 'none';
+        line.style.display = 'none';
     }
 
     updateErfolgsquote(id, erfolgsquote) {
         const erfolgsquoteElement = document.getElementById(id);
         if (erfolgsquoteElement) {
             erfolgsquoteElement.innerHTML = erfolgsquote + "%";
+            localStorage.setItem(id, erfolgsquote); // Erfolgsquote in localStorage speichern
         }
     }
 }
@@ -259,44 +298,37 @@ class Presenter {
 class View {
     constructor(presenter) {
         this.presenter = presenter;
-        this.setHandler();
-        this.setButtons(0);
+        this.setButtonHandler();
+        //this.setButtons(0);
     }
 
-    setHandler() {
-        // use capture false -> use bubbling
-        // bind this -> this is refering to object rather than event
-        // allButtons[0].addEventListener('click', this.nextQuestion.bind(this), false);
+    setButtonHandler() {
         allButtons[0].addEventListener('click', this.checkAnswer.bind(this), false);
-
-        // allButtons[1].addEventListener('click', this.nextQuestion.bind(this), false);
         allButtons[1].addEventListener('click', this.checkAnswer.bind(this), false);
-
-        // allButtons[2].addEventListener('click', this.nextQuestion.bind(this), false);
         allButtons[2].addEventListener('click', this.checkAnswer.bind(this), false);
-
-        // allButtons[3].addEventListener('click', this.nextQuestion.bind(this), false);
         allButtons[3].addEventListener('click', this.checkAnswer.bind(this), false);
-
     }
 
-    setButtons(i) {
-        const correctAnswer = i[0];
+    setButtons(opt) {
+
+       //const correctAnswer = i[0];
         const randomIndex = Math.floor(Math.random() * allButtons.length);
 
-        allButtons[0].textContent = i[randomIndex];
-        allButtons[1].textContent = i[(randomIndex + 1) % allButtons.length];
-        allButtons[2].textContent = i[(randomIndex + 2) % allButtons.length];
-        allButtons[3].textContent = i[(randomIndex + 3) % allButtons.length];
+        //console.log("correctAnswer :" + correctAnswer);
+        allButtons[randomIndex].innerHTML = opt[0];
+        allButtons[(randomIndex + 1) % allButtons.length].innerHTML = opt[1];
+        allButtons[(randomIndex + 2) % allButtons.length].innerHTML = opt[2];
+        allButtons[(randomIndex + 3) % allButtons.length].innerHTML = opt[3];
 
-        for (let j = 0; j < 4; j++) {
-            if (allButtons[j].textContent === correctAnswer) {
-                allButtons[j].value = 1;
-                console.log("Button: " + allButtons[j].id + " ist die richtige Antwort mit " + correctAnswer);
-                console.log(allButtons[j].value);
-            }  else {
-                allButtons[j].value = 0;
-            }
+        if (!(this.presenter.model === questionsAjax)) {
+            console.log("Keine Ajax-Aufgabe!");
+            allButtons[randomIndex].value = 1;
+            allButtons[(randomIndex + 1) % allButtons.length].value = 0;
+            allButtons[(randomIndex + 2) % allButtons.length].value = 0;
+            allButtons[(randomIndex + 3) % allButtons.length].value = 0;
+
+            console.log("Button: " + allButtons[randomIndex].id + " hat die richtige Antwort");
+            console.log(allButtons[randomIndex].value);
         }
     }
 
@@ -323,6 +355,7 @@ function getQuizFromServer() {
             const jsonObject = JSON.parse(xhr.responseText);
             console.log("JSON-Object");
             console.log(jsonObject);
+            //console.log(jsonObject.title);
 
             if (!questionIds.includes(jsonObject.id)) { // prüfen, ob id bereits vorhanden
                 questionIds.push(jsonObject.id);
@@ -407,5 +440,10 @@ function getAnswerFromServer(id, answer, callback){
         console.log("Request send");
     }
 
+    return correctAnswer;
+}
+
+function handleAnswerFromServer(correctAnswer){
+    console.log("Die korrekte Antwort vom Server lautet: " + correctAnswer);
     return correctAnswer;
 }

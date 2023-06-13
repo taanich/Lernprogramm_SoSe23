@@ -177,11 +177,14 @@ button:hover {
 /* --- Anzeige der Erfolgsquote --- */
 .erfolgsquote-container {
     display: flex; /* Elemente in einer Flexbox anordnen */
-    flex-wrap: wrap; /* Bei Platzmangel umbrechen */
-    justify-content: flex-start; /* Elemente am Anfang der Hauptachse ausrichten */
+    flex-direction: column;
+    /*flex-wrap: wrap; /* Bei Platzmangel umbrechen */
+    /*justify-content: flex-start; /* Elemente am Anfang der Hauptachse ausrichten */
 }
 
 .erfolgsquote-item {
+    display: flex;
+    justify-content: space-between;
     padding: 5px; /* Innenabstand des Elements */
     border-radius: 5px; /* Runde Ecken */
     color: var(--grey-color); /* Farbe des Textes */

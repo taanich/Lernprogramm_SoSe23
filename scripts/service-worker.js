@@ -1,5 +1,5 @@
 // Name des Cache-Speichers
-const CACHE_NAME = 'my-cache';
+// const CACHE_NAME = 'my-cache';
 
 // Ressourcen, die im Cache gespeichert werden sollen
 const urlsToCache = [
@@ -14,7 +14,7 @@ const urlsToCache = [
 // Installationsereignis: Ressourcen im Cache speichern
 self.addEventListener('install', function(event) {
     event.waitUntil(
-        caches.open(CACHE_NAME)
+        caches.open('pwa1')
             .then(function(cache) {
                 return cache.addAll(urlsToCache);
             })
@@ -36,6 +36,7 @@ self.addEventListener('fetch', function(event) {
     );
 });
 
+/*
 // Löschereignis: Alte Cache-Speicher bereinigen
 self.addEventListener('activate', function(event) {
     event.waitUntil(
@@ -51,3 +52,4 @@ self.addEventListener('activate', function(event) {
             })
     );
 });
+*/
