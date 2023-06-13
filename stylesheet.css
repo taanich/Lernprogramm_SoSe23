@@ -160,6 +160,15 @@ button {
     transition: background-color 0.3s;
 }
 
+/**/
+.katex {
+    /*display: flex;*/
+    /*justify-content: center;*/
+    pointer-events: none;
+}
+.base {
+    flex-wrap: wrap;
+}
 /* Styling für den ausgewählten Button */
 /*
 button.selected {

@@ -12,28 +12,24 @@ const header = document.getElementById('headline');
 // Alle Antwort-Buttons
 const allButtons = document.querySelectorAll('#options > *');
 
-// Erfolgsquote
-let erfolgsQuote;
-
 // ------------------------------------------------------------------------------------------------------------------
-
-// Aufgabenbereiche festlegen
+// Aufgabenbereiche mit Aufgaben festlegen
 const questionsMath = [
-    {"text":"\\text{Was ist das Ergebnis von:} x^2+x^2= ?", "options":["2x^2","x^4","x^8","2x^4"]},
-    {"text":"\\text{Was ist das Ergebnis von:}\\ x^2*x^2\\ =\\ ?", "options":["x^4","x^2","2x^2","4x"]},
-    {"text":"\\text{Was ist die Lösung dieser Gleichung:}\\ 2x^2-5x+2 = 0 \\text{?}", "options":["x = 1", "x = -\\frac{1}{2}", "x = 2", "x = \\frac{1}{4}"]},
-    {"text":"\\text{Was ist die Ableitung von:}\\ f(x)=sin(x)+cos(x) \\text{?}", "options":["f'(x)=cos(x)-sin(x)","f'(x)=sin(x)+ cos(x)"," f'(x)=sin(x)-cos(x)","f'(x)=-sin(x)-cos(x)"]},
-    {"text":"\\text{Was ist der Grenzwert von:}\\ lim_{x \\to 0} \\frac{sin(x)}{x} \\text{?}", "options":["1","0","\\frac{1}{2}","-\\frac{1}{2}"]},
-    {"text":"\\text{Welche ist die Determinante von:}\\ \\begin{bmatrix}2&-1&3&4\\end{bmatrix} \\text{?}", "options":["11","9","7","5"]},
-    {"text":"\\text{Welches ist die Ableitung dieser Funktion:} f(x)=e^x\\cdot\\cos(x) \\text{?}", "options":["f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\cos(x)+e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\sin(x)","f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)"]},
-    {"text":"\\text{Was ist die Summe dieser Reihe:}\\  \\sum_{n=1}^{\\infty}\\frac{1}{2^n} \\text{?}", "options":["1","2","\\frac{1}{2}","\\frac{2}{3}"]},
-    {"text":"\\text{Was ist die Lösungsmenge dieser Gleichung:}\\ \\sqrt{x+3}-2=0 \\text{?}", "options":["x=1","x=2","x=4","x=7"]},
-    {"text":"\\text{Welches ist die Koordinate des Tiefpunktes dieser Funktion:} f(x)=e^x-3x^2 text{?}", "options":["(0,1)","(1,-1)","(0,-3)","(1,-3)"]},
-    {"text":"\\text{Bestimme die Lösungsmenge dieser Gleichung:}\\ \\log_2(x)=3", "options":["\\{8\\}","\\{ \\frac{1}{8}\\}","\\{ \\frac{1}{2}\\}","\\{2^3\\}"]},
-    {"text":"\\text{Welches Volumen hat eine Kugel mit einem Radius von 10cm?}", "options":["1000\\pi cm^3","300\\pi cm^3","400\\pi cm^3","100\\pi cm^3"]},
-    {"text":"\\text{Was ist der Umfang eines gleichseitigen Dreiecks mit einer Seitenlänge von 12cm?}", "options":["12\\pi cm","4\\pi cm","6\\pi cm","36\\pi cm"]},
-    {"text":"\\text{Was ist das bestimmte Integral von:}\\ \\int_{{0}}^{{2}}(x^2+3x)dx \\text{?}", "options":["5","7","9","11"]},
-    {"text":"\\text{Was ist Logarithmus von 100 zur Basis 10?}", "options":["2","1","10","100"]}
+    {"text":"Was ist das Ergebnis von: $$x^2+x^2$$ = ?", "options":["$$2x^2$$","$$x^4$$","$$x^8$$","$$2x^4$$"]},
+    {"text":"Was ist das Ergebnis von: $$x^2*x^2$$ = ?", "options":["$$x^4$$","$$x^2$$","$$2x^2$$","$$4x$$"]},
+    {"text":"Was ist die Lösung dieser Gleichung: $$2x^2-5x+2$$ = 0 ?", "options":["$$x=1$$","$$x=-\\frac{1}{2}$$","$$x=2$$","$$x=\\frac{1}{4}$$"]},
+    {"text":"Was ist die Ableitung von: $$f(x)=sin(x)+cos(x)$$ ?", "options":["$$f'(x)=cos(x)-sin(x)$$","$$f'(x)=sin(x)+cos(x)$$","$$f'(x)=sin(x)-cos(x)$$","$$f'(x)=-sin(x)-cos(x)$$"]},
+    {"text":"Was ist der Grenzwert von: $$\\lim_{x \\to 0}$$ $$\\frac{sin(x)}{x}$$ ?", "options":["$$1$$","$$0$$","$$\\frac{1}{2}$$","$$-\\frac{1}{2}$$"]},
+    {"text":"Welche ist die Determinante von: $$\\begin{bmatrix}2&-1&3&4\\end{bmatrix}$$ ?", "options":["$$11$$","$$9$$","$$7$$","$$5$$"]},
+    {"text":"Welches ist die Ableitung dieser Funktion: $$f(x)=e^x\\cdot\\cos(x)$$ ?", "options":["$$f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)$$","$$f'(x)=e^x\\cdot\\cos(x)+e^x\\cdot\\sin(x)$$","$$f'(x)=e^x\\cdot\\sin(x)$$","$$f'(x)=e^x\\cdot\\cos(x)-e^x\\cdot\\sin(x)$$"]},
+    {"text":"Was ist die Summe dieser Reihe: $$\\sum_{n=1}^{\\infty}\\frac{1}{2^n}$$ ?", "options":["1","2","$$\\frac{1}{2}$$","$$\\frac{2}{3}$$"]},
+    {"text":"Was ist die Lösungsmenge dieser Gleichung: $$\\sqrt{x+3}-2=0$$ ?", "options":["$$x=1$$","$$x=2$$","$$x=4$$","$$x=7$$"]},
+    {"text":"Welches ist die Koordinate des Tiefpunktes dieser Funktion: $$f(x)=e^x-3x^2$$ ?", "options":["$$(0,1)$$","$$(1,-1)$$","$$(0,-3)$$","$$(1,-3)$$"]},
+    {"text":"Bestimme die Lösungsmenge dieser Gleichung: $$\\log_2(x)$$ = 3", "options":["$$\\{8\\}$$","$$\\{ \\frac{1}{8}\\}$$","$$\\{ \\frac{1}{2}\\}$$","$$\\{2^3\\}$$"]},
+    {"text":"Welches Volumen hat eine Kugel mit einem Radius von $$10cm$$ ?", "options":["$$1000\\pi cm^3$$","$$300\\pi cm^3$$","$$400\\pi cm^3$$","$$100\\pi cm^3$$"]},
+    {"text":"Was ist der Umfang eines gleichseitigen Dreiecks mit einer Seitenlänge von $$12cm$$ ?", "options":["$$12\\pi cm$$","$$4\\pi cm$$","$$6\\pi cm$$","$$36\\pi cm$$"]},
+    {"text":"Was ist das bestimmte Integral von: $$\\int_{{0}}^{{2}}(x^2+3x)dx$$ ?", "options":["$$5$$","$$7$$","$$9$$","$$11$$"]},
+    {"text":"Was ist Logarithmus von 100 zur Basis 10?}", "options":["$$2$$","$$1$$","$$10$$","$$100$$"]}
 ];
 
 let questionsInternet = [
@@ -76,7 +72,7 @@ let questionsAllgemein = [
 let questionsAjax = [];
 
 // ------------------------------------------------------------------------------------------------------------------
-
+// Radio Buttons initialisieren -------------------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function (){
     let model = new Model();
     let presenter = new Presenter();
@@ -105,14 +101,14 @@ document.addEventListener('DOMContentLoaded', function (){
     });
 
     ajaxRadioButton.addEventListener('click', function() {
-        header.textContent = 'Ajax Aufgaben';
+        header.textContent = 'Persönlichkeiten';
         model.init(questionsAjax, 0, 0, 0);
         presenter.start();
     });
 
     // Erfolgsquoten aus dem localStorage holen
     const lernbereiche = ['math', 'internet', 'allgemein', 'person'];
-    lernbereiche.forEach((lernbereich, index) => {
+    lernbereiche.forEach((lernbereich) => {
         const quote = localStorage.getItem(`${lernbereich}-quote`);
         if (quote) {
             document.getElementById(`${lernbereich}-quote`).innerHTML = `${quote}%`;
@@ -120,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function (){
     })
 });
 
+// --------------------------------------------------------------------------------------------------------------------------
 // Model --------------------------------------------------------------------------------------------------------------------
 class Model {
     init(set, index, correct, incorrect) {
@@ -143,7 +140,7 @@ class Model {
         console.log("Hole Aufgabe: " + question + "...")
 
         if (this.questions === questionsMath)
-            return katex.renderToString(question);
+            return renderKatexFormula(question);
         else
             return question;
     }
@@ -183,6 +180,7 @@ class Model {
 
 }
 
+// ------------------------------------------------------------------------------------------------------------------------------
 // Presenter --------------------------------------------------------------------------------------------------------------------
 class Presenter {
     setModelAndView(model, view){
@@ -305,7 +303,7 @@ class Presenter {
     }
 }
 
-
+// -------------------------------------------------------------------------------------------------------------------------
 // View --------------------------------------------------------------------------------------------------------------------
 class View {
     constructor(presenter) {
@@ -325,26 +323,17 @@ class View {
         //const correctAnswer = opt[0];
         const randomIndex = Math.floor(Math.random() * allButtons.length);
 
-        // gerenderte Version
         if (this.presenter.model.questions === questionsMath) {
-            allButtons[randomIndex].innerHTML = katex.renderToString(opt[0], {throwOnError: false});
-            allButtons[(randomIndex + 1) % allButtons.length].innerHTML = katex.renderToString(opt[1], {throwOnError: false});
-            allButtons[(randomIndex + 2) % allButtons.length].innerHTML = katex.renderToString(opt[2], {throwOnError: false});
-            allButtons[(randomIndex + 3) % allButtons.length].innerHTML = katex.renderToString(opt[3], {throwOnError: false});
+            allButtons[randomIndex].innerHTML = renderKatexFormula(opt[0]);
+            allButtons[(randomIndex + 1) % allButtons.length].innerHTML = renderKatexFormula(opt[1]);
+            allButtons[(randomIndex + 2) % allButtons.length].innerHTML = renderKatexFormula(opt[2]);
+            allButtons[(randomIndex + 3) % allButtons.length].innerHTML = renderKatexFormula(opt[3]);
         } else {
             allButtons[randomIndex].innerHTML = opt[0];
             allButtons[(randomIndex + 1) % allButtons.length].innerHTML = opt[1];
             allButtons[(randomIndex + 2) % allButtons.length].innerHTML = opt[2];
             allButtons[(randomIndex + 3) % allButtons.length].innerHTML = opt[3];
         }
-
-        // nicht gerenderte Version
-        /*
-        allButtons[randomIndex].innerHTML = opt[0];
-        allButtons[(randomIndex + 1) % allButtons.length].innerHTML = opt[1];
-        allButtons[(randomIndex + 2) % allButtons.length].innerHTML = opt[2];
-        allButtons[(randomIndex + 3) % allButtons.length].innerHTML = opt[3];
-         */
 
         if (this.presenter.model.getquestionsAjax()) {
             console.log("Ajax Aufgabe!");
@@ -364,35 +353,17 @@ class View {
         }
     }
 
-    // mit Fehlermeldung
-    /*
-    checkAnswer(event) {
-        this.presenter.evaluate(event.target);
-    }
-    */
-
     // mit Ausgabe an Console
     checkAnswer(event) {
         const target = event.target;
         if (target.tagName === 'BUTTON') {
-            // Das Event-Target ist ein Button
             const buttonId = target.getAttribute('id');
-            // Hier kannst du die ID des Buttons verwenden
             console.log('Button ID:', buttonId);
             this.presenter.evaluate(event.target);
         } else {
-            // Das Event-Target ist nicht der erwartete Button
             console.log('Ungültiges Event-Target:', target);
         }
-        /*
-        const answer = event.target;
-        if (answer.attributes && answer.attributes.getNamedItem("id") !== null)
-            this.presenter.evaluate(event.target);
-        else
-            console.log(answer.attributes.getNamedItem('id'));
-        */
     }
-
 }
 
 // ------------------------------------------------------------------------------------------------------------------
@@ -501,6 +472,23 @@ function getAnswerFromServer(id, answer) {
         }
     });
 }
+
+// ----------------------------------------------------------------------------------------------------------------------
+// Katex Rendern --------------------------------------------------------------------------------------------------------
+function renderKatexFormula(formula) {
+    const regex = /\$\$(.*?)\$\$/g; // Regex-Muster für $$-Tags
+    return formula.replace(regex, (match, p1) => {
+        try {
+            return katex.renderToString(p1, { throwOnError: false });
+        } catch (error) {
+            console.error("Fehler beim Rendern der Formel:", error);
+            return match; // Falls ein Fehler auftritt, beibehalten wir den ursprünglichen Tag
+        }
+    });
+}
+
+// ----------------------------------------------------------------------------------------------------------------------
+// Callback - Funktion
 /*
 function handleAnswerFromServer(correctAnswer){
     console.log("Die korrekte Antwort vom Server lautet: " + correctAnswer);

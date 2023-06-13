@@ -36,6 +36,7 @@ self.addEventListener('fetch', function(event) {
     );
 });
 
+/*
 // Löschereignis: Alte Cache-Speicher bereinigen
 self.addEventListener('activate', function(event) {
     event.waitUntil(
@@ -51,3 +52,4 @@ self.addEventListener('activate', function(event) {
             })
     );
 });
+*/
