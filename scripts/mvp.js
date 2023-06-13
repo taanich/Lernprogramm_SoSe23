@@ -5,6 +5,7 @@ const mathRadioButton = document.getElementById('mathe');
 const internetRadioButton = document.getElementById('internet');
 const allgemeinRadioButton = document.getElementById('allgemein');
 const ajaxRadioButton = document.getElementById('ajax');
+const spanischRadioButton = document.getElementById('spanisch');
 
 // Überschrift
 const header = document.getElementById('headline');
@@ -29,7 +30,7 @@ const questionsMath = [
     {"text":"Welches Volumen hat eine Kugel mit einem Radius von $$10cm$$ ?", "options":["$$1000\\pi cm^3$$","$$300\\pi cm^3$$","$$400\\pi cm^3$$","$$100\\pi cm^3$$"]},
     {"text":"Was ist der Umfang eines gleichseitigen Dreiecks mit einer Seitenlänge von $$12cm$$ ?", "options":["$$12\\pi cm$$","$$4\\pi cm$$","$$6\\pi cm$$","$$36\\pi cm$$"]},
     {"text":"Was ist das bestimmte Integral von: $$\\int_{{0}}^{{2}}(x^2+3x)dx$$ ?", "options":["$$5$$","$$7$$","$$9$$","$$11$$"]},
-    {"text":"Was ist Logarithmus von 100 zur Basis 10?}", "options":["$$2$$","$$1$$","$$10$$","$$100$$"]}
+    {"text":"Was ist Logarithmus von 100 zur Basis 10?", "options":["$$2$$","$$1$$","$$10$$","$$100$$"]}
 ];
 
 let questionsInternet = [
@@ -69,6 +70,24 @@ let questionsAllgemein = [
 
 ];
 
+let questionsSpanisch = [
+        {"text": "Was bedeutet \"Haus\" auf Spanisch?", "options": ["Casa", "Coche", "Perro", "Gato"]},
+        {"text": "Wie sagt man \"Danke\" auf Spanisch?", "options": ["Gracias", "Amigo", "Hola", "Adiós"]},
+        {"text": "Wie übersetzt man \"Apfel\" ins Spanische?", "options": ["Manzana", "Mesa", "Playa", "Sol"]},
+        {"text": "Was bedeutet \"Schule\" auf Spanisch?", "options": ["Escuela", "Lápiz", "Flor", "Coche"]},
+        {"text": "Wie sagt man \"Katze\" auf Spanisch?", "options": ["Gato", "Casa", "Perro", "Árbol"]},
+        {"text": "Was bedeutet \"Wasser\" auf Spanisch?", "options": ["Agua", "Sol", "Flor", "Playa"]},
+        {"text": "Wie übersetzt man \"Tisch\" ins Spanische?", "options": ["Mesa", "Perro", "Taza", "Coche"]},
+        {"text": "Was bedeutet \"Buch\" auf Spanisch?", "options": ["Libro", "Casa", "Sol", "Manzana"]},
+        {"text": "Wie sagt man \"Mutter\" auf Spanisch?", "options": ["Madre", "Amigo", "Padre", "Hola"]},
+        {"text": "Was bedeutet \"Hund\" auf Spanisch?", "options": ["Perro", "Gato", "Coche", "Árbol"]},
+        {"text": "Wie übersetzt man \"Stuhl\" ins Spanische?", "options": ["Silla", "Lápiz", "Flor", "Casa"]},
+        {"text": "Was bedeutet \"Stift\" auf Spanisch?", "options": ["Lápiz", "Sol", "Coche", "Taza"]},
+        {"text": "Wie sagt man \"Bruder\" auf Spanisch?", "options": ["Hermano", "Amigo", "Hola", "Padre"]},
+        {"text": "Was bedeutet \"Blume\" auf Spanisch?", "options": ["Flor", "Árbol", "Perro", "Casa"]},
+        {"text": "Wie übersetzt man \"Glas\" ins Spanische?", "options": ["Vaso", "Taza", "Sol", "Playa"]}
+    ];
+
 let questionsAjax = [];
 
 // ------------------------------------------------------------------------------------------------------------------
@@ -106,8 +125,14 @@ document.addEventListener('DOMContentLoaded', function (){
         presenter.start();
     });
 
+    spanischRadioButton.addEventListener('click', function() {
+        header.textContent = 'Spanisch';
+        model.init(questionsSpanisch, 0, 0, 0);
+        presenter.start();
+    });
+
     // Erfolgsquoten aus dem localStorage holen
-    const lernbereiche = ['math', 'internet', 'allgemein', 'person'];
+    const lernbereiche = ['math', 'internet', 'allgemein', 'person', 'spnaisch'];
     lernbereiche.forEach((lernbereich) => {
         const quote = localStorage.getItem(`${lernbereich}-quote`);
         if (quote) {
@@ -169,15 +194,6 @@ class Model {
     getIndex() {
         return this.index;
     }
-
-    getquestionsAjax() {
-        if (this.questions === questionsAjax) {
-            return true;
-        }  else {
-            return false;
-        }
-    }
-
 }
 
 // ------------------------------------------------------------------------------------------------------------------------------
@@ -287,6 +303,8 @@ class Presenter {
             this.updateErfolgsquote('allgemein-quote', erfolgsquote);
         } else if (this.model.questions === questionsAjax) {
             this.updateErfolgsquote('person-quote', erfolgsquote);
+        } else if (this.model.questions === questionsSpanisch) {
+            this.updateErfolgsquote('spanisch-quote', erfolgsquote);
         }
 
         question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.getLength() + " Aufgaben richtig gelöst!";
@@ -309,7 +327,6 @@ class View {
     constructor(presenter) {
         this.presenter = presenter;
         this.setHandler();
-        //this.setButtons(0);
     }
 
     setHandler() {
@@ -335,7 +352,7 @@ class View {
             allButtons[(randomIndex + 3) % allButtons.length].innerHTML = opt[3];
         }
 
-        if (this.presenter.model.getquestionsAjax()) {
+        if (this.presenter.model.questions === questionsAjax) {
             console.log("Ajax Aufgabe!");
             allButtons[randomIndex].value = 0;
             allButtons[(randomIndex + 1) % allButtons.length].value = 1;
@@ -353,7 +370,7 @@ class View {
         }
     }
 
-    // mit Ausgabe an Console
+    // mit Ausgabe an Console - Kontrolle, ob Event auch Button ist!
     checkAnswer(event) {
         const target = event.target;
         if (target.tagName === 'BUTTON') {
@@ -479,7 +496,7 @@ function renderKatexFormula(formula) {
     const regex = /\$\$(.*?)\$\$/g; // Regex-Muster für $$-Tags
     return formula.replace(regex, (match, p1) => {
         try {
-            return katex.renderToString(p1, { throwOnError: false });
+            return katex.renderToString(p1, { throwOnError: false }); //displayMode: true für Zeilenumruch für jedes $$
         } catch (error) {
             console.error("Fehler beim Rendern der Formel:", error);
             return match; // Falls ein Fehler auftritt, beibehalten wir den ursprünglichen Tag

@@ -166,8 +166,10 @@ button {
     /*justify-content: center;*/
     pointer-events: none;
 }
-.base {
-    flex-wrap: wrap;
+
+.katex-display {
+    pointer-events: none;
+    /*flex-wrap: wrap;*/
 }
 /* Styling für den ausgewählten Button */
 /*
