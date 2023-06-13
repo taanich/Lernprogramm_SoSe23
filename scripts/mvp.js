@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function (){
     });
 
     // Erfolgsquoten aus dem localStorage holen
-    const lernbereiche = ['math', 'internet', 'allgemein', 'gemischt'];
+    const lernbereiche = ['math', 'internet', 'allgemein', 'person'];
     lernbereiche.forEach((lernbereich, index) => {
         const quote = localStorage.getItem(`${lernbereich}-quote`);
         if (quote) {
@@ -151,6 +151,24 @@ class Model {
     getOptions() {
         console.log("Hole Lösungen: " + this.questions[this.index].options + "...");
         return this.questions[this.index].options;
+
+        /*
+        const opt = this.questions[this.index].options;
+        console.log("Hole Optionen: " + this.questions[this.index].options + "...")
+        let options = [];
+
+        if (this.questions === questionsMath) {
+            for (let key of Object.keys(opt)) {
+                const element = opt[key];
+                const renderedElement = katex.renderToString(element);
+                options.push(renderedElement);
+                console.log(options);
+            }
+            return options;
+        } else {
+            return opt;
+        }
+        */
     }
 
     incrementCorrect() {
@@ -289,7 +307,7 @@ class Presenter {
         } else if (this.model.questions === questionsAllgemein) {
             this.updateErfolgsquote('allgemein-quote', erfolgsquote);
         } else if (this.model.questions === questionsAjax) {
-            this.updateErfolgsquote('gemischt-quote', erfolgsquote);
+            this.updateErfolgsquote('person-quote', erfolgsquote);
         }
 
         question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.getLength() + " Aufgaben richtig gelöst!";
