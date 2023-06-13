@@ -190,6 +190,9 @@ class Presenter {
         console.log("Applikation beginnt...");
         this.displayQuestion(this.model.index); // Beginne bei Index o des Fragenkatalogs
         this.updateProgressBar(); // Aktualisiere die Fortschrittsleiste
+
+        const antwortAnzeige = document.getElementById('antwort-anzeige');
+        antwortAnzeige.innerHTML = "";
     }
 
     displayQuestion(){
@@ -206,14 +209,17 @@ class Presenter {
 
     evaluate(answer){
         // console.log("answer: " + answer.value)
+        const antwortAnzeige = document.getElementById('antwort-anzeige');
         if (answer.value === "1") {
             this.model.incrementCorrect();
-            console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist richtig!');
+            //console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist richtig!');
+            antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist richtig!";
             console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
             console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
         } else {
             this.model.incrementIncorrect();
-            console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist falsch! ');
+            //console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist falsch! ');
+            antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist falsch!";
             console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
             console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
         }
