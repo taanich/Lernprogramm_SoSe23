@@ -7,7 +7,7 @@ const allgemeinRadioButton = document.getElementById('allgemein');
 const ajaxRadioButton = document.getElementById('ajax');
 const spanischRadioButton = document.getElementById('spanisch');
 
-// Überschrift
+// Überschrift in article
 const header = document.getElementById('headline');
 
 // Alle Antwort-Buttons
@@ -496,11 +496,3 @@ function renderKatexFormula(formula) {
         }
     });
 }
-// ----------------------------------------------------------------------------------------------------------------------
-// Callback - Funktion --------------------------------------------------------------------------------------------------
-/*
-function handleAnswerFromServer(correctAnswer){
-    console.log("Die korrekte Antwort vom Server lautet: " + correctAnswer);
-    return correctAnswer;
-}
-*/

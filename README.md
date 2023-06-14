@@ -1,10 +1,23 @@
-## Quiz-App
+## Lernprogramm
 
-Dies ist eine Quiz-App, die verschiedene Fragen in den Bereichen Mathematik, Internet Technologie, Allgemeinwissen und Spanisch stellt. Die App bietet mehrere Kategorien zur Auswahl und zeigt Fragen mit mehreren Antwortmöglichkeiten an. Der Benutzer kann eine Antwort auswählen und erhält Feedback über die Richtigkeit seiner Antwort. Die App enthält auch eine Punktzählung, um den Fortschritt des Benutzers zu verfolgen.
+Das Lernprogramm ist eine Webanwendung, die es Benutzern ermöglicht, Lernfragen aus verschiedenen Bereichen zu beantworten. Die Anwendung bietet Fragen aus den Bereichen Mathematik, Internet-Technologie, Allgemeinwissen und Spanisch. Der Benutzer kann einen Lernbereich auswählen und dazu die Fragen beantworten, indem er den Button mit der richtigen Antwort auswählt. Die Anwendung zeigt auch den Fortschritt des Benutzers an und wertet die Antworten in "Richtige Antwort" und "Falsche Antwort" aus. 
+
+### Installation
+Um das Lernprogramm auszuführen, müssen die folgenden Schritte ausgeführt werden:
+1. Klonen des Lernprogramm-Repository auf den lokalen Computer.
+2. Öffnen der `index.html`-Datei in einem Webbrowser. 
 
 ### Verwendung
 
-Um das Quiz zu starten, wählen Sie eine Kategorie aus den verfügbaren Optionen aus. Klicken Sie auf den entsprechenden Radio-Button, um die Fragen in dieser Kategorie anzuzeigen. Die Fragen werden dynamisch geladen und angezeigt. Wählen Sie eine Antwort aus den vorgegebenen Optionen aus, indem Sie auf den entsprechenden Button klicken. Sie erhalten sofortiges Feedback zu Ihrer Antwort. Um das Quiz zurückzusetzen und erneut zu starten, wählen Sie eine andere Kategorie aus.
+Nachdem Sie die Quiz-App geöffnet haben, können Sie einen Bereich auswählen, indem Sie auf einen der Radio-Buttons klicken. Die verfügbaren Bereiche sind Mathematik, Internet-Technologie, Allgemeinwissen und Spanisch. Nach der Auswahl eines Bereichs werden Fragen zu diesem Bereich angezeigt.
+
+Um eine Frage zu beantworten, wählen Sie die richtige Antwort aus den angegebenen Optionen aus, indem Sie auf die entsprechende Schaltfläche klicken. Nachdem Sie eine Antwort ausgewählt haben, wird die nächste Frage angezeigt. Der Fortschritt des Benutzers wird ebenfalls angezeigt.
+
+Nachdem alle Fragen beantwortet wurden, zeigt die Anwendung die Anzahl der richtigen und falschen Antworten an. Sie können das Quiz auch zurücksetzen und ein anderes Thema auswählen, um weitere Fragen zu beantworten.
+
+### Technologien
+
+Die Quiz-App wurde mit HTML, CSS und JavaScript entwickelt. Sie verwendet das Model-View-Presenter (MVP)-Muster, um die Trennung von Datenmodell, Präsentationslogik und Benutzeroberfläche zu ermöglichen. Die Anwendung verwendet auch AJAX, um Quizfragen vom Server abzurufen.
 
 ### Code-Überblick
 
@@ -24,6 +37,9 @@ Die Quiz-App verwendet HTML, CSS und JavaScript. Es werden keine zusätzlichen F
 Um das Quiz auszuführen, öffnen Sie die `index.html`-Datei in einem Webbrowser. Stellen Sie sicher, dass Sie mit dem Internet verbunden sind, um die Fragen aus dem Server abzurufen.
 
 Bitte beachten Sie, dass die Fragen dynamisch vom Server geladen werden, daher kann es zu Verzögerungen kommen, wenn die Verbindung zum Server langsam ist.
+
+### Quizfragen
+Die Quizfragen sind in separaten Arrays für jeden Bereich definiert: Mathematik, Internet-Technologie, Allgemeinwissen und Spanisch. Jede Frage hat einen Text und eine Liste von möglichen Antworten. Der Benutzer kann die richtige Antwort auswählen, indem er auf die entsprechende Schaltfläche klickt.
 
 ### Anpassung
 
