@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="wip" />
+    <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="wip">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mvp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mvp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/service-worker.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +45,7 @@
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
         <option name="accountId" value="91cb9a85-f29f-4192-a558-5a851d46bd88" />
-        <option name="url" value="https://github.com/HTWDD-RN/Lernprogramm.git" />
+        <option name="url" value="https://github.com/xSelecta/Lernprogramm_SoSe23.git" />
       </UrlAndAccount>
     </option>
   </component>
@@ -109,6 +114,8 @@
       <workItem from="1686489160827" duration="31670000" />
       <workItem from="1686590708985" duration="21278000" />
       <workItem from="1686630598966" duration="4015000" />
+      <workItem from="1686692811865" duration="75000" />
+      <workItem from="1686719631986" duration="418000" />
     </task>
     <task id="LOCAL-00001" summary="initial Project">
       <created>1685805672388</created>

@@ -7,6 +7,7 @@ const urlsToCache = [
     '/index.html',
     '/stylesheet.css',
     '/scripts/mvp.js',
+    '/scripts/service-worker.js',
     '/images/01_HTWD_logo_RGB_wordmark_color.png',
     '/images/03_HTWD_logo_RBG_horizontal_color.png',
 ];

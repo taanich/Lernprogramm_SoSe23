@@ -248,7 +248,7 @@ class Presenter {
                 console.error("Fehler beim Abrufen der Antwort vom Server:", error);
             }
         } else {
-            if (answer.value === "1") {
+            if (answer.value === "0") {
                 this.correctAnswer(answer);
             } else {
                 this.incorrectAnswer(answer);
@@ -352,6 +352,14 @@ class View {
             allButtons[(randomIndex + 3) % allButtons.length].innerHTML = opt[3];
         }
 
+
+        allButtons[randomIndex].value = 0;
+        allButtons[(randomIndex + 1) % allButtons.length].value = 1;
+        allButtons[(randomIndex + 2) % allButtons.length].value = 2;
+        allButtons[(randomIndex + 3) % allButtons.length].value = 3;
+
+
+        /*
         if (this.presenter.model.questions === questionsAjax) {
             console.log("Ajax Aufgabe!");
             allButtons[randomIndex].value = 0;
@@ -368,6 +376,8 @@ class View {
             console.log("Button: " + allButtons[randomIndex].id + " hat die richtige Antwort");
             console.log(allButtons[randomIndex].value);
         }
+        /*
+         */
     }
 
     // mit Ausgabe an Console - Kontrolle, ob Event auch Button ist!
