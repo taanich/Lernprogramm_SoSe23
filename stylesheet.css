@@ -29,14 +29,15 @@ h2 {
 
 /* -- Footer -- */
 footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #ee9e6e;
     font-weight: bold;
-    padding: 10px;
     text-align: center;
-    white-space: break-spaces;
-    overflow: hidden;
-    text-overflow: fade;
+    padding: 18px;
 }
+
 
 /* -------------------------------------------------------------------------------------------------------- */
 /* -- Responsive Design -- */
