@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function (){
     });
 
     // Erfolgsquoten aus dem localStorage holen
-    const lernbereiche = ['math', 'internet', 'allgemein', 'person', 'spnaisch'];
+    const lernbereiche = ['math', 'internet', 'allgemein', 'person', 'spanisch'];
     lernbereiche.forEach((lernbereich) => {
         const quote = localStorage.getItem(`${lernbereich}-quote`);
         if (quote) {
@@ -162,7 +162,7 @@ class Model {
 
     getTask() {
         const question = this.questions[this.index].text;
-        console.log("Hole Aufgabe: " + question + "...")
+        console.log("Hole Aufgabe: " + question + "...");
 
         if (this.questions === questionsMath)
             return renderKatexFormula(question);
@@ -205,7 +205,6 @@ class Presenter {
     }
 
     start(){
-        //Begin application
         options.style.display = 'flex';
         line.style.display = 'flex';
 
@@ -219,7 +218,6 @@ class Presenter {
 
     displayQuestion(){
         let question = document.getElementById('question');
-
         if(this.model.index < this.model.getLength()) {
             question.innerHTML= this.model.getTask();
             this.view.setButtons(this.model.getOptions());
@@ -229,16 +227,16 @@ class Presenter {
         this.updateProgressBar(); // Aktualisiere die Fortschrittsleiste
     }
 
-    async evaluate(answer){
-        // console.log("answer: " + answer.value)
+    async evaluate(answer) {
         if (this.model.questions === questionsAjax) {
             let questionId = this.model.questions[this.model.index].id;
-            console.log("questionID: " + questionId);
+            console.log("questionId: " + questionId);
             console.log("answerIndex: " + answer.value);
 
             try {
                 const correctAnswer = await getAnswerFromServer(questionId, answer.value);
-                console.log("Die korrekte Antwort vom Server lautet: " + correctAnswer);
+                console.log("Antwort vom Server: " + correctAnswer);
+
                 if (correctAnswer === true) {
                     this.correctAnswer(answer);
                 } else {
@@ -257,6 +255,7 @@ class Presenter {
         this.model.incrementIndex();
         this.displayQuestion();
     }
+
 
     correctAnswer(answer) {
         const antwortAnzeige = document.getElementById('antwort-anzeige');
@@ -352,40 +351,17 @@ class View {
             allButtons[(randomIndex + 3) % allButtons.length].innerHTML = opt[3];
         }
 
-
         allButtons[randomIndex].value = 0;
         allButtons[(randomIndex + 1) % allButtons.length].value = 1;
         allButtons[(randomIndex + 2) % allButtons.length].value = 2;
         allButtons[(randomIndex + 3) % allButtons.length].value = 3;
-
-
-        /*
-        if (this.presenter.model.questions === questionsAjax) {
-            console.log("Ajax Aufgabe!");
-            allButtons[randomIndex].value = 0;
-            allButtons[(randomIndex + 1) % allButtons.length].value = 1;
-            allButtons[(randomIndex + 2) % allButtons.length].value = 2;
-            allButtons[(randomIndex + 3) % allButtons.length].value = 3;
-        } else {
-            console.log("Keine Ajax Aufgabe!");
-            allButtons[randomIndex].value = 1;
-            allButtons[(randomIndex + 1) % allButtons.length].value = 0;
-            allButtons[(randomIndex + 2) % allButtons.length].value = 0;
-            allButtons[(randomIndex + 3) % allButtons.length].value = 0;
-
-            console.log("Button: " + allButtons[randomIndex].id + " hat die richtige Antwort");
-            console.log(allButtons[randomIndex].value);
-        }
-        /*
-         */
     }
 
-    // mit Ausgabe an Console - Kontrolle, ob Event auch Button ist!
     checkAnswer(event) {
         const target = event.target;
-        if (target.tagName === 'BUTTON') {
+        if (target.tagName === 'BUTTON') { // Kontrolle, ob Event auch Button ist!
             const buttonId = target.getAttribute('id');
-            console.log('Button ID:', buttonId);
+            console.log('Button Id:', buttonId);
             this.presenter.evaluate(event.target);
         } else {
             console.log('Ungültiges Event-Target:', target);
@@ -396,6 +372,8 @@ class View {
 // ------------------------------------------------------------------------------------------------------------------
 // GET QUIZ ---------------------------------------------------------------------------------------------------------
 function getQuizFromServer() {
+    let id = Math.floor(Math.random() * (33 - 2 + 1)) + 2;
+    let counter = 0;
     let questionIds = [];
     let xhr = getXhr();
     sendXhr(xhr);
@@ -408,27 +386,32 @@ function getQuizFromServer() {
 
         console.log("Status "+ xhr.readyState + " " + xhr.status);
         if (xhr.status === 200) {
+            counter++;
             const jsonObject = JSON.parse(xhr.responseText);
-            console.log("JSON-Object");
+            console.log(counter + ". JSON-Object");
             console.log(jsonObject);
 
-            if (!questionIds.includes(jsonObject.id)) { // prüfen, ob id bereits vorhanden
-                questionIds.push(jsonObject.id);
+            if (id === jsonObject.id) {
+                if (!questionIds.includes(jsonObject.id)) { // prüfen, ob id bereits vorhanden
+                    questionIds.push(jsonObject.id);
 
-                questionsAjax.push({
-                    "id": jsonObject.id,
-                    "text": jsonObject.text,
-                    "options": jsonObject.options,
-                });
+                    questionsAjax.push({
+                        "id": jsonObject.id,
+                        "text": jsonObject.text,
+                        "options": jsonObject.options,
+                    });
 
-                if (questionsAjax.length === 15) {
-                    console.log("Alle Fragen wurden erfolgreich abgerufen:");
-                    console.log(questionsAjax);
-                } else {
-                    sendXhr(); // Neue Anfrage senden, bis 15 Fragen erhalten wurden
+                    if (questionsAjax.length === 15) {
+                        console.log("Alle Fragen wurden erfolgreich abgerufen:");
+                        console.log(questionsAjax);
+                    } else {
+                        sendXhr(); // Neue Anfrage senden, bis 15 Fragen erhalten wurden
+                    }
+                    //console.log("Success!");
                 }
-
-                console.log("Success!");
+            } else {
+                console.log("Erhaltene Id (" + jsonObject.id + ") stimmt mit angeforderter Id (" + id + ") nicht überein!");
+                sendXhr();
             }
         }
     }
@@ -440,17 +423,17 @@ function getQuizFromServer() {
     }
 
     function sendXhr() {
-        let i;
         do {
-            i = Math.floor(Math.random() * (33 - 2 + 1)) + 2;
-        } while (questionIds.includes(i)); // Prüfung auf doppelte Werte
+            id = Math.floor(Math.random() * (33 - 2 + 1)) + 2;
+        } while (questionIds.includes(id)); // Prüfung auf doppelte Werte
 
         xhr.onreadystatechange = xhrHandler;
-        xhr.open("GET", "https://irene.informatik.htw-dresden.de:8888/api/quizzes/" + i, true)
+        xhr.open("GET", "https://irene.informatik.htw-dresden.de:8888/api/quizzes/" + id, true)
         xhr.setRequestHeader('Authorization', 'Basic ' + btoa('test@gmail.com:secret'));
         xhr.send(null);
         console.log("Anfrage gesendet!");
     }
+
 }
 
 // ------------------------------------------------------------------------------------------------------------------
@@ -513,9 +496,8 @@ function renderKatexFormula(formula) {
         }
     });
 }
-
 // ----------------------------------------------------------------------------------------------------------------------
-// Callback - Funktion
+// Callback - Funktion --------------------------------------------------------------------------------------------------
 /*
 function handleAnswerFromServer(correctAnswer){
     console.log("Die korrekte Antwort vom Server lautet: " + correctAnswer);
