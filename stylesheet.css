@@ -18,74 +18,17 @@ header, article, nav, aside, footer {
     border-radius: 0.5em;
 }
 
+/* -- Überschrift: nav, article, aside -- */
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
 /* -- Links -- */
 a {color: black; text-decoration: none}
 
-/* Überschriften Navigation, Aufgabenbereich, Erfolgsquote */
-h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-/* -- Footer -- */
-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ee9e6e;
-    font-weight: bold;
-    text-align: center;
-    padding: 18px;
-}
-
-
 /* -------------------------------------------------------------------------------------------------------- */
-/* -- Responsive Design -- */
-
-main {
-    display: flex;
-    flex-direction: row; /* Ändere die Richtung auf vertikal */
-}
-
-nav {
-    background-color: #5b5a5a;
-    padding: 10px;
-    order: 1;
-    flex: 1 1 1em;
-}
-
-article {
-    background-color: #cccccc;
-    order: 2;
-    flex: 3 3 3%;
-    overflow: auto; /* Fügt bei Bedarf einen Scrollbalken hinzu */
-}
-
-#task {
-    word-wrap: break-word;
-    max-width: 100%;
-    overflow-wrap: break-word;
-}
-
-aside {
-    background-color: #e8e8e8;
-    order: 3;
-    flex: 1 1 1em;
-}
-
-/* Media Query für kleinere Bildschirme */
-@media (max-width: 1080px) {
-    main {
-        flex-direction: column;
-    }
-}
-
-
-
-
-/* -------------------------------------------------------------------------------------------------------- */
-/* -- Neue Einstellungen -- *
-
 /* --- Radiobuttons in Navigation --- */
 /* Container für Radiobutton und Label */
 .radio {
@@ -132,7 +75,6 @@ aside {
     cursor: pointer;
 }
 
-
 /* -------------------------------------------------------------------------------------------------------- */
 /* -- Allgemeiner Button-Stil -- */
 /* Styling für den Button-Container */
@@ -161,28 +103,62 @@ button {
     transition: background-color 0.3s;
 }
 
-/**/
 .katex {
-    /*display: flex;*/
-    /*justify-content: center;*/
-    pointer-events: none;
+    pointer-events: none; /* Sonst Fehlermeldung beim klicken des Antwortbuttons! */
 }
 
 .katex-display {
-    pointer-events: none;
-    /*flex-wrap: wrap;*/
+    pointer-events: none; /* Sonst Fehlermeldung beim klicken des Antwortbuttons! */
 }
-/* Styling für den ausgewählten Button */
-/*
-button.selected {
-    background-color: #0b8d28;
-}
-*/
 
 /* Styling beim Überfahren mit dem Mauszeiger */
 button:hover {
     background-color: #ff5722;
+    color: var(--white-color);
     cursor: pointer;
+}
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Anzeige der Aufgaben -- */
+#question {
+    margin: 15px;
+    text-align: center;
+    white-space: pre-wrap;
+}
+
+/* -- Progressbar -- */
+#progress-container {
+    display: flex;
+    justify-content: stretch;
+    margin-top: 20px; /* Optional: Füge einen oberen Abstand hinzu */
+}
+
+#progress-bar {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--orange-color);
+    transition: width 0.3s ease-in-out; /* Hinzugefügt: Übergangseffekt für die Breitenänderung */
+}
+
+/* -- Anzeige: X von X Aufgaben -- */
+#aufgaben-fortschritt {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+/* -- Anzeige: Richtige Antworten/ Falsche Antworten -- */
+#ergebnis-anzeige {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-top: 15px;
+}
+
+#ergebnis-anzeige span {
+    font-size: 16px;
+    color: #333;
 }
 
 /* -------------------------------------------------------------------------------------------------------- */
@@ -212,55 +188,55 @@ button:hover {
 }
 
 /* -------------------------------------------------------------------------------------------------------- */
-/* -- Überschrift: Mathematik, Internet Technologie, Allgemeinwissen -- */
-#headline {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-/* -------------------------------------------------------------------------------------------------------- */
-/* -- Anzeige der Aufgaben -- */
-#question {
-    margin: 15px;
-    text-align: center;
-    white-space: pre-wrap;
-}
-
-/* -------------------------------------------------------------------------------------------------------- */
-/* -- Progressbar -- */
-#progress-container {
-    display: flex;
-    justify-content: stretch;
-    margin-top: 20px; /* Optional: Füge einen oberen Abstand hinzu */
-}
-
-#progress-bar {
-    width: 100%;
-    height: 10px;
-    border-radius: 5px;
-    background-color: var(--orange-color);
-    transition: width 0.3s ease-in-out; /* Hinzugefügt: Übergangseffekt für die Breitenänderung */
-}
-
-/* -------------------------------------------------------------------------------------------------------- */
-/* -- Anzeige: X von X Aufgaben -- */
-#aufgaben-fortschritt {
-    display: flex;
-    justify-content: center;
-    margin: 15px;
-}
-
-/* -------------------------------------------------------------------------------------------------------- */
-/* -- Anzeige: Richtige Antworten/ Falsche Antworten -- */
-#ergebnis-anzeige {
+/* -- Footer -- */
+footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #ee9e6e;
+    font-weight: bold;
     text-align: center;
-    margin-top: 15px;
+    padding: 18px;
 }
 
-#ergebnis-anzeige span {
-    font-size: 16px;
-    color: #333;
+/* -------------------------------------------------------------------------------------------------------- */
+/* -- Responsive Design -- */
+
+main {
+    display: flex;
+    flex-direction: row; /* Ändere die Richtung auf vertikal */
 }
+
+nav {
+    background-color: #5b5a5a;
+    padding: 10px;
+    order: 1;
+    flex: 1 1 1em;
+}
+
+article {
+    background-color: #cccccc;
+    order: 2;
+    flex: 3 3 3%;
+    overflow: auto; /* Fügt bei Bedarf einen Scrollbalken hinzu */
+}
+
+#task {
+    word-wrap: break-word;
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+aside {
+    background-color: #e8e8e8;
+    order: 3;
+    flex: 1 1 1em;
+}
+
+/* Media Query für kleinere Bildschirme */
+@media (max-width: 1080px) {
+    main {
+        flex-direction: column;
+    }
+}
+
