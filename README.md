@@ -1,52 +1,60 @@
-## Lernprogramm
+# Lernprogramm 
+Das Lernprogramm ist eine interaktive Webanwendung, mit der Benutzer verschiedene Lernbereiche auswählen und die dazugehörigen Fragen beantworten können. Es bietet Lernfragen zu Mathematik, Internet Technologie, Allgemeinwissen, Persönlichkeiten und Spanisch-Vokabeln an. Der Benutzer kann einen Lernbereich auswählen und die Fragen beantworten, indem er den entsprechenden Button mit der richtigen Antwort auswählt. Während der Anwendung wird der Fortschritt des Benutzers angezeigt, einschließlich des aktuellen Aufgabenstandes und der Anzahl der richtig und falsch beantworteten Fragen.
 
-Das Lernprogramm ist eine Webanwendung, die es Benutzern ermöglicht, Lernfragen aus verschiedenen Bereichen zu beantworten. Die Anwendung bietet Fragen aus den Bereichen Mathematik, Internet-Technologie, Allgemeinwissen und Spanisch. Der Benutzer kann einen Lernbereich auswählen und dazu die Fragen beantworten, indem er den Button mit der richtigen Antwort auswählt. Die Anwendung zeigt auch den Fortschritt des Benutzers an und wertet die Antworten in "Richtige Antwort" und "Falsche Antwort" aus. 
+## Funktionalität
+Die wichtigsten Funktionen des Lernprogramms umfassen:
+- Auswahl des Lernbereichs über Radio-Buttons
 
-### Installation
-Um das Lernprogramm auszuführen, müssen die folgenden Schritte ausgeführt werden:
-1. Klonen des Lernprogramm-Repository auf den lokalen Computer.
-2. Öffnen der `index.html`-Datei in einem Webbrowser. 
+- Anzeige einer Überschrift basierend auf der ausgewählten Kategorie
 
-### Verwendung
+- Anzeige von Fragen und Antwortmöglichkeiten
 
-Nachdem Sie die Quiz-App geöffnet haben, können Sie einen Bereich auswählen, indem Sie auf einen der Radio-Buttons klicken. Die verfügbaren Bereiche sind Mathematik, Internet-Technologie, Allgemeinwissen und Spanisch. Nach der Auswahl eines Bereichs werden Fragen zu diesem Bereich angezeigt.
+- Überprüfung der vom Benutzer ausgewählten Antwort
 
-Um eine Frage zu beantworten, wählen Sie die richtige Antwort aus den angegebenen Optionen aus, indem Sie auf die entsprechende Schaltfläche klicken. Nachdem Sie eine Antwort ausgewählt haben, wird die nächste Frage angezeigt. Der Fortschritt des Benutzers wird ebenfalls angezeigt.
+- Aktualisierung des Fortschrittsbalkens und der Anzahl der richtigen udn falschen Antworten
 
-Nachdem alle Fragen beantwortet wurden, zeigt die Anwendung die Anzahl der richtigen und falschen Antworten an. Sie können das Quiz auch zurücksetzen und ein anderes Thema auswählen, um weitere Fragen zu beantworten.
+- Anzeige der Erfolgsquote am Ende der Lernrunde
 
-### Technologien
+- Speichern der Erfolgsquote für jeden Lernbereich im localStorage
 
-Die Quiz-App wurde mit HTML, CSS und JavaScript entwickelt. Sie verwendet das Model-View-Presenter (MVP)-Muster, um die Trennung von Datenmodell, Präsentationslogik und Benutzeroberfläche zu ermöglichen. Die Anwendung verwendet auch AJAX, um Quizfragen vom Server abzurufen.
+## Installation 
+Um das Lernprogramm auszuführen, müssen folgende Schritte ausgeführt werden:
+1. Klonen Sie das Lernprogramm-Repository auf Ihren lokalen Computer.
+2. Platzieren Sie das geklonte Repository im öffentlichen HTML-Ordner.
 
-### Code-Überblick
+## Setup
+Um das Lernprogramm vollständig nutzen zu können, stellen Sie sicher, dass Sie eine Internetverbindung haben, die Fragen vom Server abzurufen. Bitte beachten Sie, dass die Fragen und Antworten dynamisch vom Server geladen werden und es daher zu Verzögerungen kommen kann.
 
-Der Code besteht aus vier Hauptkomponenten: `Model`, `Presenter`, `View` und `Server`. Diese Komponenten arbeiten zusammen, um das Quiz zu verwalten, die Fragen anzuzeigen und die Antworten des Benutzers zu verarbeiten.
+## Verwendung
+1. Öffnen Sie die `index.html`-Datei in einem Webbrowser.
+2. Wählen Sie unter Lernbereich ein Modul aus, welches Sie lernen möchten (Mathematik, Internet Technologie, Allgemeinwissen, Persönlichkeiten oder Spanisch).
+3. Für jede Frage erhalten Sie vier Antwortmöglichkeiten. Die richtige Antwort wird mit einem Klick auf den richtigen Button ausgewählt.
+4. Ihre Antwort wird geprüft und gibt Ihnen an, ob die gewählte Antwort richtig oder falsch war.
+5. Die bisher richtig und falsch beantworteten Fragen werden dabei laufend nach jeder beantworteten Aufgabe aktualisiert
+6. Nach Beantwortung aller Fragen, wird zum Schluss ausgegeben, wie viel Fragen Sie insgesamt richtig beantwortet haben.
+7. Die Erfolgsquote aus der Lernrunde wird von dem entsprechenden Lernbereich unter "Meine Erfolgsquote" aktulisiert.
+8. Die Lernrunde können Sie wiederholen, indem Sie unter "Lernbereiche" wieder das Modul oder ein anderes Modul auswählen.
 
-- `Model`: Verwaltet den aktuellen Zustand des Quiz, einschließlich der ausgewählten Kategorie, der aktuellen Frage und der Punktzahl.
-- `Presenter`: Nimmt Benutzerinteraktionen entgegen und aktualisiert das Modell entsprechend. Es kommuniziert auch mit der `View`, um die Fragen und Feedback anzuzeigen.
-- `View`: Verantwortlich für die Darstellung der Fragen, Optionen und des Feedbacks auf der Benutzeroberfläche. Es empfängt Benutzeraktionen und benachrichtigt den `Presenter`.
-- `Server`: Stellt die Fragen für jede Kategorie bereit und ermöglicht die Kommunikation zwischen dem Client und dem Server.
+## Technologien
+Das Lernprogramm wurde mit HTML, CSS und JavaScript entwickelt. Sie verwendet das Model-View-Presenter-Architektur, um die Trennung von Datenmodell, Präsentationslogik und Benutzeroberfläche zu ermöglichen.
+Die Amnwendung verwendet auch AJAX, um Quizfragen vom Server abzurufen.
 
-### Abhängigkeiten
+## Code-Überblick 
+Der Code besteht aus drei Hauptkomponenten: `Model`, `Presenter` und `View`. Dies Komponenten arbeiten zusammen, um das Quiz zu verwalten:
 
-Die Quiz-App verwendet HTML, CSS und JavaScript. Es werden keine zusätzlichen Frameworks oder Bibliotheken verwendet. Die App ist darauf ausgelegt, in einem modernen Webbrowser ausgeführt zu werden.
+- `Model`: Verwaltet den aktuellen Zustand des Quiz, einschließlich der ausgewählten Kategoriem der aktuellen Frage und der Punktzahl.
+- `Presenter`: Nimmt Benutzerinteraktionen entgegen und aktualisiert das Modell entsprechend. Es kommunizert auch mit der View, um due Fragen und Feedback anzuzeigen.
+- `View`: Verantwortlich für die Darstellung der Fragen, Antwortmöglichkeiten und des Feedbacks auf der Benutzeroberfläche. Es empfängt Benutzerinteraktionen und benachrichtigt den `Presenter`.
 
-### Setup
+## Abhängigkeiten
+Das Lernprogramm verwendet HTML, CSS und JavaScript. Es werden keine zusätzlichen Frameworks oder Bibliotheken verwendet. Die Anwendung ist darauf ausgelegt, in einem modernen Webbrowser wie Firefox, GoogleChrome oder Erdge ausgeführt zu werden.
 
-Um das Quiz auszuführen, öffnen Sie die `index.html`-Datei in einem Webbrowser. Stellen Sie sicher, dass Sie mit dem Internet verbunden sind, um die Fragen aus dem Server abzurufen.
+## Lernfragen
+Die lokalen Lernfragen zu den Modulen Mathematik, Internet Technologie, Allgemeinwissen und Spanisch, sind in separaten Arrays definiert. JEde Frafe hat einen Text und eine Liste von Antwortmöglichkeiten.
 
-Bitte beachten Sie, dass die Fragen dynamisch vom Server geladen werden, daher kann es zu Verzögerungen kommen, wenn die Verbindung zum Server langsam ist.
+### Anpassungen
+Sie können die Fragen in den verschiedenen Modulen anpassen, indem Sie die entsprechenden Arrays in der Datei `/scripts/mvp.js` bearbeiten. Es können neue Aufgaben hinzugefügt oder vorhandene Aufgaben entfernt oder geändert werden. Wichtig ist dabei, dass das Datenformat der Fragen in JSON Format beibehalten wird, um die Funktionalität des Lernprogramms nicht zu beeinträchtigen.
 
-### Quizfragen
-Die Quizfragen sind in separaten Arrays für jeden Bereich definiert: Mathematik, Internet-Technologie, Allgemeinwissen und Spanisch. Jede Frage hat einen Text und eine Liste von möglichen Antworten. Der Benutzer kann die richtige Antwort auswählen, indem er auf die entsprechende Schaltfläche klickt.
+## Autor
+Dieses Lernprogramm wurde von Tanja Dietrich entwickelt.
 
-### Anpassung
-
-Sie können die Fragen in den verschiedenen Kategorien anpassen, indem Sie die entsprechenden Arrays in der Datei `script.js` bearbeiten. Sie können neue Fragen hinzufügen oder vorhandene Fragen entfernen oder ändern. Stellen Sie sicher, dass das Datenformat der Fragen beibehalten wird, um die Funktionalität der App nicht zu beeinträchtigen.
-
-Bei Bedarf können Sie auch das Erscheinungsbild der App anpassen, indem Sie das CSS in der `styles.css`-Datei bearbeiten.
-
-### Autoren
-
-Diese Quiz-App wurde entwickelt von Tanja Dietrich.

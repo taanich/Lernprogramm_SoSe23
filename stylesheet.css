@@ -80,8 +80,8 @@ a {color: black; text-decoration: none}
 /* Styling für den Button-Container */
 #options {
     display: flex;
-    justify-content: center; /* Buttons haben den Startpunkt als Ausrichtung */
-    flex-wrap: wrap; /* Buttons werden bei Platzmangel umgebrochen */
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .option-button {
@@ -92,13 +92,13 @@ a {color: black; text-decoration: none}
 /* Styling für die Buttons */
 button {
     flex-grow: 1;
-    padding: 15px; /* Innenabstand des Buttons (vertikal und horizontal) */
+    padding: 15px;
     border: none;
     border-radius: 5px;
     background-color: #e8e8e8;
     color: #000000;
     font-size: 16px;
-    margin-bottom: 10px; /* Abstand zwischen den Buttons (vertikal) */
+    margin-bottom: 10px;
     margin-right: 10px;
     transition: background-color 0.3s;
 }
@@ -129,7 +129,7 @@ button:hover {
 #progress-container {
     display: flex;
     justify-content: stretch;
-    margin-top: 20px; /* Optional: Füge einen oberen Abstand hinzu */
+    margin-top: 20px;
 }
 
 #progress-bar {
@@ -137,7 +137,7 @@ button:hover {
     height: 10px;
     border-radius: 5px;
     background-color: var(--orange-color);
-    transition: width 0.3s ease-in-out; /* Hinzugefügt: Übergangseffekt für die Breitenänderung */
+    transition: width 0.3s ease-in-out;
 }
 
 /* -- Anzeige: X von X Aufgaben -- */
@@ -166,25 +166,23 @@ button:hover {
 .erfolgsquote-container {
     display: flex; /* Elemente in einer Flexbox anordnen */
     flex-direction: column;
-    /*flex-wrap: wrap; /* Bei Platzmangel umbrechen */
-    /*justify-content: flex-start; /* Elemente am Anfang der Hauptachse ausrichten */
 }
 
 .erfolgsquote-item {
     display: flex;
     justify-content: space-between;
-    padding: 5px; /* Innenabstand des Elements */
-    border-radius: 5px; /* Runde Ecken */
-    color: var(--grey-color); /* Farbe des Textes */
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--grey-color);
 }
 
 .lernbereich {
-    font-weight: bold; /* Fettschrift für die Kategorie */
-    font-size: 15px; /* Schriftgröße für die Kategorie */
+    font-weight: bold;
+    font-size: 15px;
 }
 
 .erfolgsquote {
-    font-size: 15px; /* Schriftgröße für die Zitate */
+    font-size: 15px;
 }
 
 /* -------------------------------------------------------------------------------------------------------- */

@@ -69,9 +69,9 @@ document.addEventListener('DOMContentLoaded', function (){
 class Model {
     initialize(questionSet, index, correctAnswer, incorrectAnswer) {
         this.questionSet = questionSet;               // Komplette Aufgabensammlung
-        this.index = index;                 // Beginn bei Index 0
-        this.correctAnswers = correctAnswer;      // Anzahl richtige Antworten
-        this.incorrectAnswers = incorrectAnswer;  // Anzahl falsche Antworten
+        this.index = index;                           // Beginn bei Index 0
+        this.correctAnswers = correctAnswer;          // Anzahl richtige Antworten
+        this.incorrectAnswers = incorrectAnswer;      // Anzahl falsche Antworten
         this.shuffleQuestions();
     }
 
@@ -289,7 +289,8 @@ class View {
 function getQuizFromServer() {
     let id;
     let counter = 0;
-    let questionIds = [];
+    let amountQuestions = 15;
+    let questionIds = []; // Liste mit Ids die wir bereits erhalten haben
     let xhr = getXhr();
     sendXhr(xhr);
 
@@ -306,7 +307,7 @@ function getQuizFromServer() {
             console.log(counter + ". JSON-Object");
             console.log(jsonObject);
 
-            if (id === jsonObject.id) {
+            if (id === jsonObject.id) { // prüfen, ob id die wir gefordert haben auch erhalten haben
                 if (!questionIds.includes(jsonObject.id)) { // prüfen, ob die Aufgabe mit der id bereits geholt wurde
                     questionIds.push(jsonObject.id);
 
@@ -316,7 +317,7 @@ function getQuizFromServer() {
                         "options": jsonObject.options,
                     });
 
-                    if (questionsAjax.length === 15) {
+                    if (questionsAjax.length === amountQuestions) {
                         console.log("Alle Fragen wurden erfolgreich abgerufen:");
                         console.log(questionsAjax);
                     } else {
@@ -340,7 +341,7 @@ function getQuizFromServer() {
     function sendXhr() {
         do {
             //id = Math.floor(Math.random() * (33 - 2 + 1)) + 2; // Aufgaben zwischen id 2 - 33
-            id = Math.floor(Math.random() * (199 - 185 + 1)) + 185; // Selbsterstellte Aufgaben zwischen id 185 - 199
+            id = Math.floor(Math.random() * (199 - 185 + 1)) + 185; // selbst erstellte Aufgaben zwischen id 185 - 199
         } while (questionIds.includes(id)); // Prüfung auf doppelte Werte
 
         xhr.onreadystatechange = xhrHandler;
@@ -355,7 +356,7 @@ function getQuizFromServer() {
 // ------------------------------------------------------------------------------------------------------------------
 // POST QUIZ --------------------------------------------------------------------------------------------------------
 function getAnswerFromServer(id, answer) {
-    return new Promise((resolve, reject) => {  // Promise(), um Rückgabewert von resolve(correctAnswer) zu erhalten für die Weiterverarbeitung
+    return new Promise((resolve, reject) => {  // Promise(), um Rückgabewert (true/false) von resolve(correctAnswer) zu erhalten für die Weiterverarbeitung
         let xhr = getXhr();
         sendXhr(xhr);
 
@@ -406,7 +407,7 @@ function renderKatexFormula(formula) {
     const regex = /\$\$(.*?)\$\$/g; // Regex-Muster für $$-Tags
     return formula.replace(regex, (match, p1) => {
         try {
-            return katex.renderToString(p1, { throwOnError: false }); //displayMode: true für Zeilenumruch für jedes $$
+            return katex.renderToString(p1, { throwOnError: false }); //Ergänzung: displayMode: true für Zeilenumruch für jedes $$
         } catch (error) {
             console.error("Fehler beim Rendern der Formel:", error);
             return match; // Falls ein Fehler auftritt, beibehalten wir den ursprünglichen Tag

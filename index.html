@@ -11,15 +11,22 @@
   <link rel="icon" sizes="512x512" href="images/01_HTWD_logo_RGB_wordmark_color.png"/>
 
   <link rel="stylesheet" href="stylesheet.css" type="text/css"/>
-  <script src="scripts/service-worker.js" type="text/javascript" defer></script>
   <script src="scripts/mvp.js" type="text/javascript" defer></script>
 
   <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+
+  <script>
+    // Service Worker registrieren für PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('scripts/service-worker.js')
+              .then(reg => console.log(reg))
+              .catch(err => console.log(err));
+    }
+  </script>
 </head>
 
 <body>
-
 <header style="display: flex; align-items: center;">
   <h1 style="margin-right: auto;">Lernprogramm</h1>
   <div style="max-width: 300px; overflow: hidden;">
@@ -126,11 +133,5 @@
 </body>
 </html>
 
-<! --- Service-Worker --- !>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('scripts/service-worker.js')
-            .then(reg => console.log(reg))
-            .catch(err => console.log(err));
-  }
-</script>
+
+

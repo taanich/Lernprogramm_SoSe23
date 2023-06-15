@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="fix: refactored">
+      <change afterPath="$PROJECT_DIR$/README2.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manifest.webmanifest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lernportfolio.md" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/lernportfolio.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projekt_dokumentation.md" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/projekt_dokumentation.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mvp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mvp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/service-worker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,32 +63,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/tandi/Documents/00_Studium/00_HTW/04. Semester/02. Internet-Technologie I/00. APL/ajax(1).js&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/tandi/Documents/00_Studium/00_HTW/04. Semester/02. Internet-Technologie I/00. APL/Lernprogramm_SoSe23",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23\documentation" />
       <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23\scripts" />
       <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23" />
       <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23\mvp" />
       <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23\images" />
-      <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23\mvp-demo" />
+    </key>
+    <key name="ImportExportFile.TargetDir.RECENT_KEYS">
+      <recent name="C:\Users\tandi\Documents\00_Studium\00_HTW\04. Semester\02. Internet-Technologie I\00. APL\Lernprogramm_SoSe23" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -122,7 +133,16 @@
       <workItem from="1686719631986" duration="418000" />
       <workItem from="1686748762711" duration="758000" />
       <workItem from="1686765135207" duration="9347000" />
-      <workItem from="1686810028278" duration="9763000" />
+      <workItem from="1686810028278" duration="9942000" />
+      <workItem from="1686824848539" duration="2090000" />
+      <workItem from="1686827542716" duration="2051000" />
+      <workItem from="1686830147361" duration="629000" />
+      <workItem from="1686839933700" duration="6717000" />
+      <workItem from="1686846937384" duration="4079000" />
+      <workItem from="1686853331734" duration="1345000" />
+      <workItem from="1686856658932" duration="5726000" />
+      <workItem from="1686862476348" duration="172000" />
+      <workItem from="1686862662347" duration="3028000" />
     </task>
     <task id="LOCAL-00001" summary="initial Project">
       <created>1685805672388</created>
@@ -292,7 +312,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686821319364</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fix: refactored">
+      <created>1686822302511</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1686822302511</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
