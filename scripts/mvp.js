@@ -114,10 +114,6 @@ class Model {
         this.incorrectAnswers++;
     }
 
-    getLength(){
-        return this.questionSet.length;
-    }
-
     incrementIndex() {
         this.index++;
     }
@@ -135,8 +131,8 @@ class Presenter {
         options.style.display = 'flex';
         line.style.display = 'flex';
 
-        console.log("Lernrunde beginnt...");
-        this.displayQuestion(this.model.index); // Beginne bei Index 0 der Aufgabensammlung
+        console.log("Runde beginnt...");
+        this.displayQuestion(this.model.index); // Aufgabe mit Index x wird angezeigt
         this.updateProgressBar();
 
         const antwortAnzeige = document.getElementById('antwort-anzeige');
@@ -154,49 +150,49 @@ class Presenter {
         this.updateProgressBar();
     }
 
-    async evaluate(answer) {    // async - Für das Warten, bis wir die Antwort vom Server erhalten haben!
+    async evaluate(answerButton) {    // async - Für das Warten, bis wir die Antwort vom Server erhalten haben!
         if (this.model.questionSet === questionsAjax) {
             let questionId = this.model.questionSet[this.model.index].id;
             console.log("questionId: " + questionId);
-            console.log("answerIndex: " + answer.value);
+            console.log("answerIndex: " + answerButton.value);
 
             try {
-                const correctAnswer = await getAnswerFromServer(questionId, answer.value);
+                const correctAnswer = await getAnswerFromServer(questionId, answerButton.value);
                 console.log("Antwort vom Server: " + correctAnswer);
 
                 if (correctAnswer === true) {
-                    this.correctAnswer(answer);
+                    this.correctAnswer(answerButton);
                 } else {
-                    this.incorrectAnswer(answer);
+                    this.incorrectAnswer(answerButton);
                 }
             } catch (error) {
                 console.error("Fehler beim Abrufen der Antwort vom Server:", error);
             }
         } else {
-            if (answer.value === "0") {
-                this.correctAnswer(answer);
+            if (answerButton.value === "0") {
+                this.correctAnswer(answerButton);
             } else {
-                this.incorrectAnswer(answer);
+                this.incorrectAnswer(answerButton);
             }
         }
         this.model.incrementIndex();
         this.displayQuestion();
     }
 
-    correctAnswer(answer) {
-        const antwortAnzeige = document.getElementById('antwort-anzeige');
+    correctAnswer(answerButton) {
+        const showAnswer = document.getElementById('antwort-anzeige');
         this.model.incrementCorrect();
-        console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist richtig!');
-        antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist richtig!";
+        //console.log("Antwort " + answerButton.attributes.getNamedItem('id').value + ' ist richtig!');
+        showAnswer.innerHTML = "Antwort " + answerButton.attributes.getNamedItem('id').value + " ist richtig!";
         console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
         console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
     }
 
-    incorrectAnswer(answer){
-        const antwortAnzeige = document.getElementById('antwort-anzeige');
+    incorrectAnswer(answerButton){
+        const showAnswer = document.getElementById('antwort-anzeige');
         this.model.incrementIncorrect();
-        console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist falsch! ');
-        antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist falsch!";
+        //console.log("Antwort " + answerButton.attributes.getNamedItem('id').value + ' ist falsch! ');
+        showAnswer.innerHTML = "Antwort " + answerButton.attributes.getNamedItem('id').value + " ist falsch!";
         console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
         console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
     }
@@ -210,38 +206,38 @@ class Presenter {
         const progressPercentage = (this.model.index / this.model.questionSet.length) * 100;
         progressBar.style.width = progressPercentage + '%';
 
-        const richtigeAntwortenAnzeige = document.getElementById('richtige-antworten');
-        const falscheAntwortenAnzeige = document.getElementById('falsche-antworten');
-        richtigeAntwortenAnzeige.innerHTML = "Richtige Antworten: " + this.model.correctAnswers;
-        falscheAntwortenAnzeige.innerHTML = "Falsche Antworten: " + this.model.incorrectAnswers;
+        const showCorrectAnswer = document.getElementById('richtige-antworten');
+        const showIncorrectAnswer = document.getElementById('falsche-antworten');
+        showCorrectAnswer.innerHTML = "Richtige Antworten: " + this.model.correctAnswers;
+        showIncorrectAnswer.innerHTML = "Falsche Antworten: " + this.model.incorrectAnswers;
     }
 
     displayFinalResult() {
         const question = document.getElementById('question');
-        const erfolgsquote = Math.round((this.model.correctAnswers / this.model.getLength()) * 100);
+        const successrate = Math.round((this.model.correctAnswers / this.model.questionSet.length) * 100);
 
         if (this.model.questionSet === questionsMath) {
-            this.updateErfolgsquote('math-quote', erfolgsquote);
+            this.updateErfolgsquote('math-quote', successrate);
         } else if (this.model.questionSet === questionsInternet) {
-            this.updateErfolgsquote('internet-quote', erfolgsquote);
+            this.updateErfolgsquote('internet-quote', successrate);
         } else if (this.model.questionSet === questionsAllgemein) {
-            this.updateErfolgsquote('allgemein-quote', erfolgsquote);
+            this.updateErfolgsquote('allgemein-quote', successrate);
         } else if (this.model.questionSet === questionsAjax) {
-            this.updateErfolgsquote('person-quote', erfolgsquote);
+            this.updateErfolgsquote('person-quote', successrate);
         } else if (this.model.questionSet === questionsSpanisch) {
-            this.updateErfolgsquote('spanisch-quote', erfolgsquote);
+            this.updateErfolgsquote('spanisch-quote', successrate);
         }
 
-        question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.getLength() + " Aufgaben richtig gelöst!";
+        question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.questionSet.length + " Aufgaben richtig gelöst!";
         options.style.display = 'none';
         line.style.display = 'none';
     }
 
-    updateErfolgsquote(id, erfolgsquote) {
-        const erfolgsquoteElement = document.getElementById(id);
-        if (erfolgsquoteElement) {
-            erfolgsquoteElement.innerHTML = erfolgsquote + "%";
-            localStorage.setItem(id, erfolgsquote); // Erfolgsquote in localStorage speichern
+    updateErfolgsquote(id, successrate) {
+        const successrateElement = document.getElementById(id);
+        if (successrateElement) {
+            successrateElement.innerHTML = successrate + "%";
+            localStorage.setItem(id, successrate); // Erfolgsquote in localStorage speichern
         }
     }
 }
@@ -291,7 +287,7 @@ class View {
 // ------------------------------------------------------------------------------------------------------------------
 // GET QUIZ ---------------------------------------------------------------------------------------------------------
 function getQuizFromServer() {
-    let id = Math.floor(Math.random() * (33 - 2 + 1)) + 2;
+    let id;
     let counter = 0;
     let questionIds = [];
     let xhr = getXhr();
@@ -399,7 +395,7 @@ function getAnswerFromServer(id, answer) {
                 "Basic " + btoa("tanja.dietrich@stud.htw-dresden.de:it1HTWD!")
             );
             xhr.send(JSON.stringify([answer]));
-            console.log("Request send");
+            console.log("Anfrage gesendet!");
         }
     });
 }
@@ -419,7 +415,7 @@ function renderKatexFormula(formula) {
 }
 
 // ----------------------------------------------------------------------------------------------------------------------
-// Aufgabenbereiche mit Aufgaben festlegen
+// Aufgabenbereiche mit Aufgabensammlung initialisieren
 const questionsMath = [
     {"text":"Was ist das Ergebnis von: $$x^2+x^2$$ = ?", "options":["$$2x^2$$","$$x^4$$","$$x^8$$","$$2x^4$$"]},
     {"text":"Was ist das Ergebnis von: $$x^2*x^2$$ = ?", "options":["$$x^4$$","$$x^2$$","$$2x^2$$","$$4x$$"]},
