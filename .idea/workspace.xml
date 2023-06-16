@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="fix: refactored">
-      <change afterPath="$PROJECT_DIR$/README2.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manifest.webmanifest" afterDir="false" />
+    <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="wip">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lernportfolio.md" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/lernportfolio.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projekt_dokumentation.md" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/projekt_dokumentation.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documentation/projekt_dokumentation.md" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/projekt_dokumentation.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifest.webmanifest" beforeDir="false" afterPath="$PROJECT_DIR$/manifest.webmanifest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/mvp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mvp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +63,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/tandi/Documents/00_Studium/00_HTW/04. Semester/02. Internet-Technologie I/00. APL/Lernprogramm_SoSe23",
+    "last_opened_file_path": "C:/Users/tandi/Documents/00_Studium/00_HTW/04. Semester/02. Internet-Technologie I/00. APL/ajax(1).js",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -143,6 +137,8 @@
       <workItem from="1686856658932" duration="5726000" />
       <workItem from="1686862476348" duration="172000" />
       <workItem from="1686862662347" duration="3028000" />
+      <workItem from="1686865738395" duration="75000" />
+      <workItem from="1686898714911" duration="2411000" />
     </task>
     <task id="LOCAL-00001" summary="initial Project">
       <created>1685805672388</created>
@@ -319,7 +315,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686822302511</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="wip">
+      <created>1686865773738</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1686865773738</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,8 +344,8 @@
     <MESSAGE value="fix: service-worker" />
     <MESSAGE value="fix: footer" />
     <MESSAGE value="feat: check id" />
-    <MESSAGE value="wip" />
     <MESSAGE value="fix: refactored" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: refactored" />
+    <MESSAGE value="wip" />
+    <option name="LAST_COMMIT_MESSAGE" value="wip" />
   </component>
 </project>

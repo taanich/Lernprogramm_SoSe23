@@ -290,6 +290,7 @@ function getQuizFromServer() {
     let id;
     let counter = 0;
     let amountQuestions = 15;
+    let questionTitle = "Personen";
     let questionIds = []; // Liste mit Ids die wir bereits erhalten haben
     let xhr = getXhr();
     sendXhr(xhr);
@@ -308,26 +309,32 @@ function getQuizFromServer() {
             console.log(jsonObject);
 
             if (id === jsonObject.id) { // prüfen, ob id die wir gefordert haben auch erhalten haben
-                if (!questionIds.includes(jsonObject.id)) { // prüfen, ob die Aufgabe mit der id bereits geholt wurde
-                    questionIds.push(jsonObject.id);
+                if (jsonObject.title === questionTitle) { // prüfen, ob der Titel gleich "Personen" ist
+                    if (!questionIds.includes(jsonObject.id)) { // prüfen, ob die Aufgabe mit der id bereits geholt wurde
+                        questionIds.push(jsonObject.id);
 
-                    questionsAjax.push({
-                        "id": jsonObject.id,
-                        "text": jsonObject.text,
-                        "options": jsonObject.options,
-                    });
+                        questionsAjax.push({
+                            "id": jsonObject.id,
+                            "title": jsonObject.title,
+                            "text": jsonObject.text,
+                            "options": jsonObject.options,
+                        });
 
-                    if (questionsAjax.length === amountQuestions) {
-                        console.log("Alle Fragen wurden erfolgreich abgerufen:");
-                        console.log(questionsAjax);
-                    } else {
-                        sendXhr(); // Neue Anfrage senden, bis 15 Fragen erhalten wurden
+                        if (questionsAjax.length === amountQuestions) {
+                            console.log("Alle Fragen wurden erfolgreich abgerufen:");
+                            console.log(questionsAjax);
+                        } else {
+                            sendXhr(); // Neue Anfrage senden, bis 15 Fragen erhalten wurden
+                        }
+                        //console.log("Success!");
                     }
-                    //console.log("Success!");
+                } else {
+                    console.log("Der Titel der Frage ist nicht " + questionTitle);
+                    sendXhr(); // Erneute Anfrage senden
                 }
             } else {
                 console.log("Erhaltene Id (" + jsonObject.id + ") stimmt mit angeforderter Id (" + id + ") nicht überein!");
-                sendXhr();
+                sendXhr(); // Erneute Anfrage senden
             }
         }
     }
@@ -340,8 +347,8 @@ function getQuizFromServer() {
 
     function sendXhr() {
         do {
-            //id = Math.floor(Math.random() * (33 - 2 + 1)) + 2; // Aufgaben zwischen id 2 - 33
-            id = Math.floor(Math.random() * (199 - 185 + 1)) + 185; // selbst erstellte Aufgaben zwischen id 185 - 199
+            // id = Math.floor(Math.random() * (33 - 2 + 1)) + 2; // Aufgaben zwischen id 2 - 33
+           id = Math.floor(Math.random() * (199 - 185 + 1)) + 185; // selbst erstellte Aufgaben zwischen id 185 - 199
         } while (questionIds.includes(id)); // Prüfung auf doppelte Werte
 
         xhr.onreadystatechange = xhrHandler;
