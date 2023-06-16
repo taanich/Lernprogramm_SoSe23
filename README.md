@@ -55,7 +55,10 @@ Um die Webanwendung zu installieren, sind folgende Schritte erforderlich:
 
 Das Lernprogramm sollte nun von deinem Webserver aus erreichbar sein.
 
-## Verwendung 
+## Anwendung
+
+Für die Anwendung des Lernprogramms wurde der Firefox Browser verwendet.
+
 1. Öffne deine Webbrowser und gehe zur URL deines Webservers. In diesem Beispiel wird die URL< https://www.informatik.htw-dresden.de/~s83797/Lernprogramm/ verwendet.
 2. Wähle ein Lernmodul im Lernbereich aus.
 3. Es erscheint eine Frage. Löse die Frage, indem du die richtige Antwort auswählst.
