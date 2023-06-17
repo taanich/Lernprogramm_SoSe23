@@ -7,14 +7,423 @@ const allgemeinRadioButton = document.getElementById('allgemein');
 const ajaxRadioButton = document.getElementById('ajax');
 const spanischRadioButton = document.getElementById('spanisch');
 
-// Überschrift
-const header = document.getElementById('headline');
+// Überschrift in article
+const headline = document.getElementById('headline');
 
 // Alle Antwort-Buttons
-const allButtons = document.querySelectorAll('#options > *');
+const allAnswerButtons = document.querySelectorAll('#options > *');
 
 // ------------------------------------------------------------------------------------------------------------------
-// Aufgabenbereiche mit Aufgaben festlegen
+// DOM vollständig laden - Radiobuttons initialisieren --------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', function (){
+    let model = new Model();
+    let presenter = new Presenter();
+    let view = new View(presenter);
+    presenter.setModelAndView(model, view);
+
+    getQuizFromServer();
+
+    // Radio-Buttons initialisieren
+    mathRadioButton.addEventListener('click', function() {
+        headline.textContent = 'Mathematik';
+        model.initialize(questionsMath, 0, 0, 0);
+        presenter.start();
+    });
+
+    internetRadioButton.addEventListener('click', function() {
+        headline.textContent = 'Internet Technologie';
+        model.initialize(questionsInternet, 0, 0, 0);
+        presenter.start();
+    });
+
+    allgemeinRadioButton.addEventListener('click', function() {
+        headline.textContent = 'Allgemeinwissen';
+        model.initialize(questionsAllgemein, 0, 0, 0);
+        presenter.start();
+    });
+
+    ajaxRadioButton.addEventListener('click', function() {
+        headline.textContent = 'Persönlichkeiten';
+        model.initialize(questionsAjax, 0, 0, 0);
+        presenter.start();
+    });
+
+    spanischRadioButton.addEventListener('click', function() {
+        headline.textContent = 'Spanisch';
+        model.initialize(questionsSpanisch, 0, 0, 0);
+        presenter.start();
+    });
+
+    // Erfolgsquoten aus dem localStorage holen
+    const learnmodules = ['math', 'internet', 'allgemein', 'person', 'spanisch'];
+    learnmodules.forEach((learnmodule) => {
+        const quote = localStorage.getItem(`${learnmodule}-quote`);
+        if (quote) {
+            document.getElementById(`${learnmodule}-quote`).innerHTML = `${quote}%`;
+        }
+    })
+});
+
+// ------------------------------------------------------------------------------------------------------------------
+// Model ------------------------------------------------------------------------------------------------------------
+class Model {
+    initialize(questionSet, index, correctAnswer, incorrectAnswer) {
+        this.questionSet = questionSet;               // Komplette Aufgabensammlung
+        this.index = index;                           // Beginn bei Index 0
+        this.correctAnswers = correctAnswer;          // Anzahl richtige Antworten
+        this.incorrectAnswers = incorrectAnswer;      // Anzahl falsche Antworten
+        this.shuffleQuestions();
+    }
+
+    // Fisher-Yates-Shuffle-Algorithmus
+    shuffleQuestions() {
+        for (let i = this.questionSet.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.questionSet[i], this.questionSet[j]] = [this.questionSet[j], this.questionSet[i]];
+        }
+    }
+
+    getTask() {
+        const questions = this.questionSet[this.index].text;
+        console.log("Hole Aufgabe: " + questions + "...");
+
+        if (this.questionSet === questionsMath)
+            return renderKatexFormula(questions);
+        else
+            return questions;
+    }
+
+    getOptions() {
+        const options = this.questionSet[this.index].options;
+        if (this.questionSet === questionsMath) {
+            let optionsList = [];
+            for (let i = 0; i < options.length; i++) {
+                optionsList.push(renderKatexFormula(options[i]));
+            }
+            return optionsList;
+        } else {
+            return options;
+        }
+    }
+
+    incrementCorrect() {
+        this.correctAnswers++;
+    }
+
+    incrementIncorrect() {
+        this.incorrectAnswers++;
+    }
+
+    incrementIndex() {
+        this.index++;
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+// Presenter --------------------------------------------------------------------------------------------------------
+class Presenter {
+    setModelAndView(model, view){
+        this.model = model;
+        this.view = view;
+    }
+
+    start(){
+        options.style.display = 'flex';
+        line.style.display = 'flex';
+
+        console.log("Runde beginnt...");
+        this.displayQuestion();
+        this.updateProgressBar();
+
+        const antwortAnzeige = document.getElementById('antwort-anzeige');
+        antwortAnzeige.innerHTML = "";
+    }
+
+    displayQuestion(){
+        let question = document.getElementById('question');
+        if(this.model.index < this.model.questionSet.length) {
+            question.innerHTML= this.model.getTask();
+            this.view.setButtons(this.model.getOptions());
+        } else {
+          this.displayFinalResult();
+        }
+        this.updateProgressBar();
+    }
+
+    async evaluate(answerButton) {    // async - Für das Warten, bis wir die Antwort vom Server erhalten haben!
+        if (this.model.questionSet === questionsAjax) {
+            let questionId = this.model.questionSet[this.model.index].id;
+            console.log("questionId: " + questionId);
+            console.log("answerIndex: " + answerButton.value);
+
+            try {
+                const correctAnswer = await getAnswerFromServer(questionId, answerButton.value);
+                console.log("Antwort vom Server: " + correctAnswer);
+
+                if (correctAnswer === true) {
+                    this.correctAnswer(answerButton);
+                } else {
+                    this.incorrectAnswer(answerButton);
+                }
+            } catch (error) {
+                console.error("Fehler beim Abrufen der Antwort vom Server:", error);
+            }
+        } else {
+            if (answerButton.value === "0") {
+                this.correctAnswer(answerButton);
+            } else {
+                this.incorrectAnswer(answerButton);
+            }
+        }
+        this.model.incrementIndex();
+        this.displayQuestion();
+    }
+
+    correctAnswer(answerButton) {
+        const showAnswer = document.getElementById('antwort-anzeige');
+        this.model.incrementCorrect();
+        //console.log("Antwort " + answerButton.attributes.getNamedItem('id').value + ' ist richtig!');
+        showAnswer.innerHTML = "Antwort " + answerButton.attributes.getNamedItem('id').value + " ist richtig!";
+        console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
+        console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
+    }
+
+    incorrectAnswer(answerButton){
+        const showAnswer = document.getElementById('antwort-anzeige');
+        this.model.incrementIncorrect();
+        //console.log("Antwort " + answerButton.attributes.getNamedItem('id').value + ' ist falsch! ');
+        showAnswer.innerHTML = "Antwort " + answerButton.attributes.getNamedItem('id').value + " ist falsch!";
+        console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
+        console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
+    }
+
+    updateProgressBar() {
+        const progressTask = document.getElementById('aufgaben-fortschritt');
+        progressTask.innerHTML = this.model.index + " von " + this.model.questionSet.length + " Aufgaben";
+
+        const progressBar = document.getElementById('progress-bar');
+        progressBar.style.display = 'flex';
+        const progressPercentage = (this.model.index / this.model.questionSet.length) * 100;
+        progressBar.style.width = progressPercentage + '%';
+
+        const showCorrectAnswer = document.getElementById('richtige-antworten');
+        const showIncorrectAnswer = document.getElementById('falsche-antworten');
+        showCorrectAnswer.innerHTML = "Richtige Antworten: " + this.model.correctAnswers;
+        showIncorrectAnswer.innerHTML = "Falsche Antworten: " + this.model.incorrectAnswers;
+    }
+
+    displayFinalResult() {
+        const question = document.getElementById('question');
+        const successrate = Math.round((this.model.correctAnswers / this.model.questionSet.length) * 100);
+
+        if (this.model.questionSet === questionsMath) {
+            this.updateErfolgsquote('math-quote', successrate);
+        } else if (this.model.questionSet === questionsInternet) {
+            this.updateErfolgsquote('internet-quote', successrate);
+        } else if (this.model.questionSet === questionsAllgemein) {
+            this.updateErfolgsquote('allgemein-quote', successrate);
+        } else if (this.model.questionSet === questionsAjax) {
+            this.updateErfolgsquote('person-quote', successrate);
+        } else if (this.model.questionSet === questionsSpanisch) {
+            this.updateErfolgsquote('spanisch-quote', successrate);
+        }
+
+        question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.questionSet.length + " Aufgaben richtig gelöst!";
+        options.style.display = 'none';
+        line.style.display = 'none';
+    }
+
+    updateErfolgsquote(id, successrate) {
+        const successrateElement = document.getElementById(id);
+        if (successrateElement) {
+            successrateElement.innerHTML = successrate + "%";
+            localStorage.setItem(id, successrate); // Erfolgsquote in localStorage speichern
+        }
+    }
+}
+
+/// ------------------------------------------------------------------------------------------------------------------
+// View --------------------------------------------------------------------------------------------------------------
+class View {
+    constructor(presenter) {
+        this.presenter = presenter;
+        this.setHandler();
+    }
+
+    setHandler() {
+        allAnswerButtons[0].addEventListener('click', this.checkAnswer.bind(this), false);
+        allAnswerButtons[1].addEventListener('click', this.checkAnswer.bind(this), false);
+        allAnswerButtons[2].addEventListener('click', this.checkAnswer.bind(this), false);
+        allAnswerButtons[3].addEventListener('click', this.checkAnswer.bind(this), false);
+    }
+
+    setButtons(opt) {
+        //const correctAnswer = opt[0];
+        const randomIndex = Math.floor(Math.random() * allAnswerButtons.length);
+
+        allAnswerButtons[randomIndex].innerHTML = opt[0];
+        allAnswerButtons[(randomIndex + 1) % allAnswerButtons.length].innerHTML = opt[1];
+        allAnswerButtons[(randomIndex + 2) % allAnswerButtons.length].innerHTML = opt[2];
+        allAnswerButtons[(randomIndex + 3) % allAnswerButtons.length].innerHTML = opt[3];
+
+        allAnswerButtons[randomIndex].value = 0;
+        allAnswerButtons[(randomIndex + 1) % allAnswerButtons.length].value = 1;
+        allAnswerButtons[(randomIndex + 2) % allAnswerButtons.length].value = 2;
+        allAnswerButtons[(randomIndex + 3) % allAnswerButtons.length].value = 3;
+    }
+
+    checkAnswer(event) {
+        const target = event.target;
+        if (target.tagName === 'BUTTON') { // Kontrolle, ob Event auch Button ist!
+            const buttonId = target.getAttribute('id');
+            console.log('Button Id:', buttonId);
+            this.presenter.evaluate(event.target);
+        } else {
+            console.log('Ungültiges Event-Target:', target);
+        }
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+// GET QUIZ ---------------------------------------------------------------------------------------------------------
+function getQuizFromServer() {
+    let id;
+    let counter = 0;
+    let amountQuestions = 15;
+    let questionTitle = "Personen";
+    let questionIds = []; // Liste mit Ids die wir bereits erhalten haben
+    let xhr = getXhr();
+    sendXhr(xhr);
+
+    function xhrHandler() {
+        console.log("Status: " +xhr.readyState);
+        if (xhr.readyState !== 4 ){
+            return;
+        }
+
+        console.log("Status "+ xhr.readyState + " " + xhr.status);
+        if (xhr.status === 200) {
+            counter++;
+            const jsonObject = JSON.parse(xhr.responseText);
+            console.log(counter + ". JSON-Object");
+            console.log(jsonObject);
+
+            if (id === jsonObject.id) { // prüfen, ob id die wir gefordert haben auch erhalten haben
+                if (jsonObject.title === questionTitle) { // prüfen, ob der Titel gleich "Personen" ist
+                    if (!questionIds.includes(jsonObject.id)) { // prüfen, ob die Aufgabe mit der id bereits geholt wurde
+                        questionIds.push(jsonObject.id);
+
+                        questionsAjax.push({
+                            "id": jsonObject.id,
+                            "title": jsonObject.title,
+                            "text": jsonObject.text,
+                            "options": jsonObject.options,
+                        });
+
+                        if (questionsAjax.length === amountQuestions) {
+                            console.log("Alle Fragen wurden erfolgreich abgerufen:");
+                            console.log(questionsAjax);
+                        } else {
+                            sendXhr(); // Neue Anfrage senden, bis 15 Fragen erhalten wurden
+                        }
+                        //console.log("Success!");
+                    }
+                } else {
+                    console.log("Der Titel der Frage ist nicht " + questionTitle);
+                    sendXhr(); // Erneute Anfrage senden
+                }
+            } else {
+                console.log("Erhaltene Id (" + jsonObject.id + ") stimmt mit angeforderter Id (" + id + ") nicht überein!");
+                sendXhr(); // Erneute Anfrage senden
+            }
+        }
+    }
+
+    function getXhr() {
+        if(window.XMLHttpRequest) {
+            return new XMLHttpRequest();
+        } else return false;
+    }
+
+    function sendXhr() {
+        do {
+            // id = Math.floor(Math.random() * (33 - 2 + 1)) + 2; // Aufgaben zwischen id 2 - 33
+           id = Math.floor(Math.random() * (199 - 185 + 1)) + 185; // selbst erstellte Aufgaben zwischen id 185 - 199
+        } while (questionIds.includes(id)); // Prüfung auf doppelte Werte
+
+        xhr.onreadystatechange = xhrHandler;
+        xhr.open("GET", "https://irene.informatik.htw-dresden.de:8888/api/quizzes/" + id, true)
+        //xhr.setRequestHeader('Authorization', 'Basic ' + btoa('test@gmail.com:secret'));
+        xhr.setRequestHeader('Authorization', 'Basic ' + btoa('tanja.dietrich@stud.htw-dresden.de:it1HTWD!'));
+        xhr.send(null);
+        console.log("Anfrage gesendet!");
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------------
+// POST QUIZ --------------------------------------------------------------------------------------------------------
+function getAnswerFromServer(id, answer) {
+    return new Promise((resolve, reject) => {  // Promise(), um Rückgabewert (true/false) von resolve(correctAnswer) zu erhalten für die Weiterverarbeitung
+        let xhr = getXhr();
+        sendXhr(xhr);
+
+        function xhrHandler() {
+            console.log("Status: " + xhr.readyState);
+            if (xhr.readyState !== 4) {
+                return;
+            }
+
+            console.log("Status " + xhr.readyState + " " + xhr.status);
+            if (xhr.status === 200) {
+                const jsonObject = JSON.parse(xhr.responseText);
+                console.log("JSON-Object");
+                console.log(jsonObject);
+                const correctAnswer = jsonObject.success;
+                resolve(correctAnswer); // Auflösen der Promise mit dem Wert
+            } else {
+                reject(new Error("Fehler beim Abrufen der Antwort vom Server")); // Ablehnen der Promise mit einem Fehler
+            }
+        }
+
+        function getXhr() {
+            if (window.XMLHttpRequest) {
+                return new XMLHttpRequest();
+            } else {
+                reject(new Error("XMLHttpRequest wird nicht unterstützt"));
+            }
+        }
+
+        function sendXhr(xhr) {
+            xhr.onreadystatechange = xhrHandler;
+            xhr.open( "POST", "https://irene.informatik.htw-dresden.de:8888/api/quizzes/" + id + "/solve", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader(
+                "Authorization",
+               //"Basic " + btoa("test@gmail.com:secret")
+                "Basic " + btoa("tanja.dietrich@stud.htw-dresden.de:it1HTWD!")
+            );
+            xhr.send(JSON.stringify([answer]));
+            console.log("Anfrage gesendet!");
+        }
+    });
+}
+
+// ----------------------------------------------------------------------------------------------------------------------
+// Katex Rendern --------------------------------------------------------------------------------------------------------
+function renderKatexFormula(formula) {
+    const regex = /\$\$(.*?)\$\$/g; // Regex-Muster für $$-Tags
+    return formula.replace(regex, (match, p1) => {
+        try {
+            return katex.renderToString(p1, { throwOnError: false }); //Ergänzung: displayMode: true für Zeilenumruch für jedes $$
+        } catch (error) {
+            console.error("Fehler beim Rendern der Formel:", error);
+            return match; // Falls ein Fehler auftritt, beibehalten wir den ursprünglichen Tag
+        }
+    });
+}
+
+// ----------------------------------------------------------------------------------------------------------------------
+// Aufgabenbereiche mit Aufgabensammlung initialisieren
 const questionsMath = [
     {"text":"Was ist das Ergebnis von: $$x^2+x^2$$ = ?", "options":["$$2x^2$$","$$x^4$$","$$x^8$$","$$2x^4$$"]},
     {"text":"Was ist das Ergebnis von: $$x^2*x^2$$ = ?", "options":["$$x^4$$","$$x^2$$","$$2x^2$$","$$4x$$"]},
@@ -71,444 +480,21 @@ let questionsAllgemein = [
 ];
 
 let questionsSpanisch = [
-        {"text": "Was bedeutet \"Haus\" auf Spanisch?", "options": ["Casa", "Coche", "Perro", "Gato"]},
-        {"text": "Wie sagt man \"Danke\" auf Spanisch?", "options": ["Gracias", "Amigo", "Hola", "Adiós"]},
-        {"text": "Wie übersetzt man \"Apfel\" ins Spanische?", "options": ["Manzana", "Mesa", "Playa", "Sol"]},
-        {"text": "Was bedeutet \"Schule\" auf Spanisch?", "options": ["Escuela", "Lápiz", "Flor", "Coche"]},
-        {"text": "Wie sagt man \"Katze\" auf Spanisch?", "options": ["Gato", "Casa", "Perro", "Árbol"]},
-        {"text": "Was bedeutet \"Wasser\" auf Spanisch?", "options": ["Agua", "Sol", "Flor", "Playa"]},
-        {"text": "Wie übersetzt man \"Tisch\" ins Spanische?", "options": ["Mesa", "Perro", "Taza", "Coche"]},
-        {"text": "Was bedeutet \"Buch\" auf Spanisch?", "options": ["Libro", "Casa", "Sol", "Manzana"]},
-        {"text": "Wie sagt man \"Mutter\" auf Spanisch?", "options": ["Madre", "Amigo", "Padre", "Hola"]},
-        {"text": "Was bedeutet \"Hund\" auf Spanisch?", "options": ["Perro", "Gato", "Coche", "Árbol"]},
-        {"text": "Wie übersetzt man \"Stuhl\" ins Spanische?", "options": ["Silla", "Lápiz", "Flor", "Casa"]},
-        {"text": "Was bedeutet \"Stift\" auf Spanisch?", "options": ["Lápiz", "Sol", "Coche", "Taza"]},
-        {"text": "Wie sagt man \"Bruder\" auf Spanisch?", "options": ["Hermano", "Amigo", "Hola", "Padre"]},
-        {"text": "Was bedeutet \"Blume\" auf Spanisch?", "options": ["Flor", "Árbol", "Perro", "Casa"]},
-        {"text": "Wie übersetzt man \"Glas\" ins Spanische?", "options": ["Vaso", "Taza", "Sol", "Playa"]}
-    ];
+    {"text": "Was bedeutet \"Haus\" auf Spanisch?", "options": ["Casa", "Coche", "Perro", "Gato"]},
+    {"text": "Wie sagt man \"Danke\" auf Spanisch?", "options": ["Gracias", "Amigo", "Hola", "Adiós"]},
+    {"text": "Wie übersetzt man \"Apfel\" ins Spanische?", "options": ["Manzana", "Mesa", "Playa", "Sol"]},
+    {"text": "Was bedeutet \"Schule\" auf Spanisch?", "options": ["Escuela", "Lápiz", "Flor", "Coche"]},
+    {"text": "Wie sagt man \"Katze\" auf Spanisch?", "options": ["Gato", "Casa", "Perro", "Árbol"]},
+    {"text": "Was bedeutet \"Wasser\" auf Spanisch?", "options": ["Agua", "Sol", "Flor", "Playa"]},
+    {"text": "Wie übersetzt man \"Tisch\" ins Spanische?", "options": ["Mesa", "Perro", "Taza", "Coche"]},
+    {"text": "Was bedeutet \"Buch\" auf Spanisch?", "options": ["Libro", "Casa", "Sol", "Manzana"]},
+    {"text": "Wie sagt man \"Mutter\" auf Spanisch?", "options": ["Madre", "Amigo", "Padre", "Hola"]},
+    {"text": "Was bedeutet \"Hund\" auf Spanisch?", "options": ["Perro", "Gato", "Coche", "Árbol"]},
+    {"text": "Wie übersetzt man \"Stuhl\" ins Spanische?", "options": ["Silla", "Lápiz", "Flor", "Casa"]},
+    {"text": "Was bedeutet \"Stift\" auf Spanisch?", "options": ["Lápiz", "Sol", "Coche", "Taza"]},
+    {"text": "Wie sagt man \"Bruder\" auf Spanisch?", "options": ["Hermano", "Amigo", "Hola", "Padre"]},
+    {"text": "Was bedeutet \"Blume\" auf Spanisch?", "options": ["Flor", "Árbol", "Perro", "Casa"]},
+    {"text": "Wie übersetzt man \"Glas\" ins Spanische?", "options": ["Vaso", "Taza", "Sol", "Playa"]}
+];
 
 let questionsAjax = [];
-
-// ------------------------------------------------------------------------------------------------------------------
-// Radio Buttons initialisieren -------------------------------------------------------------------------------------
-document.addEventListener('DOMContentLoaded', function (){
-    let model = new Model();
-    let presenter = new Presenter();
-    let view = new View(presenter);
-    presenter.setModelAndView(model, view);
-
-    getQuizFromServer();
-
-    // Radio-Buttons initialisieren
-    mathRadioButton.addEventListener('click', function() {
-        header.textContent = 'Mathematik';
-        model.init(questionsMath, 0, 0, 0);
-        presenter.start();
-    });
-
-    internetRadioButton.addEventListener('click', function() {
-        header.textContent = 'Internet Technologie';
-        model.init(questionsInternet, 0, 0, 0);
-        presenter.start();
-    });
-
-    allgemeinRadioButton.addEventListener('click', function() {
-        header.textContent = 'Allgemeinwissen';
-        model.init(questionsAllgemein, 0, 0, 0);
-        presenter.start();
-    });
-
-    ajaxRadioButton.addEventListener('click', function() {
-        header.textContent = 'Persönlichkeiten';
-        model.init(questionsAjax, 0, 0, 0);
-        presenter.start();
-    });
-
-    spanischRadioButton.addEventListener('click', function() {
-        header.textContent = 'Spanisch';
-        model.init(questionsSpanisch, 0, 0, 0);
-        presenter.start();
-    });
-
-    // Erfolgsquoten aus dem localStorage holen
-    const lernbereiche = ['math', 'internet', 'allgemein', 'person', 'spnaisch'];
-    lernbereiche.forEach((lernbereich) => {
-        const quote = localStorage.getItem(`${lernbereich}-quote`);
-        if (quote) {
-            document.getElementById(`${lernbereich}-quote`).innerHTML = `${quote}%`;
-        }
-    })
-});
-
-// --------------------------------------------------------------------------------------------------------------------------
-// Model --------------------------------------------------------------------------------------------------------------------
-class Model {
-    init(set, index, correct, incorrect) {
-        this.questions = set;               // Kompletter Fragenkatalog
-        this.index = index;                 // Beginn bei Index 0
-        this.correctAnswers = correct;      // Anzahl richtige Antworten
-        this.incorrectAnswers = incorrect;  // Anzahl falsche Antworten
-        this.shuffleQuestions();
-    }
-
-    // Fisher-Yates-Shuffle-Algorithmus
-    shuffleQuestions() {
-        for (let i = this.questions.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]];
-        }
-    }
-
-    getTask() {
-        const question = this.questions[this.index].text;
-        console.log("Hole Aufgabe: " + question + "...")
-
-        if (this.questions === questionsMath)
-            return renderKatexFormula(question);
-        else
-            return question;
-    }
-
-    getOptions() {
-        console.log("Hole Lösungen: " + this.questions[this.index].options + "...");
-        return this.questions[this.index].options;
-    }
-
-    incrementCorrect() {
-        this.correctAnswers +=1;
-    }
-
-    incrementIncorrect() {
-        this.incorrectAnswers +=1;
-    }
-
-    getLength(){
-        return this.questions.length;
-    }
-
-    incrementIndex() {
-        this.index +=1;
-    }
-
-    getIndex() {
-        return this.index;
-    }
-}
-
-// ------------------------------------------------------------------------------------------------------------------------------
-// Presenter --------------------------------------------------------------------------------------------------------------------
-class Presenter {
-    setModelAndView(model, view){
-        this.model = model;
-        this.view = view;
-    }
-
-    start(){
-        //Begin application
-        options.style.display = 'flex';
-        line.style.display = 'flex';
-
-        console.log("Applikation beginnt...");
-        this.displayQuestion(this.model.index); // Beginne bei Index o des Fragenkatalogs
-        this.updateProgressBar(); // Aktualisiere die Fortschrittsleiste
-
-        const antwortAnzeige = document.getElementById('antwort-anzeige');
-        antwortAnzeige.innerHTML = "";
-    }
-
-    displayQuestion(){
-        let question = document.getElementById('question');
-
-        if(this.model.index < this.model.getLength()) {
-            question.innerHTML= this.model.getTask();
-            this.view.setButtons(this.model.getOptions());
-        } else {
-          this.displayFinalResult();
-        }
-        this.updateProgressBar(); // Aktualisiere die Fortschrittsleiste
-    }
-
-    async evaluate(answer){
-        // console.log("answer: " + answer.value)
-        if (this.model.questions === questionsAjax) {
-            let questionId = this.model.questions[this.model.index].id;
-            console.log("questionID: " + questionId);
-            console.log("answerIndex: " + answer.value);
-
-            try {
-                const correctAnswer = await getAnswerFromServer(questionId, answer.value);
-                console.log("Die korrekte Antwort vom Server lautet: " + correctAnswer);
-                if (correctAnswer === true) {
-                    this.correctAnswer(answer);
-                } else {
-                    this.incorrectAnswer(answer);
-                }
-            } catch (error) {
-                console.error("Fehler beim Abrufen der Antwort vom Server:", error);
-            }
-        } else {
-            if (answer.value === "1") {
-                this.correctAnswer(answer);
-            } else {
-                this.incorrectAnswer(answer);
-            }
-        }
-        this.model.incrementIndex();
-        this.displayQuestion();
-    }
-
-    correctAnswer(answer) {
-        const antwortAnzeige = document.getElementById('antwort-anzeige');
-        this.model.incrementCorrect();
-        console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist richtig!');
-        antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist richtig!";
-        console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
-        console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
-    }
-
-    incorrectAnswer(answer){
-        const antwortAnzeige = document.getElementById('antwort-anzeige');
-        this.model.incrementIncorrect();
-        console.log("Antwort " + answer.attributes.getNamedItem('id').value + ' ist falsch! ');
-        antwortAnzeige.innerHTML = "Antwort " + answer.attributes.getNamedItem('id').value + " ist falsch!";
-        console.log("Richtige Antworten bisher: " + this.model.correctAnswers);
-        console.log("Falsche Antworten bisher: " + this.model.incorrectAnswers);
-    }
-
-    updateProgressBar() {
-        const progressTask = document.getElementById('aufgaben-fortschritt');
-        progressTask.innerHTML = this.model.index + " von " + this.model.getLength() + " Aufgaben";
-
-        const progressBar = document.getElementById('progress-bar');
-        progressBar.style.display = 'flex';
-        const progressPercentage = (this.model.getIndex() / this.model.getLength()) * 100;
-        progressBar.style.width = progressPercentage + '%';
-
-        const richtigeAntwortenAnzeige = document.getElementById('richtige-antworten');
-        const falscheAntwortenAnzeige = document.getElementById('falsche-antworten');
-        richtigeAntwortenAnzeige.innerHTML = "Richtige Antworten: " + this.model.correctAnswers;
-        falscheAntwortenAnzeige.innerHTML = "Falsche Antworten: " + this.model.incorrectAnswers;
-    }
-
-    displayFinalResult() {
-        const question = document.getElementById('question');
-        const erfolgsquote = Math.round((this.model.correctAnswers / this.model.getLength()) * 100);
-
-        if (this.model.questions === questionsMath) {
-            this.updateErfolgsquote('math-quote', erfolgsquote);
-        } else if (this.model.questions === questionsInternet) {
-            this.updateErfolgsquote('internet-quote', erfolgsquote);
-        } else if (this.model.questions === questionsAllgemein) {
-            this.updateErfolgsquote('allgemein-quote', erfolgsquote);
-        } else if (this.model.questions === questionsAjax) {
-            this.updateErfolgsquote('person-quote', erfolgsquote);
-        } else if (this.model.questions === questionsSpanisch) {
-            this.updateErfolgsquote('spanisch-quote', erfolgsquote);
-        }
-
-        question.innerHTML = "Du hast " + this.model.correctAnswers + " von " + this.model.getLength() + " Aufgaben richtig gelöst!";
-        options.style.display = 'none';
-        line.style.display = 'none';
-    }
-
-    updateErfolgsquote(id, erfolgsquote) {
-        const erfolgsquoteElement = document.getElementById(id);
-        if (erfolgsquoteElement) {
-            erfolgsquoteElement.innerHTML = erfolgsquote + "%";
-            localStorage.setItem(id, erfolgsquote); // Erfolgsquote in localStorage speichern
-        }
-    }
-}
-
-// -------------------------------------------------------------------------------------------------------------------------
-// View --------------------------------------------------------------------------------------------------------------------
-class View {
-    constructor(presenter) {
-        this.presenter = presenter;
-        this.setHandler();
-    }
-
-    setHandler() {
-        allButtons[0].addEventListener('click', this.checkAnswer.bind(this), false);
-        allButtons[1].addEventListener('click', this.checkAnswer.bind(this), false);
-        allButtons[2].addEventListener('click', this.checkAnswer.bind(this), false);
-        allButtons[3].addEventListener('click', this.checkAnswer.bind(this), false);
-    }
-
-    setButtons(opt) {
-        //const correctAnswer = opt[0];
-        const randomIndex = Math.floor(Math.random() * allButtons.length);
-
-        if (this.presenter.model.questions === questionsMath) {
-            allButtons[randomIndex].innerHTML = renderKatexFormula(opt[0]);
-            allButtons[(randomIndex + 1) % allButtons.length].innerHTML = renderKatexFormula(opt[1]);
-            allButtons[(randomIndex + 2) % allButtons.length].innerHTML = renderKatexFormula(opt[2]);
-            allButtons[(randomIndex + 3) % allButtons.length].innerHTML = renderKatexFormula(opt[3]);
-        } else {
-            allButtons[randomIndex].innerHTML = opt[0];
-            allButtons[(randomIndex + 1) % allButtons.length].innerHTML = opt[1];
-            allButtons[(randomIndex + 2) % allButtons.length].innerHTML = opt[2];
-            allButtons[(randomIndex + 3) % allButtons.length].innerHTML = opt[3];
-        }
-
-        if (this.presenter.model.questions === questionsAjax) {
-            console.log("Ajax Aufgabe!");
-            allButtons[randomIndex].value = 0;
-            allButtons[(randomIndex + 1) % allButtons.length].value = 1;
-            allButtons[(randomIndex + 2) % allButtons.length].value = 2;
-            allButtons[(randomIndex + 3) % allButtons.length].value = 3;
-        } else {
-            console.log("Keine Ajax Aufgabe!");
-            allButtons[randomIndex].value = 1;
-            allButtons[(randomIndex + 1) % allButtons.length].value = 0;
-            allButtons[(randomIndex + 2) % allButtons.length].value = 0;
-            allButtons[(randomIndex + 3) % allButtons.length].value = 0;
-
-            console.log("Button: " + allButtons[randomIndex].id + " hat die richtige Antwort");
-            console.log(allButtons[randomIndex].value);
-        }
-    }
-
-    // mit Ausgabe an Console - Kontrolle, ob Event auch Button ist!
-    checkAnswer(event) {
-        const target = event.target;
-        if (target.tagName === 'BUTTON') {
-            const buttonId = target.getAttribute('id');
-            console.log('Button ID:', buttonId);
-            this.presenter.evaluate(event.target);
-        } else {
-            console.log('Ungültiges Event-Target:', target);
-        }
-    }
-}
-
-// ------------------------------------------------------------------------------------------------------------------
-// GET QUIZ ---------------------------------------------------------------------------------------------------------
-function getQuizFromServer() {
-    let questionIds = [];
-    let xhr = getXhr();
-    sendXhr(xhr);
-
-    function xhrHandler() {
-        console.log("Status: " +xhr.readyState);
-        if (xhr.readyState !== 4 ){
-            return;
-        }
-
-        console.log("Status "+ xhr.readyState + " " + xhr.status);
-        if (xhr.status === 200) {
-            const jsonObject = JSON.parse(xhr.responseText);
-            console.log("JSON-Object");
-            console.log(jsonObject);
-
-            if (!questionIds.includes(jsonObject.id)) { // prüfen, ob id bereits vorhanden
-                questionIds.push(jsonObject.id);
-
-                questionsAjax.push({
-                    "id": jsonObject.id,
-                    "text": jsonObject.text,
-                    "options": jsonObject.options,
-                });
-
-                if (questionsAjax.length === 15) {
-                    console.log("Alle Fragen wurden erfolgreich abgerufen:");
-                    console.log(questionsAjax);
-                } else {
-                    sendXhr(); // Neue Anfrage senden, bis 15 Fragen erhalten wurden
-                }
-
-                console.log("Success!");
-            }
-        }
-    }
-
-    function getXhr() {
-        if(window.XMLHttpRequest) {
-            return new XMLHttpRequest();
-        } else return false;
-    }
-
-    function sendXhr() {
-        let i;
-        do {
-            i = Math.floor(Math.random() * (33 - 2 + 1)) + 2;
-        } while (questionIds.includes(i)); // Prüfung auf doppelte Werte
-
-        xhr.onreadystatechange = xhrHandler;
-        xhr.open("GET", "https://irene.informatik.htw-dresden.de:8888/api/quizzes/" + i, true)
-        xhr.setRequestHeader('Authorization', 'Basic ' + btoa('test@gmail.com:secret'));
-        xhr.send(null);
-        console.log("Anfrage gesendet!");
-    }
-}
-
-// ------------------------------------------------------------------------------------------------------------------
-// POST QUIZ --------------------------------------------------------------------------------------------------------
-function getAnswerFromServer(id, answer) {
-    return new Promise((resolve, reject) => {
-        let xhr = getXhr();
-        sendXhr(xhr);
-
-        function xhrHandler() {
-            console.log("Status: " + xhr.readyState);
-            if (xhr.readyState !== 4) {
-                return;
-            }
-
-            console.log("Status " + xhr.readyState + " " + xhr.status);
-            if (xhr.status === 200) {
-                const jsonObject = JSON.parse(xhr.responseText);
-                console.log("JSON-Object");
-                console.log(jsonObject);
-                const correctAnswer = jsonObject.success;
-                resolve(correctAnswer); // Auflösen der Promise mit dem Wert
-            } else {
-                reject(new Error("Fehler beim Abrufen der Antwort vom Server")); // Ablehnen der Promise mit einem Fehler
-            }
-        }
-
-        function getXhr() {
-            if (window.XMLHttpRequest) {
-                return new XMLHttpRequest();
-            } else {
-                reject(new Error("XMLHttpRequest wird nicht unterstützt"));
-            }
-        }
-
-        function sendXhr(xhr) {
-            xhr.onreadystatechange = xhrHandler;
-            xhr.open( "POST", "https://irene.informatik.htw-dresden.de:8888/api/quizzes/" + id + "/solve", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader(
-                "Authorization",
-                "Basic " + btoa("test@gmail.com:secret")
-            );
-            xhr.send(JSON.stringify([answer]));
-            console.log("Request send");
-        }
-    });
-}
-
-// ----------------------------------------------------------------------------------------------------------------------
-// Katex Rendern --------------------------------------------------------------------------------------------------------
-function renderKatexFormula(formula) {
-    const regex = /\$\$(.*?)\$\$/g; // Regex-Muster für $$-Tags
-    return formula.replace(regex, (match, p1) => {
-        try {
-            return katex.renderToString(p1, { throwOnError: false }); //displayMode: true für Zeilenumruch für jedes $$
-        } catch (error) {
-            console.error("Fehler beim Rendern der Formel:", error);
-            return match; // Falls ein Fehler auftritt, beibehalten wir den ursprünglichen Tag
-        }
-    });
-}
-
-// ----------------------------------------------------------------------------------------------------------------------
-// Callback - Funktion
-/*
-function handleAnswerFromServer(correctAnswer){
-    console.log("Die korrekte Antwort vom Server lautet: " + correctAnswer);
-    return correctAnswer;
-}
-*/

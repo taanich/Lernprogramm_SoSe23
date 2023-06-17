@@ -1,36 +1,91 @@
-## Quiz-App
+# Lernprogramm
 
-Dies ist eine Quiz-App, die verschiedene Fragen in den Bereichen Mathematik, Internet Technologie, Allgemeinwissen und Spanisch stellt. Die App bietet mehrere Kategorien zur Auswahl und zeigt Fragen mit mehreren Antwortmöglichkeiten an. Der Benutzer kann eine Antwort auswählen und erhält Feedback über die Richtigkeit seiner Antwort. Die App enthält auch eine Punktzählung, um den Fortschritt des Benutzers zu verfolgen.
+## Beschreibung
+Das Lernprogramm ist eine interaktive Webanwendung, die es den Nutzern ermöglicht aus verschiedenen Lernbereichen zu wählen und die entsprechenden Fragen interaktiv zu beantworten. Es umfasst Lernfragen zu Mathematik, Internet Technologie, Allgemeinwissen, Persönlichkeiten und Spanisch-Vokabeln. Der Nutzer kann einen Lernbereich auswählen und die Fragen beantworten, indem er den entsprechenden Button mit der richtigen Antwort auswählt. Während der Nutzung wird der Aufgaben-Fortschritt des Nutzers durch einen wachsenden Balken dargestellt, einschließlich der Anzahl der richtig und falsch beantworteten Fragen.
 
-### Verwendung
+## Lernbereiche
+Das Lernprogramm umfasst folgende Lernbereiche:
 
-Um das Quiz zu starten, wählen Sie eine Kategorie aus den verfügbaren Optionen aus. Klicken Sie auf den entsprechenden Radio-Button, um die Fragen in dieser Kategorie anzuzeigen. Die Fragen werden dynamisch geladen und angezeigt. Wählen Sie eine Antwort aus den vorgegebenen Optionen aus, indem Sie auf den entsprechenden Button klicken. Sie erhalten sofortiges Feedback zu Ihrer Antwort. Um das Quiz zurückzusetzen und erneut zu starten, wählen Sie eine andere Kategorie aus.
+- Mathematik
+- Internet Technologie
+- Allgemeinwissen
+- Persönlichkeiten
+- Spanisch
 
-### Code-Überblick
+## Funktionalitäten
+Das Lernprogramm bietet eine Vielzahl von Funktionen:
 
-Der Code besteht aus vier Hauptkomponenten: `Model`, `Presenter`, `View` und `Server`. Diese Komponenten arbeiten zusammen, um das Quiz zu verwalten, die Fragen anzuzeigen und die Antworten des Benutzers zu verarbeiten.
+- [x] **Vier Lernbereiche**
 
-- `Model`: Verwaltet den aktuellen Zustand des Quiz, einschließlich der ausgewählten Kategorie, der aktuellen Frage und der Punktzahl.
-- `Presenter`: Nimmt Benutzerinteraktionen entgegen und aktualisiert das Modell entsprechend. Es kommuniziert auch mit der `View`, um die Fragen und Feedback anzuzeigen.
-- `View`: Verantwortlich für die Darstellung der Fragen, Optionen und des Feedbacks auf der Benutzeroberfläche. Es empfängt Benutzeraktionen und benachrichtigt den `Presenter`.
-- `Server`: Stellt die Fragen für jede Kategorie bereit und ermöglicht die Kommunikation zwischen dem Client und dem Server.
+    Das Programm besitzt lokal gespeicherte Lernbereiche wie Mathematik, Internet Technologie, Allgemeinwissen und Spanisch.
 
-### Abhängigkeiten
+- [x] **Aufgaben vom Server**
 
-Die Quiz-App verwendet HTML, CSS und JavaScript. Es werden keine zusätzlichen Frameworks oder Bibliotheken verwendet. Die App ist darauf ausgelegt, in einem modernen Webbrowser ausgeführt zu werden.
+    Mithilfe von Ajax und REST-API werden Aufgaben aus der Kategorie "Personen" vom Server abgerufen und im Lernprogramm unter "Persönlichkeiten" dargestellt.
 
-### Setup
+- [x] **Zufällige Darstellung von Aufgaben**
 
-Um das Quiz auszuführen, öffnen Sie die `index.html`-Datei in einem Webbrowser. Stellen Sie sicher, dass Sie mit dem Internet verbunden sind, um die Fragen aus dem Server abzurufen.
+    Die Aufgaben werden zufällig angezeigt, um Abwechslung und Vielfalt bei der Lösung der Aufgaben zu bringen.
 
-Bitte beachten Sie, dass die Fragen dynamisch vom Server geladen werden, daher kann es zu Verzögerungen kommen, wenn die Verbindung zum Server langsam ist.
+- [x] **Fortschrittsbalken**
 
-### Anpassung
+    Ein Fortschrittsbalken zeigt den aktuellen Stand der Aufgabenbearbeitung an.
 
-Sie können die Fragen in den verschiedenen Kategorien anpassen, indem Sie die entsprechenden Arrays in der Datei `script.js` bearbeiten. Sie können neue Fragen hinzufügen oder vorhandene Fragen entfernen oder ändern. Stellen Sie sicher, dass das Datenformat der Fragen beibehalten wird, um die Funktionalität der App nicht zu beeinträchtigen.
+- [x] **Aktualisierung der Antworten**
 
-Bei Bedarf können Sie auch das Erscheinungsbild der App anpassen, indem Sie das CSS in der `styles.css`-Datei bearbeiten.
+  Die richtig und falsch beantworteten Aufgaben werden nach jeder Beantwortung aktualisiert.
 
-### Autoren
+- [x] **Statistik-Funktionalität**
 
-Diese Quiz-App wurde entwickelt von Tanja Dietrich.
+  Am Ende eines Durchlaufs wird angezeigt, wie viele Aufgaben korrekt beantwortet wurden. Die Erfolgsquote für den Lernbereich wird lokal im Browser gespeichert, sodass beim Neuladen der Seite der aktuelle Stand weiterhin angezeigt wird.
+
+- [x] **Responsive Design**
+  
+  Die Webanwendung passt sich automatisch verschiedenen Geräten wie Smartphones und Tablets an.
+
+- [x] **Offline-Funktionalität**
+
+    Das Lernprogramm kann als App mit Smartphones und Tablets heruntergeladen und auch ohne Internetverbindung verwendet werden.
+
+## Installation
+Um die Webanwendung zu installieren, sind folgende Schritte erforderlich:
+1. Klone das Repository auf deine lokalen Computer.
+2. Öffne das Terminal und wechsel in das Verzeichnis des geklonten Repositories.
+3. Verschiebe das geklonte Repository in den öffentlichen HTML-Ordner deines Webservers, damit es von dort aus erreichbar ist.
+
+Das Lernprogramm sollte nun von deinem Webserver aus erreichbar sein.
+
+## Anwendung
+
+Für die Anwendung des Lernprogramms wurde der Firefox Browser verwendet.
+
+1. Öffne deine Webbrowser und gehe zur URL deines Webservers. In diesem Beispiel wird die URL https://www.informatik.htw-dresden.de/~s83797/Lernprogramm/ verwendet.
+2. Wähle ein Lernmodul im Lernbereich aus.
+3. Es erscheint eine Frage. Löse die Frage, indem du die richtige Antwort auswählst.
+4. Nach Auswählen einer Antwort, erscheint eine Anzeige, ob die gewählte Antwort richtig oder falsch war. 
+5. Verfolge deinen Lernfortschritt über den Fortschrittsbalken und der Anzahl einer bisher richtig und falsch beantworteten Aufgaben.
+6. Am Ende eines Durchlaufs wird die Anzahl der richtig beantworteten Aufgaben angezeigt.
+7. Die Erfolgsquote von dem Durchlauf wird angezeigt und im Browser lokal gespeichert.
+8. Um eine neue Runde zu beginnen, kann wieder im Lernbereich auf ein Lernmodul geklickt werden.
+
+## Technologien
+Das Lernprogrmamm verwendet folgende Technologien:
+
+- JavaScript
+- HTML
+- CSS
+- Ajax
+- REST-API
+
+## Anpassungen 
+Falls Anpassungen an der Webanwendung vorgenommen werden sollen, können folgende Dateien bearbeitet werden:
+
+- `index.html`: Hier kann das Layout und die Struktur der Webanwendung angepasst werden.
+- `stylesheet.css`: Hier kann das Design und das Erscheinungsbild der Webanwendung angepasst werden.
+- `mvp.js`: Hier kann die Logik der Webanwendung angepasst und neue Funktionalitäten hinzugefügt werden.
+- `service-worker.js`: Hier kann der Service-Worker angepasst werden, um das Verhalten der Webanwendung bei Offline-Verfügbarkeit zu steuern
+
+Zusätzlich kann im `manifest.webmanifest` Anpassungen vorgenommen werden, um die App-Darstellung auf Smartphones und Tablets zu beeinflussen. Hier können z.B. App-Icon, den Namen der Anwendung und weitere Einstellungen festgelegt werden.
+
+## Autor
+Das Lernprogramm wurde von Tanja Dietrich entwickelt.

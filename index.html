@@ -11,19 +11,22 @@
   <link rel="icon" sizes="512x512" href="images/01_HTWD_logo_RGB_wordmark_color.png"/>
 
   <link rel="stylesheet" href="stylesheet.css" type="text/css"/>
-  <script src="scripts/service-worker.js" type="text/javascript" defer></script>
   <script src="scripts/mvp.js" type="text/javascript" defer></script>
 
-  <!-- kaTeX -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-  <!-- The loading of KaTeX is deferred to speed up page rendering -->
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-  <!-- To automatically render math in text elements, include the auto-render extension: -->
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+
+  <script>
+    // Service Worker registrieren für PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('scripts/service-worker.js')
+              .then(reg => console.log(reg))
+              .catch(err => console.log(err));
+    }
+  </script>
 </head>
 
 <body>
-<! --- Header mit Logo - [TODO - Einstellungen auslagern!!!] --- !>
 <header style="display: flex; align-items: center;">
   <h1 style="margin-right: auto;">Lernprogramm</h1>
   <div style="max-width: 300px; overflow: hidden;">
@@ -65,34 +68,35 @@
 
   <! --- Hauptseite --- !>
   <article id="hauptseite">
-        <p id="headline">Willkommen im Lernprogramm!</p>
+  <h2 id="headline">Willkommen im Lernprogramm!</h2>
+  <hr />
+
+  <div id="task-container">
+    <div id="question">Klicke im Lernbereich auf das Fach, welches Du lernen möchtest!</div>
     <hr />
 
-    <div id="task-container">
-      <div id="question">Klicke im Lernbereich auf das Fach, welches Du lernen möchtest!</div>
-      <hr />
-
-      <div id="options" style="display: none">
-        <button id="a" class="option-button"></button>
-        <button id="b" class="option-button"></button>
-        <button id="c" class="option-button"></button>
-        <button id="d" class="option-button"></button>
-      </div>
+    <div id="options" style="display: none">
+      <button id="a" class="option-button"></button>
+      <button id="b" class="option-button"></button>
+      <button id="c" class="option-button"></button>
+      <button id="d" class="option-button"></button>
     </div>
+  </div>
 
-    <hr id="line" style="display: none"/>
+  <hr id="line" style="display: none"/>
 
-    <div id="aufgaben-fortschritt"></div>
-    <div id="progress-container">
-      <div id="progress-bar" style="display: none"></div>
-    </div>
+  <div id="aufgaben-fortschritt"></div>
+  <div id="progress-container">
+    <div id="progress-bar" style="display: none"></div>
+  </div>
 
-    <div id="ergebnis-anzeige">
-      <span id="richtige-antworten"></span>
-      <span id="antwort-anzeige"></span>
-      <span id="falsche-antworten"></span>
-    </div>
-  </article>
+  <div id="ergebnis-anzeige">
+    <span id="richtige-antworten"></span>
+    <span id="antwort-anzeige"></span>
+    <span id="falsche-antworten"></span>
+  </div>
+</article>
+
 
   <! --- Anzeige des aktuellen Lernstands --- !>
   <aside>
@@ -115,7 +119,7 @@
         <span id="person-quote" class="erfolgsquote">0%</span>
       </div>
       <div class="erfolgsquote-item">
-        <span class="lernbereich">Spansich</span>
+        <span class="lernbereich">Spanisch</span>
         <span id="spanisch-quote" class="erfolgsquote">0%</span>
       </div>
     </div>
@@ -123,19 +127,12 @@
 </main>
 
 <footer style="display: flex; align-items: center">
-  <p id="footerText1" style="margin-right: auto">SoSe 2023 - Beleg</p>
-  <p id="footerText2" style="margin-right: auto">Internet Technologie I - Prof. Dr.-Ing. Jörg Vogt</p>
-  <p id="footerText3">Tanja Dietrich - s83797</p>
+  <span>SoSe 2023 - Beleg</span>
+  <span>Internet Technologie I - Prof. Dr.-Ing. Jörg Vogt</span>
+  <span>Tanja Dietrich</span>
 </footer>
 </body>
 </html>
 
 
-<script>
-  // Service Worker registrieren für PWA
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('scripts/service-worker.js')
-            .then(reg => console.log(reg))
-            .catch(err => console.log(err));
-  }
-</script>
+

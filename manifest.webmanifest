@@ -1,0 +1,10 @@
+{
+  "name": "Tanja's Lernprogramm",
+  "short_name": "Lernprogramm",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eaeaea",
+  "theme_color": "#ec6608",
+  "offline": true,
+  "scope": "/"
+}
