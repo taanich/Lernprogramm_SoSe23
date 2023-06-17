@@ -15,7 +15,7 @@ Das Lernprogramm umfasst folgende Lernbereiche:
 ## Funktionalitäten
 Das Lernprogramm bietet eine Vielzahl von Funktionen:
 
--  **Vier Lernbereiche**
+- [x] **Vier Lernbereiche**
 
     Das Programm besitzt lokal gespeicherte Lernbereiche wie Mathematik, Internet Technologie, Allgemeinwissen und Spanisch.
 
@@ -45,7 +45,7 @@ Das Lernprogramm bietet eine Vielzahl von Funktionen:
 
 - [x] **Offline-Funktionalität**
 
-    Das Lernprogramm kann als App auch Smartphones und Tablets heruntergeladen und auch ohne Internetverbindung verwendet werden.
+    Das Lernprogramm kann als App mit Smartphones und Tablets heruntergeladen und auch ohne Internetverbindung verwendet werden.
 
 ## Installation
 Um die Webanwendung zu installieren, sind folgende Schritte erforderlich:
@@ -59,7 +59,7 @@ Das Lernprogramm sollte nun von deinem Webserver aus erreichbar sein.
 
 Für die Anwendung des Lernprogramms wurde der Firefox Browser verwendet.
 
-1. Öffne deine Webbrowser und gehe zur URL deines Webservers. In diesem Beispiel wird die URL< https://www.informatik.htw-dresden.de/~s83797/Lernprogramm/ verwendet.
+1. Öffne deine Webbrowser und gehe zur URL deines Webservers. In diesem Beispiel wird die URL https://www.informatik.htw-dresden.de/~s83797/Lernprogramm/ verwendet.
 2. Wähle ein Lernmodul im Lernbereich aus.
 3. Es erscheint eine Frage. Löse die Frage, indem du die richtige Antwort auswählst.
 4. Nach Auswählen einer Antwort, erscheint eine Anzeige, ob die gewählte Antwort richtig oder falsch war. 
@@ -78,7 +78,7 @@ Das Lernprogrmamm verwendet folgende Technologien:
 - REST-API
 
 ## Anpassungen 
-Fall Anpassungen an der Webanwendung vorgenommen werden sollen, können folgende Dateien bearbeitet werden:
+Falls Anpassungen an der Webanwendung vorgenommen werden sollen, können folgende Dateien bearbeitet werden:
 
 - `index.html`: Hier kann das Layout und die Struktur der Webanwendung angepasst werden.
 - `stylesheet.css`: Hier kann das Design und das Erscheinungsbild der Webanwendung angepasst werden.

@@ -164,7 +164,7 @@ button:hover {
 /* -------------------------------------------------------------------------------------------------------- */
 /* --- Anzeige der Erfolgsquote --- */
 .erfolgsquote-container {
-    display: flex; /* Elemente in einer Flexbox anordnen */
+    display: flex;
     flex-direction: column;
 }
 

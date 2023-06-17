@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ce574a1-bdfe-40a6-a414-79ee6ade1ad1" name="Changes" comment="wip">
-      <change afterPath="$PROJECT_DIR$/documentation/projektdokumentation.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README3.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/projekt_dokumentation.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documentation/lernportfolio.md" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/lernportfolio.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documentation/projektdokumentation.md" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/projektdokumentation.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mvp.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mvp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +145,12 @@
       <workItem from="1686901547436" duration="4325000" />
       <workItem from="1686908630783" duration="616000" />
       <workItem from="1686909272747" duration="177000" />
-      <workItem from="1686909715629" duration="3158000" />
+      <workItem from="1686909715629" duration="3179000" />
+      <workItem from="1686913373879" duration="696000" />
+      <workItem from="1686914532960" duration="3588000" />
+      <workItem from="1686919300415" duration="428000" />
+      <workItem from="1686935729510" duration="19507000" />
+      <workItem from="1686975405910" duration="5964000" />
     </task>
     <task id="LOCAL-00001" summary="initial Project">
       <created>1685805672388</created>
@@ -340,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686905897737</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="wip">
+      <created>1686912909479</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1686912909479</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -132,7 +132,7 @@ class Presenter {
         line.style.display = 'flex';
 
         console.log("Runde beginnt...");
-        this.displayQuestion(this.model.index); // Aufgabe mit Index x wird angezeigt
+        this.displayQuestion();
         this.updateProgressBar();
 
         const antwortAnzeige = document.getElementById('antwort-anzeige');
